@@ -116,16 +116,26 @@ a:hover {
 
 /* 12. Hero Section */
 #hero {
+  position: relative;
   grid-column: 1 / -1;
   background-color: var(--color-neutral-light);
   padding: 4rem 0;
+  overflow: hidden;         /* hide any overflow for a clean edge */
+}
+
+.hero-accent {
+  position: absolute;
+  top: 0;                   /* drop it to the very top of the hero section */
+  right: 50%;               /* adjust as needed to center/offset */
+  transform: translateX(50%); /* fine-tune horizontal centering */
+  width: clamp(200px, 30vw, 400px); /* fluid size so it never gets absurd */
+  opacity: 0.15;            /* keep it behind, very subtle */
+  z-index: 0;               /* behind your content */
 }
 
 .hero-content {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  text-align: center;
   position: relative;
+  z-index: 1;
 }
 
 .btn-cta {
