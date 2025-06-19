@@ -3,7 +3,7 @@
 /* 1. Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap');
 
-/* 2. CSS Variables for Typography and Layout */
+/* 2. CSS Variables for Typography, Layout & Color Palette */
 :root {
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Lato', sans-serif;
@@ -11,124 +11,102 @@
   --font-size-h2: 1.5rem;
   --font-size-body: 1rem;
   --line-height-body: 1.6;
-  /* fluid width: min 40ch, preferred 60vw, max 80vw */
   --max-width: clamp(40ch, 60vw, 80vw);
   --padding: 2rem;
-  --bg-color: #ffffff;
-  --text-color: #333333;
-  --muted-color: #666666;
+  /* Modern Tech palette */
+  --color-primary: #0A1F44;      /* Deep Navy */
+  --color-secondary: #3F83F8;    /* Electric Blue */
+  --color-accent: #2CE8E8;       /* Vibrant Cyan */
+  --color-neutral-light: #F5F7FA;/* Snow */
+  --color-neutral-dark: #2E2E2E; /* Charcoal */
 }
 
-/* 3. Global Box-Sizing & Reset */ Global Box-Sizing & Reset */
+/* 3. Global Box-Sizing & Reset */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* 4 & 6. Base Styles & Fluid Grid Layout */
+/* 4. Base Styles & Fluid Grid Layout */
 body {
   display: grid;
   grid-template-columns: minmax(1rem, 1fr) minmax(auto, var(--max-width)) minmax(1rem, 1fr);
   font-family: var(--font-body);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
-  background-color: #f5f5f5;
-  color: var(--text-color);
+  background-color: var(--color-neutral-light);
+  color: var(--color-neutral-dark);
   padding: var(--padding) 0;
 }
 
-/* Hero: span full grid, then constrain inner content */
-#hero {
-  grid-column: 1 / -1;         /* span from first to last column */
-  background: #f0f0f0;         /* or any hero background color/image */
-  padding: 4rem 0;
-}
-
-.hero-content {
-  max-width: var(--max-width); /* use your clamp’d max-width */
-  margin: 0 auto;              /* center the content block */
-  text-align: center;          /* center headings/text */
-}
-
-/* CTA button inside hero */
-.btn-cta {
-  display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.75rem 1.5rem;
-  background: #333;
-  color: #fff;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.btn-cta:hover {
-  background: #555;
-}
-
-/* 7. Container */
+/* 5. Container */
 .container {
   grid-column: 2;
   max-width: var(--max-width);
   width: 100%;
   padding: var(--padding);
-  background-color: var(--bg-color);
+  background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* 5. Headings */
+/* 6. Headings */
 h1 {
   font-family: var(--font-heading);
   font-size: var(--font-size-h1);
+  color: var(--color-primary);
   margin-bottom: 0.5rem;
 }
 
 h2 {
   font-family: var(--font-heading);
   font-size: var(--font-size-h2);
+  color: var(--color-primary);
   margin-bottom: 1rem;
 }
 
 h3 {
   font-size: 1.25rem;
+  color: var(--color-secondary);
   margin-bottom: 0.5rem;
 }
 
-/* 8. Tagline & Contact */
+/* 7. Tagline & Contact */
 .tagline {
   font-style: italic;
+  color: var(--color-neutral-dark);
   margin-bottom: 1rem;
 }
 
 .contact {
   font-size: 0.9rem;
-  color: var(--muted-color);
+  color: var(--color-neutral-dark);
 }
 
-/* 9. Date and Subtitles */
+/* 8. Date and Subtitles */
 .date,
 .project-subtitle {
   font-size: 0.9rem;
-  color: var(--muted-color);
+  color: var(--color-neutral-dark);
   display: block;
   margin-bottom: 0.5rem;
 }
 
-/* 10. Section Spacing */
+/* 9. Section Spacing */
 section {
   margin-bottom: 2rem;
 }
 
-/* 11. Paragraphs & Lists */
+/* 10. Paragraphs & Lists */
 p,
 li {
   margin-bottom: 0.75rem;
 }
 
-/* Links */
+/* 11. Links */
 a {
-  color: inherit;
+  color: var(--color-secondary);
   text-decoration: none;
 }
 
@@ -136,11 +114,40 @@ a:hover {
   text-decoration: underline;
 }
 
-/* 12. Footer */
+/* 12. Hero Section */
+#hero {
+  grid-column: 1 / -1;
+  background-color: var(--color-neutral-light);
+  padding: 4rem 0;
+}
+
+.hero-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.btn-cta {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-cta:hover {
+  background: var(--color-secondary);
+}
+
+/* 13. Footer */
 footer {
   grid-column: 2;
   text-align: center;
   font-size: 0.9rem;
-  color: var(--muted-color);
+  color: var(--color-neutral-dark);
   margin-top: 2rem;
 }
