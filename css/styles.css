@@ -114,11 +114,18 @@ a:hover {
   text-decoration: underline;
 }
 
-/* 12. Hero Section */
+/* 12. Hero Section with Abstract Shapes */
 #hero {
   grid-column: 1 / -1;
   background-color: var(--color-neutral-light);
+  /* Add abstract shape SVGs behind content */
+  background-image: url('css/blob-left.svg'), url('css/blob-right.svg');
+  background-position: bottom left, top right;
+  background-repeat: no-repeat;
+  background-size: 150px 150px, 200px 200px;
   padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-content {
@@ -126,8 +133,10 @@ a:hover {
   margin: 0 auto;
   text-align: center;
   position: relative;
+  z-index: 1;
 }
 
+/* CTA Button */
 .btn-cta {
   display: inline-block;
   margin-top: 1.5rem;
