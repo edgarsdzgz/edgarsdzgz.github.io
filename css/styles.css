@@ -11,14 +11,15 @@
   --font-size-h2: 1.5rem;
   --font-size-body: 1rem;
   --line-height-body: 1.6;
-  --max-width: clamp(40ch, 50vw, 75ch);
+  /* fluid width: min 40ch, preferred 60vw, max 80vw */
+  --max-width: clamp(40ch, 60vw, 80vw);
   --padding: 2rem;
   --bg-color: #ffffff;
   --text-color: #333333;
   --muted-color: #666666;
 }
 
-/* 3. Global Box-Sizing & Reset */
+/* 3. Global Box-Sizing & Reset */ Global Box-Sizing & Reset */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
