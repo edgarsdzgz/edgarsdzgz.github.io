@@ -44,18 +44,24 @@
 
 /* 4. Base Styles & Fluid Grid Layout */
 html {
-  /* Full-page gutters-only gradient */
+  /* Full-page gutters-only gradient, driven by theme variables */
   background-image:
+    /* vertical color fade */
     linear-gradient(
       to bottom,
-      var(--color-bg) 0%,
-      var(--color-accent) 50%,
-      var(--color-primary) 100%
+      var(--color-bg)         0%,
+      var(--color-accent)    50%,
+      var(--color-primary)  100%
     ),
+    /* subtle stripes: use a semi-opaque contrasting color */
     repeating-linear-gradient(
       to bottom,
-      rgba(255,255,255,0.05) 0px,
-      rgba(255,255,255,0.05) 1px,
+      rgba(
+        /* if dark mode, white at 5%; if light, black at 5% */
+        var(--color-text-primary),
+        0.05
+      ) 0px,
+      rgba(var(--color-text-primary), 0.05) 1px,
       transparent 1px,
       transparent 4px
     );
@@ -64,6 +70,7 @@ html {
   background-size: auto 100%;
   scroll-behavior: smooth;
 }
+
 
 body {
   display: grid;
