@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,8 +16,8 @@
   </script>
 </head>
 <body>
-  <!-- Persistent Transparent Header -->
-  <header id="main-header" class="header--transparent">
+  <!-- Persistent Transparent Header with Theme Toggle -->
+  <header id="main-header">
     <div class="logo"><h1>Edgar Diaz-Gutierrez</h1></div>
     <nav class="header-nav">
       <p class="tagline">Full-Stack Software Engineer</p>
@@ -28,10 +28,11 @@
         <a href="https://github.com/edgarsdzgz" target="_blank">GitHub</a>
       </p>
     </nav>
+    <button id="theme-toggle" aria-label="Toggle light/dark mode">🌓</button>
     <div class="social-sidebar">
-      <a href="mailto:edgar.s.dzgz@gmail.com" aria-label="Email" tabindex="0"><span class="icon-email">✉️</span></a>
-      <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank" aria-label="LinkedIn" tabindex="0"><span class="icon-linkedin">🔗</span></a>
-      <a href="https://github.com/edgarsdzgz" target="_blank" aria-label="GitHub" tabindex="0"><span class="icon-github">🐱</span></a>
+      <a href="mailto:edgar.s.dzgz@gmail.com" aria-label="Email"><span class="icon-email">✉️</span></a>
+      <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank" aria-label="LinkedIn"><span class="icon-linkedin">🔗</span></a>
+      <a href="https://github.com/edgarsdzgz" target="_blank" aria-label="GitHub"><span class="icon-github">🐱</span></a>
     </div>
   </header>
 
@@ -48,7 +49,7 @@
   </aside>
 
   <!-- Hero Section -->
-  <section id="hero" class="fade-in delay-1">
+  <section id="hero">
     <div class="hero-content">
       <h2>Building Resilient Systems, Inspiring Teams</h2>
       <p>Driven by creativity and collaboration, I craft elegant, high-impact software and guide tomorrow’s engineers toward shared success.</p>
@@ -147,37 +148,48 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Hero fade-in only
-      const hero = document.querySelector('#hero');
-      const observer = new IntersectionObserver(([entry], obs) => {
-        if (entry.isIntersecting) {
+    (function() {
+      // Hero fade-in
+      const hero = document.getElementById('hero');
+      const obs = new IntersectionObserver(([e], o) => {
+        if (e.isIntersecting) {
           hero.querySelector('.hero-content').classList.add('in-view');
-          obs.disconnect();
+          o.disconnect();
         }
       }, { threshold: 0.2 });
-      observer.observe(hero);
+      obs.observe(hero);
 
-      // Scroll-Spy Observer and sticky header unchanged...
+      // Scroll-spy & sticky header
       const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('.scroll-nav a');
-      const spyObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const id = entry.target.getAttribute('id');
+      const links = document.querySelectorAll('.scroll-nav a');
+      const spy = new IntersectionObserver((ents) => {
+        ents.forEach(e => {
+          const id = e.target.id;
           const link = document.querySelector(`.scroll-nav a[href="#${id}"]`);
-          if (entry.isIntersecting) {
-            navLinks.forEach(a => a.classList.remove('active'));
+          if (e.isIntersecting) {
+            links.forEach(a => a.classList.remove('active'));
             link.classList.add('active');
           }
         });
-      }, { threshold: 0.5 });
-      sections.forEach(sec => spyObserver.observe(sec));
+      }, { threshold: 0.6 });
+      sections.forEach(s => spy.observe(s));
 
-      const header = document.getElementById('main-header');
+      const hdr = document.getElementById('main-header');
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) header.classList.add('sticky'); else header.classList.remove('sticky');
+        hdr.classList.toggle('sticky', window.scrollY > 50);
       });
-    });
+
+      // Theme toggle
+      const toggle = document.getElementById('theme-toggle');
+      const root = document.documentElement;
+      const saved = localStorage.getItem('theme');
+      if (saved) root.setAttribute('data-theme', saved);
+      toggle.addEventListener('click', () => {
+        const cur = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', cur);
+        localStorage.setItem('theme', cur);
+      });
+    })();
   </script>
 </body>
 </html>
