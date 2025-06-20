@@ -147,6 +147,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // — Hero fade-in —
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
       new IntersectionObserver(([entry], obs) => {
@@ -157,19 +158,29 @@
       }, { threshold: 0.2 }).observe(heroContent);
     }
 
-    // ——— NEW STICKY HEADER HANDLER ———
-    const header = document.getElementById('main-header');
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 50) {
-        header.classList.add('sticky');
-      } else {
-        header.classList.remove('sticky');
-      }
-    });
+    // — Scroll-reveal for all .fade-in elements —
+    const fadeEls = document.querySelectorAll('.fade-in');
+    if (fadeEls.length) {
+      const fadeObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      fadeEls.forEach(el => fadeObserver.observe(el));
+    }
 
-    // ——— JS PARALLAX (already there) ———
+    // — Sticky header & parallax banner in one scroll handler —
+    const header = document.getElementById('main-header');
     const hero = document.getElementById('hero');
     window.addEventListener('scroll', () => {
+      // Sticky header
+      if (window.pageYOffset > 50) header.classList.add('sticky');
+      else header.classList.remove('sticky');
+
+      // JS parallax
       const offset = window.pageYOffset * 0.3;
       hero.style.backgroundPosition = `center calc(50% + ${offset}px)`;
     });
