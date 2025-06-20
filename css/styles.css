@@ -171,12 +171,15 @@ html {
   background: linear-gradient(
     to bottom,
     var(--color-neutral-light) 0%,       /* Snow at top */
-    rgba(44, 232, 232, 0.1) 40%,         /* Soft Vibrant Cyan */
-    rgba(63, 131, 248, 0.1) 70%,        /* Soft Electric Blue */
-    rgba(10, 31, 68, 0.05) 100%         /* Very Soft Deep Navy */
+    rgba(44, 232, 232, 0.2) 30%,         /* Moderate Vibrant Cyan */
+    rgba(63, 131, 248, 0.3) 60%,         /* Noticeable Electric Blue */
+    rgba(10, 31, 68, 0.15) 100%          /* Soft Deep Navy */
   );
 }
 
+body {
+  background: transparent;
+}
 body {
   background: transparent;
 }
