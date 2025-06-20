@@ -171,9 +171,9 @@ html {
   background: linear-gradient(
     to bottom,
     var(--color-neutral-light) 0%,       /* Snow at top */
-    var(--color-accent) 30%,              /* Vibrant Cyan */
-    var(--color-secondary) 60%,           /* Electric Blue */
-    var(--color-primary) 100%             /* Deep Navy at bottom */
+    rgba(44, 232, 232, 0.1) 40%,         /* Soft Vibrant Cyan */
+    rgba(63, 131, 248, 0.1) 70%,        /* Soft Electric Blue */
+    rgba(10, 31, 68, 0.05) 100%         /* Very Soft Deep Navy */
   );
 }
 
