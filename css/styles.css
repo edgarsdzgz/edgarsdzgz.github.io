@@ -1,7 +1,6 @@
-/* 1. Import Google Fonts */
+/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap');
 
-/* 2. CSS Variables for Typography & Dark/Light Color Schemes */
 :root {
   /* Typography */
   --font-heading: 'Playfair Display', serif;
@@ -10,10 +9,9 @@
   --font-size-h2: 1.5rem;
   --font-size-body: 1rem;
   --line-height-body: 1.6;
-  --max-width: clamp(40ch, 60vw, 80vw);
   --padding: 2rem;
 
-  /* Dark Mode Palette (default) */
+  /* Colors: Dark mode (default) */
   --color-bg: #121826;
   --color-surface: #1E2432;
   --color-text-primary: #E4E7EC;
@@ -28,127 +26,96 @@
   --color-surface: #FFFFFF;
   --color-text-primary: #2E2E2E;
   --color-text-secondary: #0A1F44;
-  --color-primary: #3F83F8;
-  --color-accent: #2CE8E8;
   --color-shadow: rgba(0,0,0,0.1);
 }
 
-/* 3. Global Box-Sizing & Reset */
+/* Global Reset & Base Styles */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* 4. Base Styles & Fluid Grid Layout */
-html {
-  background: linear-gradient(to bottom, var(--color-bg), var(--color-primary));
-  background-attachment: fixed;
-  scroll-behavior: smooth;
+html, body {
+  height: 100%;
   font-family: var(--font-body);
+  color: var(--color-text-primary);
+  scroll-behavior: smooth;
 }
 
 body {
+  background: linear-gradient(to bottom, var(--color-bg), var(--color-primary));
+}
+
+.layout-container {
   display: grid;
-  grid-template-columns: minmax(1rem, 1fr) minmax(auto, var(--max-width)) minmax(1rem, 1fr);
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  color: var(--color-text-primary);
-  padding-top: 4rem;
+  grid-template-columns: 1fr 2fr;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
 }
 
-/* 5. Sticky Header */
-#main-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  padding: 1rem var(--padding);
+.left-column {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: var(--padding);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--color-surface);
-  box-shadow: 0 2px 8px var(--color-shadow);
-  z-index: 100;
+  flex-direction: column;
+  justify-content: center;
+  background: transparent;
 }
 
-#main-header .logo h1,
-#main-header .header-nav .tagline,
-#main-header .header-nav .contact a {
+.right-column {
+  padding: var(--padding);
+}
+
+#main-header .logo h1 {
+  font-size: var(--font-size-h1);
   color: var(--color-text-secondary);
 }
 
-/* 6. Social Sidebar */
-.social-sidebar {
-  position: fixed;
-  top: 50%; left: 0;
-  transform: translate(-100%, -50%);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  transition: transform 0.3s ease;
-  z-index: 90;
+.header-nav .tagline, .header-nav .contact a {
+  color: var(--color-text-secondary);
 }
 
-.social-sidebar:hover { transform: translate(0, -50%); }
-.social-sidebar a { color: var(--color-text-secondary); }
-
-@media (max-width: 600px) {
-  .social-sidebar { display: none; }
-  #main-header { padding: 0.5rem 1rem; }
-}
-
-/* 7. Scroll-Spy Sidebar Nav */
 .scroll-nav {
-  position: sticky;
-  top: 50%; transform: translateY(-50%);
-  grid-column: 1;
-  padding: 0.5rem;
-  z-index: 50;
+  margin-top: 2rem;
 }
 
 .scroll-nav a {
   display: block;
+  margin: 0.5rem 0;
   color: var(--color-text-secondary);
-  padding: 0.25rem 0.5rem;
   text-decoration: none;
 }
 
-.scroll-nav a.active,
-.scroll-nav a:hover { color: var(--color-primary); }
-
-@media (max-width: 800px) {
-  .scroll-nav { display: none; }
+.scroll-nav a.active, .scroll-nav a:hover {
+  color: var(--color-primary);
 }
 
-/* 8. Container */
-.container {
-  grid-column: 2;
-  padding: var(--padding);
-  background-color: var(--color-surface);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px var(--color-shadow);
-  margin-bottom: 2rem;
+.social-sidebar {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 2rem;
 }
 
-/* 9. Headings & Text */
-h1, h2, h3, p, li { margin-bottom: 0.75rem; }
-h1, h2 { font-family: var(--font-heading); color: var(--color-text-secondary); }
-h3 { color: var(--color-primary); }
+.social-sidebar a {
+  font-size: 1.5rem;
+  color: var(--color-text-secondary);
+}
 
-/* 10. Hero Section */
 #hero {
-  grid-column: 1 / -1;
-  background: linear-gradient(to bottom, var(--color-surface), transparent);
-  padding: 4rem var(--padding);
-  text-align: center;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
-#hero h2, #hero p { color: var(--color-text-secondary); }
+.hero-content h2, .hero-content p {
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
 
-/* 11. CTA Button */
 .btn-cta {
   display: inline-block;
-  margin-top: 1rem;
   padding: 0.75rem 1.5rem;
   background: var(--color-primary);
   color: var(--color-surface);
@@ -156,15 +123,46 @@ h3 { color: var(--color-primary); }
   text-decoration: none;
 }
 
-.btn-cta:hover { background: var(--color-accent); }
-
-/* 12. Footer */
-footer {
-  grid-column: 2;
-  text-align: center;
-  color: var(--color-text-primary);
-  padding: var(--padding) 0;
+.btn-cta:hover {
+  background: var(--color-accent);
 }
 
-footer a { color: var(--color-primary); }
+.right-column section {
+  background: var(--color-surface);
+  padding: var(--padding);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px var(--color-shadow);
+  margin-bottom: 2rem;
+}
+
+h2, h3 {
+  font-family: var(--font-heading);
+  margin-bottom: 0.75rem;
+}
+
+h2 { font-size: var(--font-size-h2); }
+h3 { color: var(--color-primary); }
+
+footer {
+  text-align: center;
+  color: var(--color-text-primary);
+  padding: var(--padding);
+}
+
+footer a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
 footer a:hover { color: var(--color-accent); }
+
+@media (max-width: 900px) {
+  .layout-container {
+    grid-template-columns: 1fr;
+  }
+  .left-column, .right-column {
+    position: relative;
+    height: auto;
+    padding: 1rem;
+  }
+}
