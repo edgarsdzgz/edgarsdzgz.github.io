@@ -29,18 +29,26 @@
 }
 
 /* 4. Base Styles & Fluid Grid Layout */
+html {
+  /* Apply full-page gradient to html so it shows behind white container */
+  background: linear-gradient(
+    to bottom,
+    var(--color-neutral-light) 0%,
+    rgba(44, 232, 232, 0.1) 100%
+  );
+}
+
 body {
   display: grid;
   grid-template-columns: minmax(1rem, 1fr) minmax(auto, var(--max-width)) minmax(1rem, 1fr);
   font-family: var(--font-body);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
-  background: linear-gradient(to bottom, var(--color-neutral-light) 0%, rgba(44, 232, 232, 0.05) 100%);
+  /* ensure body background is transparent so gradient shows through */
+  background: transparent;
   color: var(--color-neutral-dark);
   padding: var(--padding) 0;
 }
-
-/* 5. Container */
 .container {
   grid-column: 2;
   max-width: var(--max-width);
