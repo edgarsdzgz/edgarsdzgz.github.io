@@ -34,11 +34,11 @@ html {
   background-image:
     linear-gradient(
       to bottom,
-      #fafcff 0%,                                 /* Off-white at top */
-      rgba(44, 232, 232, 0.3) 20%,               /* Moderate Cyan */
-      rgba(63, 131, 248, 0.4) 50%,               /* Stronger Electric Blue */
-      rgba(10, 31, 68, 0.2) 90%,                 /* Softer Deep Navy */
-      var(--color-primary) 100%                  /* Deep Navy */
+      #fafcff 0%,
+      rgba(44, 232, 232, 0.3) 20%,
+      rgba(63, 131, 248, 0.4) 50%,
+      rgba(10, 31, 68, 0.2) 90%,
+      var(--color-primary) 100%
     ),
     repeating-linear-gradient(
       to bottom,
@@ -138,7 +138,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* 12. Hero Section with Hero Banner and Shapes */
+/* 12. Hero Section with Parallax Banner & Shapes */
 #hero {
   grid-column: 1 / -1;
   /* hero background banner + subtle shapes */
@@ -146,15 +146,30 @@ a:hover {
     url('css/tech_elegance_banner.png') center/cover no-repeat,
     url('css/blob-left.svg') bottom left/150px 150px no-repeat,
     url('css/blob-right.svg') top right/200px 200px no-repeat;
+
+  /* lock banner in place for parallax effect, keep shapes static */
+  background-attachment: fixed, scroll, scroll;
   padding: 4rem 0;
   position: relative;
   overflow: hidden;
-}.hero-content {
+}
+
+.hero-content {
   max-width: var(--max-width);
   margin: 0 auto;
   text-align: center;
   position: relative;
   z-index: 1;
+  /* 16. Initial state for scroll-triggered fade-in */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* 17. Visible state after intersection */
+.hero-content.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* CTA Button */

@@ -203,5 +203,21 @@
       <p>Connect with me: <a href="mailto:edgar.s.dzgz@gmail.com">Email</a> | <a href="http://www.linkedin.com/in/edgar-dzgz/" target="_blank">LinkedIn</a> | <a href="https://github.com/edgarsdzgz" target="_blank">GitHub</a></p>
     </footer>
   </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const heroContent = document.querySelector('.hero-content');
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          heroContent.classList.add('in-view');
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(heroContent);
+  });
+</script>
 </body>
 </html>
