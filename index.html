@@ -5,7 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edgar Diaz-Gutierrez</title>
+  <!-- Prevent flash of unstyled content -->
+  <style>body{visibility:hidden;}</style>
   <link rel="stylesheet" href="css/styles.css" />
+  <!-- Reveal content once styles and fonts have loaded -->
+  <script>
+    window.addEventListener('load', () => {
+      document.body.style.visibility = 'visible';
+    });
+  </script>
 </head>
 <body>
   <!-- Hero Section -->
@@ -166,11 +174,11 @@
 
   </div>
 
+  <!-- Hero fade-in + parallax scripts -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const heroContent = document.querySelector('.hero-content');
       if (!heroContent) return;
-
       // IntersectionObserver for fade-in
       new IntersectionObserver(([entry], obs) => {
         if (entry.isIntersecting) {
@@ -178,8 +186,7 @@
           obs.disconnect();
         }
       }, { threshold: 0.2 }).observe(heroContent);
-
-      // JS-driven parallax for better cross-browser support
+      // JS-driven parallax
       const hero = document.getElementById('hero');
       window.addEventListener('scroll', () => {
         const offset = window.pageYOffset * 0.3;
