@@ -145,25 +145,35 @@
     </footer>
   </div>
 
-  <!-- Hero fade-in + parallax scripts -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const heroContent = document.querySelector('.hero-content');
-      if (!heroContent) return;
-      // IntersectionObserver for fade-in
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
       new IntersectionObserver(([entry], obs) => {
         if (entry.isIntersecting) {
           heroContent.classList.add('in-view');
           obs.disconnect();
         }
       }, { threshold: 0.2 }).observe(heroContent);
-      // JS-driven parallax
-      const hero = document.getElementById('hero');
-      window.addEventListener('scroll', () => {
-        const offset = window.pageYOffset * 0.3;
-        hero.style.backgroundPosition = `center calc(50% + ${offset}px)`;
-      });
+    }
+
+    // ——— NEW STICKY HEADER HANDLER ———
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 50) {
+        header.classList.add('sticky');
+      } else {
+        header.classList.remove('sticky');
+      }
     });
-  </script>
+
+    // ——— JS PARALLAX (already there) ———
+    const hero = document.getElementById('hero');
+    window.addEventListener('scroll', () => {
+      const offset = window.pageYOffset * 0.3;
+      hero.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+    });
+  });
+</script>
 </body>
 </html>
