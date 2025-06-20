@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap');
 
 /* 2. CSS Variables for Typography & Dark/Light Color Schemes */
-/* — Dark Mode (default) — */
+
 :root {
   /* Typography */
   --font-heading:     'Playfair Display', serif;
@@ -14,7 +14,7 @@
   --max-width:        clamp(40ch, 60vw, 80vw);
   --padding:          2rem;
 
-  /* Dark Palette */
+  /* Dark Mode Palette (default) */
   --color-bg:              #121826;
   --color-surface:         #1E2432;
   --color-text-primary:    #E4E7EC;
@@ -24,7 +24,7 @@
   --color-shadow:          rgba(0,0,0,0.5);
 }
 
-/* — Light Mode override — */
+/* Light Mode override */
 :root[data-theme="light"] {
   --color-bg:              #F5F7FA;
   --color-surface:         #FFFFFF;
@@ -45,38 +45,21 @@
 /* 4. Base Styles & Fluid Grid Layout */
 html {
   background-image:
-    linear-gradient(
-      to bottom,
-      var(--color-bg) 0%,
-      var(--color-bg) 50%,
-      var(--color-primary) 100%
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.05) 0px,
-      rgba(255, 255, 255, 0.05) 1px,
-      transparent 1px,
-      transparent 4px
-    );
-  background-repeat: no-repeat;
+    linear-gradient(to bottom, var(--color-bg) 0%, var(--color-accent) 50%, var(--color-primary) 100%),
+    repeating-linear-gradient(to bottom, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 4px);
   background-attachment: fixed;
-  background-size: cover;
+  background-size: auto 100%;
   scroll-behavior: smooth;
 }
 
 body {
   display: grid;
-  grid-template-columns:
-    minmax(1rem, 1fr)
-    minmax(auto, var(--max-width))
-    minmax(1rem, 1fr);
+  grid-template-columns: minmax(1rem, 1fr) minmax(auto, var(--max-width)) minmax(1rem, 1fr);
   font-family: var(--font-body);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
-  background: transparent;
   color: var(--color-text-primary);
   padding: var(--padding) 0;
-  position: relative;
 }
 
 /* 5. Sticky Header */
@@ -87,35 +70,26 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: transparent;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
-  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
   z-index: 100;
 }
+
 #main-header.sticky {
+  position: fixed;
   background: rgba(var(--color-surface), 0.9);
   box-shadow: 0 2px 8px var(--color-shadow);
-  color: var(--color-text-primary);
 }
-#main-header .logo h1 {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  color: var(--color-text-secondary);
-}
-#main-header .header-nav .tagline {
-  font-style: italic;
-  color: var(--color-text-primary);
-}
+
+#main-header .logo h1,
+#main-header .header-nav .tagline,
 #main-header .header-nav .contact a {
-  margin-left: 0.5rem;
-  color: var(--color-primary);
+  color: var(--color-text-secondary);
 }
 
 /* 6. Social Sidebar */
 .social-sidebar {
   position: fixed;
-  top: 50%;
-  left: 0;
+  top: 50%; left: 0;
   transform: translate(-100%, -50%);
   display: flex;
   flex-direction: column;
@@ -123,13 +97,10 @@ body {
   transition: transform 0.3s ease;
   z-index: 90;
 }
-.social-sidebar:hover {
-  transform: translate(0, -50%);
-}
-.social-sidebar a {
-  font-size: 1.25rem;
-  color: var(--color-text-primary);
-}
+
+.social-sidebar:hover { transform: translate(0, -50%); }
+.social-sidebar a { font-size: 1.25rem; color: var(--color-text-primary); }
+
 @media (max-width: 600px) {
   .social-sidebar { display: none; }
   #main-header { padding: 0.5rem 1rem; }
@@ -138,156 +109,63 @@ body {
 /* 7. Scroll-Spy Sidebar Nav */
 .scroll-nav {
   position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 50%; transform: translateY(-50%);
   grid-column: 1;
-  align-self: start;
   padding: 0.5rem;
-  z-index: 2;
 }
-.scroll-nav ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+
 .scroll-nav a {
-  position: relative;
   font-size: 0.9rem;
-  color: var(--color-text-primary);
-  text-decoration: none;
+  color: var(--color-text-secondary);
   padding: 0.25rem 0.5rem;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
-.scroll-nav a::before {
-  content: "";
-  position: absolute;
-  left: 0; bottom: 0;
-  width: 0; height: 2px;
-  background: var(--color-secondary);
-  transition: width 0.3s ease;
-}
-.scroll-nav a:hover,
-.scroll-nav a:focus {
-  color: var(--color-secondary);
-}
-.scroll-nav a:hover::before,
-.scroll-nav a:focus::before {
-  width: 100%;
-}
-.scroll-nav a.active {
-  color: var(--color-primary);
-}
-.scroll-nav a.active::before {
-  width: 100%;
-  background: var(--color-primary);
-}
-@media (max-width: 800px) {
-  .scroll-nav { display: none; }
-}
+
+.scroll-nav a.active { color: var(--color-primary); }
+
+@media (max-width: 800px) { .scroll-nav { display: none; } }
 
 /* 8. Container */
 .container {
   grid-column: 2;
-  max-width: var(--max-width);
-  width: 100%;
   padding: var(--padding);
   background-color: var(--color-surface);
   border-radius: 8px;
   box-shadow: 0 2px 8px var(--color-shadow);
-  overflow: hidden;
-  position: relative;
-}
-.container::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url('css/subtle-noise.png') repeat;
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 0;
 }
 
 /* 9. Headings & Text */
 h1, h2, h3, p, li { margin-bottom: 0.75rem; }
-h1 { font-family: var(--font-heading); font-size: var(--font-size-h1); color: var(--color-text-secondary); }
-h2 { font-family: var(--font-heading); font-size: var(--font-size-h2); color: var(--color-text-secondary); }
-h3 { font-size: 1.25rem; color: var(--color-primary); }
-.date, .project-subtitle { font-size: 0.9rem; color: var(--color-text-primary); }
+h1, h2 { font-family: var(--font-heading); color: var(--color-text-secondary); }
+h3 { color: var(--color-primary); }
 
-/* 10. Hero Section with Theme-aware Blend */
+/* 10. Hero Section */
 #hero {
   grid-column: 1 / -1;
-  background:
-    var(--color-surface),
-    url('css/tech_elegance_banner.png') center/cover no-repeat,
-    url('css/blob-left.svg') bottom left/150px 150px no-repeat,
-    url('css/blob-right.svg') top right/200px 200px no-repeat;
-  background-blend-mode: overlay, normal, normal, normal;
-  background-attachment: fixed, scroll, scroll, scroll;
+  background: var(--color-surface);
   padding: 4rem 0;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
 }
 
-/* 11. Hero Fade-In */
-.hero-content {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-  z-index: 2;
-}
-.hero-content.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
+#hero h2, #hero p { color: var(--color-text-secondary); }
 
-/* 12. CTA Button */
+/* 11. CTA Button */
 .btn-cta {
-  display: inline-block;
-  margin-top: 1.5rem;
   padding: 0.75rem 1.5rem;
   background: var(--color-primary);
   color: var(--color-surface);
   border-radius: 4px;
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-.btn-cta:hover {
-  background: var(--color-secondary);
 }
 
-/* 13. Footer */
+.btn-cta:hover { background: var(--color-accent); }
+
+/* 12. Footer */
 footer {
   grid-column: 2;
   text-align: center;
   font-size: 0.9rem;
   color: var(--color-text-primary);
-  margin-top: 2rem;
   padding: var(--padding) 0;
-  background-color: rgba(var(--color-primary), 0.05);
-  border-radius: 8px;
 }
 
-/* 14. Theme Toggle Button */
-#theme-toggle {
-  background: none;
-  border: none;
-  font-size: 1.25rem;
-  cursor: pointer;
-  color: var(--color-text-primary);
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-#theme-toggle:hover,
-#theme-toggle:focus {
-  color: var(--color-primary);
-  transform: scale(1.1);
-}
-#theme-toggle:focus {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 4px;
-}
+footer a { color: var(--color-primary); }
+footer a:hover { color: var(--color-accent); }
