@@ -30,8 +30,26 @@
 
 /* 4. Base Styles & Fluid Grid Layout */
 html {
-  /* no background gradient on html now */
-  background: none;
+  /* 14. Gutters-Only Gradient with Texture Stripes */
+  background-image:
+    linear-gradient(
+      to bottom,
+      #fafcff 0%,                                 /* Off-white at top */
+      rgba(44, 232, 232, 0.3) 20%,               /* Moderate Cyan */
+      rgba(63, 131, 248, 0.4) 50%,               /* Stronger Electric Blue */
+      rgba(10, 31, 68, 0.2) 90%,                 /* Softer Deep Navy */
+      var(--color-primary) 100%                  /* Deep Navy */
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.05) 0px,
+      rgba(255,255,255,0.05) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: auto 100%;
 }
 body {
   display: grid;
@@ -53,12 +71,12 @@ body {
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: relative;        /* needed for pseudo-element */
-  overflow: hidden;          /* contain texture */
+  position: relative;
+  overflow: hidden;
 }
 
 /* 6. Headings */
- h1 {
+h1 {
   font-family: var(--font-heading);
   font-size: var(--font-size-h1);
   color: var(--color-primary);
@@ -120,20 +138,18 @@ a:hover {
   text-decoration: underline;
 }
 
-/* 12. Hero Section with Abstract Shapes */
+/* 12. Hero Section with Hero Banner and Shapes */
 #hero {
   grid-column: 1 / -1;
-  background-color: var(--color-neutral-light);
-  background-image: url('css/blob-left.svg'), url('css/blob-right.svg');
-  background-position: bottom left, top right;
-  background-repeat: no-repeat;
-  background-size: 150px 150px, 200px 200px;
+  /* hero background banner + subtle shapes */
+  background:
+    url('css/tech_elegance_banner.png') center/cover no-repeat,
+    url('css/blob-left.svg') bottom left/150px 150px no-repeat,
+    url('css/blob-right.svg') top right/200px 200px no-repeat;
   padding: 4rem 0;
   position: relative;
   overflow: hidden;
-}
-
-.hero-content {
+}.hero-content {
   max-width: var(--max-width);
   margin: 0 auto;
   text-align: center;
@@ -164,24 +180,6 @@ footer {
   font-size: 0.9rem;
   color: var(--color-neutral-dark);
   margin-top: 2rem;
-}
-
-/* 14. Gutters-Only Gradient */
-html {
-  background: linear-gradient(
-    to bottom,
-    var(--color-neutral-light) 0%,       /* Snow at top */
-    rgba(44, 232, 232, 0.2) 30%,         /* Moderate Vibrant Cyan */
-    rgba(63, 131, 248, 0.3) 60%,         /* Noticeable Electric Blue */
-    rgba(10, 31, 68, 0.15) 100%          /* Soft Deep Navy */
-  );
-}
-
-body {
-  background: transparent;
-}
-body {
-  background: transparent;
 }
 
 /* 15. Texture Overlay on Container */
