@@ -190,54 +190,66 @@
     </footer>
   </div>
 
-  <script>
-    (function () {
-      // 1. Hero fade-in
-      const hero = document.getElementById('hero');
-      const heroObserver = new IntersectionObserver(([entry], obs) => {
-        if (entry.isIntersecting) {
-          hero.querySelector('.hero-content').classList.add('in-view');
-          obs.disconnect();
+ <script>
+  (function () {
+    // 1. Hero fade-in
+    const hero = document.getElementById('hero');
+    const heroObserver = new IntersectionObserver(([entry], obs) => {
+      if (entry.isIntersecting) {
+        hero.querySelector('.hero-content').classList.add('in-view');
+        obs.disconnect();
+      }
+    }, { threshold: 0.2 });
+    heroObserver.observe(hero);
+
+    // 2. Scroll-spy & sticky header
+    const sections = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('.scroll-nav a');
+    const spyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        const id = e.target.id;
+        const link = document.querySelector(`.scroll-nav a[href="#${id}"]`);
+        if (e.isIntersecting) {
+          links.forEach(a => a.classList.remove('active'));
+          link?.classList.add('active');
         }
-      }, { threshold: 0.2 });
-      heroObserver.observe(hero);
-
-      // 2. Scroll-spy & sticky header
-      const sections = document.querySelectorAll('section[id]');
-      const links = document.querySelectorAll('.scroll-nav a');
-      const spyObserver = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          const id = e.target.id;
-          const link = document.querySelector(`.scroll-nav a[href="#${id}"]`);
-          if (e.isIntersecting) {
-            links.forEach(a => a.classList.remove('active'));
-            link?.classList.add('active');
-          }
-        });
-      }, { threshold: 0.6 });
-      sections.forEach(s => spyObserver.observe(s));
-
-      const header = document.getElementById('main-header');
-      window.addEventListener('scroll', () => {
-        header.classList.toggle('sticky', window.scrollY > 50);
       });
+    }, { threshold: 0.6 });
+    sections.forEach(s => spyObserver.observe(s));
 
-      // 3. Theme toggle + persistence + icon swap
-      const toggle = document.getElementById('theme-toggle');
-      const root = document.documentElement;
-      // Load saved or default to dark
-      const saved = localStorage.getItem('theme') || 'dark';
-      root.setAttribute('data-theme', saved);
-      toggle.textContent = saved === 'light' ? '🌙' : '☀️';
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('sticky', window.scrollY > 50);
+    });
 
-      toggle.addEventListener('click', () => {
-        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-        root.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-        toggle.textContent = next === 'light' ? '🌙' : '☀️';
-      });
-    })();
-  </script>
+    // 3. Theme toggle + persistence + icon swap
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    const saved = localStorage.getItem('theme') || 'dark';
+    root.setAttribute('data-theme', saved);
+    toggle.textContent = saved === 'light' ? '🌙' : '☀️';
+
+    toggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      toggle.textContent = next === 'light' ? '🌙' : '☀️';
+    });
+
+    // 4. Store scroll position before unloading
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('scrollPosition', window.scrollY);
+    });
+
+    // 5. Restore scroll position on page load
+    window.addEventListener('load', () => {
+      const scrollPosition = localStorage.getItem('scrollPosition');
+      if (scrollPosition !== null) {
+        window.scrollTo(0, parseInt(scrollPosition));
+      }
+    });
+  })();
+</script>
 </body>
 
 </html>
