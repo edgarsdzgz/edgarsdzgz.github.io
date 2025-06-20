@@ -272,3 +272,22 @@ footer {
   background-color: rgba(var(--color-primary), 0.05);
   border-radius: 8px;
 }
+
+/* 14. Theme Toggle Button */
+#theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+#theme-toggle:hover,
+#theme-toggle:focus {
+  color: var(--color-primary);
+  transform: scale(1.1);
+}
+#theme-toggle:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
