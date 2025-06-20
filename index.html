@@ -1,46 +1,53 @@
-<div class="layout-container">
-  <aside class="left-column">
-    <header id="main-header">
-      <div class="logo">
-        <h1>Edgar Diaz-Gutierrez</h1>
-      </div>
-      <nav class="header-nav">
-        <p class="tagline">Full-Stack Software Engineer</p>
-        <p class="contact">
-          (619) 750-4888 | 
-          <a href="mailto:edgar.s.dzgz@gmail.com">edgar.s.dzgz@gmail.com</a> |
-          <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank">LinkedIn</a> |
-          <a href="https://github.com/edgarsdzgz" target="_blank">GitHub</a>
-        </p>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edgar Diaz-Gutierrez</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    body { visibility: hidden; }
+  </style>
+  <script>
+    window.addEventListener('load', () => {
+      document.body.style.visibility = 'visible';
+    });
+  </script>
+</head>
+<body>
+  <!-- Left Sidebar -->
+  <aside class="left-sidebar">
+    <header>
+      <h1>Edgar Diaz-Gutierrez</h1>
+      <p class="tagline">Full-Stack Software Engineer</p>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#education">Education</a></li>
+        </ul>
       </nav>
-    </header>
-
-    <section id="hero">
-      <div class="hero-content">
-        <h2>Building Resilient Systems, Inspiring Teams</h2>
-        <p>Driven by creativity and collaboration, I craft elegant, high-impact software and guide tomorrow’s engineers toward shared success.</p>
-        <a href="#projects" class="btn-cta">Explore My Work</a>
+      <div class="sidebar-social">
+        <a href="mailto:edgar.s.dzgz@gmail.com">✉️</a>
+        <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank">🔗</a>
+        <a href="https://github.com/edgarsdzgz" target="_blank">🐱</a>
       </div>
-    </section>
-
-    <nav class="scroll-nav">
-      <ul>
-        <li><a href="#introduction">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#education">Education</a></li>
-      </ul>
-    </nav>
-
-    <div class="social-sidebar">
-      <a href="mailto:edgar.s.dzgz@gmail.com" aria-label="Email">✉️</a>
-      <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank" aria-label="LinkedIn">🔗</a>
-      <a href="https://github.com/edgarsdzgz" target="_blank" aria-label="GitHub">🐱</a>
-    </div>
+    </header>
   </aside>
 
-  <main class="right-column">
+  <!-- Main Content -->
+  <main class="main-content">
+    <button id="theme-toggle" aria-label="Toggle theme">🌓</button>
+
+    <section id="hero">
+      <h2>Building Resilient Systems, Inspiring Teams</h2>
+      <p>Driven by creativity and collaboration, I craft elegant, high-impact software and guide tomorrow’s engineers toward shared success.</p>
+      <a href="#projects" class="btn-cta">Explore My Work</a>
+    </section>
+
     <section id="introduction">
       <h2>Introduction</h2>
       <p>Your introduction content...</p>
@@ -67,11 +74,36 @@
     </section>
 
     <footer>
-      <p>Connect with me: 
-        <a href="mailto:edgar.s.dzgz@gmail.com">Email</a> | 
-        <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank">LinkedIn</a> | 
-        <a href="https://github.com/edgarsdzgz" target="_blank">GitHub</a>
-      </p>
+      <p>Connect with me: <a href="mailto:edgar.s.dzgz@gmail.com">Email</a> | <a href="https://www.linkedin.com/in/edgar-dzgz/">LinkedIn</a> | <a href="https://github.com/edgarsdzgz">GitHub</a></p>
     </footer>
   </main>
-</div>
+
+  <script>
+    (function () {
+      const toggle = document.getElementById('theme-toggle');
+      const root = document.documentElement;
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      root.setAttribute('data-theme', savedTheme);
+      toggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+
+      toggle.addEventListener('click', () => {
+        const nextTheme = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', nextTheme);
+        localStorage.setItem('theme', nextTheme);
+        toggle.textContent = nextTheme === 'light' ? '🌙' : '☀️';
+      });
+
+      window.addEventListener('beforeunload', () => {
+        localStorage.setItem('scrollPosition', window.scrollY);
+      });
+
+      window.addEventListener('load', () => {
+        const scrollPosition = localStorage.getItem('scrollPosition');
+        if (scrollPosition !== null) {
+          window.scrollTo(0, parseInt(scrollPosition));
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
