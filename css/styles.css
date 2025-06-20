@@ -30,25 +30,21 @@
 
 /* 4. Base Styles & Fluid Grid Layout */
 html {
-  /* Apply full-page gradient to html so it shows behind white container */
-  background: linear-gradient(
-    to bottom,
-    var(--color-neutral-light) 0%,
-    rgba(44, 232, 232, 0.1) 100%
-  );
+  /* Reset to no gradient background */
+  background: none;
 }
-
 body {
   display: grid;
   grid-template-columns: minmax(1rem, 1fr) minmax(auto, var(--max-width)) minmax(1rem, 1fr);
   font-family: var(--font-body);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
-  /* ensure body background is transparent so gradient shows through */
   background: transparent;
   color: var(--color-neutral-dark);
   padding: var(--padding) 0;
 }
+
+/* 5. Container */
 .container {
   grid-column: 2;
   max-width: var(--max-width);
@@ -126,7 +122,6 @@ a:hover {
 #hero {
   grid-column: 1 / -1;
   background-color: var(--color-neutral-light);
-  /* Add abstract shape SVGs behind content */
   background-image: url('css/blob-left.svg'), url('css/blob-right.svg');
   background-position: bottom left, top right;
   background-repeat: no-repeat;
@@ -167,4 +162,31 @@ footer {
   font-size: 0.9rem;
   color: var(--color-neutral-dark);
   margin-top: 2rem;
+}
+
+/* 14. Gutters-Only Gradient */
+html {
+  background: linear-gradient(
+    to bottom,
+    var(--color-neutral-light) 0%,
+    rgba(44, 232, 232, 0.2) 100%
+  );
+}
+
+body {
+  background: transparent;
+}
+
+/* 15. Soft Noise / Linen Texture Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('css/subtle-noise.png') repeat;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: -1;
 }
