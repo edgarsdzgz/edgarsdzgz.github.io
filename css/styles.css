@@ -60,6 +60,56 @@ body {
   background: transparent;
   color: var(--color-neutral-dark);
   padding: var(--padding) 0;
+  position: relative;
+}
+
+/* Header & Social Sidebar */
+#main-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  z-index: 100;
+}
+#main-header.sticky {
+  position: fixed;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+#main-header .logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+#main-header .header-nav {
+  display: flex;
+  align-items: center;
+}
+.social-sidebar {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translate(-100%, -50%);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  z-index: 90;
+}
+.social-sidebar:hover {
+  transform: translate(0, -50%);
+}
+.social-sidebar .icon-email,
+.social-sidebar .icon-linkedin,
+.social-sidebar .icon-github {
+  display: block;
+  margin: 0.5rem;
+  font-size: 1.25rem;
+  color: var(--color-neutral-dark);
+  text-decoration: none;
 }
 
 /* 5. Container */
@@ -71,7 +121,6 @@ body {
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
   overflow: hidden;
 }
 
@@ -100,7 +149,7 @@ h3 {
 .tagline {
   font-style: italic;
   color: var(--color-neutral-dark);
-  margin-bottom: 1rem;
+  margin-right: 1rem;
 }
 
 .contact {
@@ -141,17 +190,15 @@ a:hover {
 /* 12. Hero Section with Parallax Banner & Shapes */
 #hero {
   grid-column: 1 / -1;
-  /* hero background banner + subtle shapes */
   background:
     url('css/tech_elegance_banner.png') center/cover no-repeat,
     url('css/blob-left.svg') bottom left/150px 150px no-repeat,
     url('css/blob-right.svg') top right/200px 200px no-repeat;
-
-  /* lock banner in place for parallax effect, keep shapes static */
-  background-attachment: fixed, scroll, scroll;
+  background-attachment: scroll, scroll, scroll;
   padding: 4rem 0;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 /* 16. Hero Copy Fade-In */
@@ -160,18 +207,12 @@ a:hover {
   margin: 0 auto;
   text-align: center;
   position: relative;
-  z-index: 1;
-
-  /* start hidden and slightly down */
+  z-index: 2;
   opacity: 0;
   transform: translateY(10px);
-
-  /* slowed to 1s for a more intentional feel */
   transition: opacity 1s ease-out,
               transform 1s ease-out;
 }
-
-/* 17. Visible state after intersection */
 .hero-content.in-view {
   opacity: 1;
   transform: translateY(0);
@@ -201,7 +242,7 @@ footer {
   color: var(--color-neutral-dark);
   margin-top: 2rem;
   padding: var(--padding) 0;
-  background-color: rgba(63, 131, 248, 0.05); /* subtle electric blue tint */
+  background-color: rgba(63, 131, 248, 0.05);
   border-radius: 8px;
 }
 
