@@ -35,7 +35,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
-  background-color: var(--color-neutral-light);
+  background: linear-gradient(to bottom, var(--color-neutral-light) 0%, rgba(44, 232, 232, 0.05) 100%);
   color: var(--color-neutral-dark);
   padding: var(--padding) 0;
 }
