@@ -58,7 +58,7 @@ body {
 }
 
 /* 6. Headings */
-h1 {
+ h1 {
   font-family: var(--font-heading);
   font-size: var(--font-size-h1);
   color: var(--color-primary);
@@ -170,9 +170,10 @@ footer {
 html {
   background: linear-gradient(
     to bottom,
-    var(--color-neutral-light) 0%,
-    rgba(44, 232, 232, 0.4) 50%,
-    rgba(62, 131, 248, 0.3) 100%
+    var(--color-neutral-light) 0%,       /* Snow at top */
+    var(--color-accent) 30%,              /* Vibrant Cyan */
+    var(--color-secondary) 60%,           /* Electric Blue */
+    var(--color-primary) 100%             /* Deep Navy at bottom */
   );
 }
 
