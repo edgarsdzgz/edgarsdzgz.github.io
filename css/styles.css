@@ -169,7 +169,8 @@ html {
   background: linear-gradient(
     to bottom,
     var(--color-neutral-light) 0%,
-    rgba(44, 232, 232, 0.2) 100%
+    rgba(44, 232, 232, 0.4) 50%,
+    rgba(62, 131, 248, 0.3) 100%
   );
 }
 
