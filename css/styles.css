@@ -154,16 +154,21 @@ a:hover {
   overflow: hidden;
 }
 
+/* 16. Hero Copy Fade-In */
 .hero-content {
   max-width: var(--max-width);
   margin: 0 auto;
   text-align: center;
   position: relative;
   z-index: 1;
-  /* 16. Initial state for scroll-triggered fade-in */
+
+  /* start hidden and slightly down */
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+
+  /* slowed to 1s for a more intentional feel */
+  transition: opacity 1s ease-out,
+              transform 1s ease-out;
 }
 
 /* 17. Visible state after intersection */
