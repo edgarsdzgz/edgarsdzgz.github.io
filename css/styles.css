@@ -168,16 +168,3 @@ footer {
   color: var(--color-neutral-dark);
   margin-top: 2rem;
 }
-
-/* 14. Gutters-Only Gradient */
-html {
-  background: linear-gradient(
-    to bottom,
-    var(--color-neutral-light) 0%,
-    rgba(44, 232, 232, 0.2) 100%
-  );
-}
-
-body {
-  background: transparent;
-}
