@@ -29,15 +29,15 @@
       </p>
     </nav>
     <div class="social-sidebar">
-      <a href="mailto:edgar.s.dzgz@gmail.com" aria-label="Email"><span class="icon-email">✉️</span></a>
-      <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank" aria-label="LinkedIn"><span class="icon-linkedin">🔗</span></a>
-      <a href="https://github.com/edgarsdzgz" target="_blank" aria-label="GitHub"><span class="icon-github">🐱</span></a>
+      <a href="mailto:edgar.s.dzgz@gmail.com" aria-label="Email" tabindex="0"><span class="icon-email">✉️</span></a>
+      <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank" aria-label="LinkedIn" tabindex="0"><span class="icon-linkedin">🔗</span></a>
+      <a href="https://github.com/edgarsdzgz" target="_blank" aria-label="GitHub" tabindex="0"><span class="icon-github">🐱</span></a>
     </div>
   </header>
 
   <!-- Hero Section -->
   <section id="hero">
-    <div class="hero-content">
+    <div class="hero-content fade-in">
       <h2>Building Resilient Systems, Inspiring Teams</h2>
       <p>Driven by creativity and collaboration, I craft elegant, high-impact software and guide tomorrow’s engineers toward shared success.</p>
       <a href="#projects" class="btn-cta">Explore My Work</a>
@@ -45,23 +45,13 @@
   </section>
 
   <div class="container">
-    <header>
-      <h1>Edgar Diaz-Gutierrez</h1>
-      <p class="tagline">Full-Stack Software Engineer</p>
-      <p class="contact">
-        (619) 750-4888 | 
-        <a href="mailto:edgar.s.dzgz@gmail.com">edgar.s.dzgz@gmail.com</a> |
-        <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank">LinkedIn</a> |
-        <a href="https://github.com/edgarsdzgz" target="_blank">GitHub</a>
-      </p>
-    </header>
 
-    <section id="introduction">
+    <section id="introduction" class="fade-in">
       <h2>Introduction</h2>
       <p>As a driven Full-Stack Engineer who has spent the past three years architecting and delivering mission-critical emergency command-and-control applications at Valcom and mentoring cohorts of 50 budding developers as a Coding Dojo instructor, I blend hands-on software expertise with the communication and teamwork honed through my Film, TV, and Theater career—a career that fuels creativity and collaboration in every project. I’m now poised to leverage this unique blend of technical acumen and people-first leadership to build elegant, high-impact software and inspire teams toward shared success.</p>
     </section>
 
-    <section id="experience">
+    <section id="experience" class="fade-in">
       <h2>Experience</h2>
       <article>
         <h3>Full Stack Developer, Valcom</h3>
@@ -140,51 +130,44 @@
       </ul>
     </section>
 
-    <footer>
+<footer>
       <p>Connect with me: <a href="mailto:edgar.s.dzgz@gmail.com">Email</a> | <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank">LinkedIn</a> | <a href="https://github.com/edgarsdzgz" target="_blank">GitHub</a></p>
     </footer>
   </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // — Hero fade-in —
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-      new IntersectionObserver(([entry], obs) => {
-        if (entry.isIntersecting) {
-          heroContent.classList.add('in-view');
-          obs.disconnect();
-        }
-      }, { threshold: 0.2 }).observe(heroContent);
-    }
-
-    // — Scroll-reveal for all .fade-in elements —
-    const fadeEls = document.querySelectorAll('.fade-in');
-    if (fadeEls.length) {
-      const fadeObserver = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const heroContent = document.querySelector('.hero-content');
+      if (heroContent) {
+        new IntersectionObserver(([entry], obs) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            obs.unobserve(entry.target);
+            heroContent.classList.add('in-view');
+            obs.disconnect();
           }
-        });
-      }, { threshold: 0.15 });
-      fadeEls.forEach(el => fadeObserver.observe(el));
-    }
+        }, { threshold: 0.2 }).observe(heroContent);
+      }
 
-    // — Sticky header & parallax banner in one scroll handler —
-    const header = document.getElementById('main-header');
-    const hero = document.getElementById('hero');
-    window.addEventListener('scroll', () => {
-      // Sticky header
-      if (window.pageYOffset > 50) header.classList.add('sticky');
-      else header.classList.remove('sticky');
+      const fadeEls = document.querySelectorAll('.fade-in');
+      if (fadeEls.length) {
+        const fadeObserver = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        fadeEls.forEach(el => fadeObserver.observe(el));
+      }
 
-      // JS parallax
-      const offset = window.pageYOffset * 0.3;
-      hero.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+      const header = document.getElementById('main-header');
+      const hero = document.getElementById('hero');
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 50) header.classList.add('sticky'); else header.classList.remove('sticky');
+        const offset = window.pageYOffset * 0.3;
+        hero.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+      });
     });
-  });
-</script>
+  </script>
 </body>
 </html>
