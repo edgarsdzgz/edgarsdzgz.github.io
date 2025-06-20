@@ -277,3 +277,15 @@ footer {
 html {
   scroll-behavior: smooth;
 }
+
+/* 20. Focus styles for sidebar links */
+.social-sidebar a:focus {
+  outline: 2px dashed var(--color-secondary);
+  outline-offset: 4px;
+}
+
+/* 21. Hide sidebar on small screens */
+@media (max-width: 600px) {
+  .social-sidebar { display: none; }
+  #main-header { padding: 0.5rem 1rem; }
+}
