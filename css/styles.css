@@ -1,37 +1,38 @@
 /* 1. Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap');
 
-/* 2. CSS Variables for Typography, Layout & Dark/Light Color Schemes */
+/* 2. CSS Variables for Typography & Dark/Light Color Schemes */
 /* — Dark Mode (default) — */
 :root {
-  --font-heading:    'Playfair Display', serif;
-  --font-body:       'Lato', sans-serif;
-  --font-size-h1:    2rem;
-  --font-size-h2:    1.5rem;
-  --font-size-body:  1rem;
-  --line-height-body:1.6;
-  --max-width:       clamp(40ch, 60vw, 80vw);
-  --padding:         2rem;
+  /* Typography */
+  --font-heading:     'Playfair Display', serif;
+  --font-body:        'Lato', sans-serif;
+  --font-size-h1:     2rem;
+  --font-size-h2:     1.5rem;
+  --font-size-body:   1rem;
+  --line-height-body: 1.6;
+  --max-width:        clamp(40ch, 60vw, 80vw);
+  --padding:          2rem;
 
   /* Dark Palette */
-  --color-bg:            #121826;   /* Very dark navy */
-  --color-surface:       #1E2432;   /* Soft charcoal-blue */
-  --color-text-primary:  #E4E7EC;   /* Off-white */
-  --color-text-secondary:#AFC8FF;   /* Light electric blue */
-  --color-primary:       #3F83F8;   /* Electric Blue */
-  --color-accent:        #2CE8E8;   /* Vibrant Cyan */
-  --color-shadow:        rgba(0,0,0,0.5);
+  --color-bg:              #121826;   /* Very dark navy */
+  --color-surface:         #1E2432;   /* Soft charcoal-blue */
+  --color-text-primary:    #E4E7EC;   /* Off-white */
+  --color-text-secondary:  #AFC8FF;   /* Light electric blue */
+  --color-primary:         #3F83F8;   /* Electric Blue */
+  --color-accent:          #2CE8E8;   /* Vibrant Cyan */
+  --color-shadow:          rgba(0,0,0,0.5);
 }
 
 /* — Light Mode override — */
 :root[data-theme="light"] {
-  --color-bg:            #F5F7FA;   /* Snow */
-  --color-surface:       #FFFFFF;   /* White */
-  --color-text-primary:  #2E2E2E;   /* Charcoal */
-  --color-text-secondary:#0A1F44;   /* Deep Navy */
-  --color-primary:       #3F83F8;   /* Electric Blue */
-  --color-accent:        #2CE8E8;   /* Vibrant Cyan */
-  --color-shadow:        rgba(0,0,0,0.1);
+  --color-bg:              #F5F7FA;   /* Snow */
+  --color-surface:         #FFFFFF;   /* White */
+  --color-text-primary:    #2E2E2E;   /* Charcoal */
+  --color-text-secondary:  #0A1F44;   /* Deep Navy */
+  --color-primary:         #3F83F8;   /* Electric Blue */
+  --color-accent:          #2CE8E8;   /* Vibrant Cyan */
+  --color-shadow:          rgba(0,0,0,0.1);
 }
 
 /* 3. Global Box-Sizing & Reset */
@@ -43,14 +44,12 @@
 
 /* 4. Base Styles & Fluid Grid Layout */
 html {
-  /* Gutters-Only Gradient with Subtle Stripes */
+  /* Full-page gutters-only gradient */
   background-image:
     linear-gradient(
       to bottom,
       var(--color-bg) 0%,
-      rgba(44,232,232,0.3) 20%,
-      rgba(63,131,248,0.4) 50%,
-      rgba(10,31,68,0.2) 90%,
+      var(--color-accent) 50%,
       var(--color-primary) 100%
     ),
     repeating-linear-gradient(
@@ -222,8 +221,10 @@ h3 { font-size: 1.25rem; color: var(--color-primary); }
   background:
     url('css/tech_elegance_banner.png') center/cover no-repeat,
     url('css/blob-left.svg') bottom left/150px 150px no-repeat,
-    url('css/blob-right.svg') top right/200px 200px no-repeat;
-  background-attachment: scroll, scroll, scroll;
+    url('css/blob-right.svg') top right/200px 200px no-repeat,
+    linear-gradient(to bottom, var(--color-bg) 0%, var(--color-surface) 100%);
+  background-blend-mode: overlay;
+  background-attachment: scroll, scroll, scroll, fixed;
   padding: 4rem 0;
   position: relative;
   overflow: hidden;
@@ -268,6 +269,6 @@ footer {
   color: var(--color-text-primary);
   margin-top: 2rem;
   padding: var(--padding) 0;
-  background-color: rgba( var(--color-primary) , 0.05 );
+  background-color: rgba(var(--color-primary), 0.05);
   border-radius: 8px;
 }
