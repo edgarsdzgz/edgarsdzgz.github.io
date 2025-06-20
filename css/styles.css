@@ -47,20 +47,20 @@ html {
   background-image:
     linear-gradient(
       to bottom,
-      var(--color-bg)         0%,
-      var(--color-accent)    50%,
-      var(--color-primary)  100%
+      var(--color-bg) 0%,
+      var(--color-bg) 50%,
+      var(--color-primary) 100%
     ),
     repeating-linear-gradient(
       to bottom,
-      rgba(var(--color-text-primary), 0.05) 0px,
-      rgba(var(--color-text-primary), 0.05) 1px,
+      rgba(255, 255, 255, 0.05) 0px,
+      rgba(255, 255, 255, 0.05) 1px,
       transparent 1px,
       transparent 4px
     );
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: auto 100%;
+  background-size: cover;
   scroll-behavior: smooth;
 }
 
