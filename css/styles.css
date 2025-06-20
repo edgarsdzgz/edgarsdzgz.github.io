@@ -30,7 +30,7 @@
 
 /* 4. Base Styles & Fluid Grid Layout */
 html {
-  /* Reset to no gradient background */
+  /* no background gradient on html now */
   background: none;
 }
 body {
@@ -53,6 +53,8 @@ body {
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;        /* needed for pseudo-element */
+  overflow: hidden;          /* contain texture */
 }
 
 /* 6. Headings */
@@ -178,10 +180,10 @@ body {
   background: transparent;
 }
 
-/* 15. Soft Noise / Linen Texture Overlay */
-body::before {
+/* 15. Texture Overlay on Container */
+.container::before {
   content: "";
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -189,5 +191,5 @@ body::before {
   background: url('css/subtle-noise.png') repeat;
   opacity: 0.03;
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
 }
