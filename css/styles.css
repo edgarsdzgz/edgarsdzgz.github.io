@@ -222,16 +222,25 @@ h2 { font-family: var(--font-heading); font-size: var(--font-size-h2); color: va
 h3 { font-size: 1.25rem; color: var(--color-primary); }
 .date, .project-subtitle { font-size: 0.9rem; color: var(--color-text-primary); }
 
-/* 10. Hero Section */
+/* 10. Hero Section with Theme-aware Blend */
 #hero {
   grid-column: 1 / -1;
+  /* hero banner on top of theme surface, then blobs */
   background:
+    /* 1) Base surface color from theme */
+    var(--color-surface),
+    /* 2) Main banner image */
     url('css/tech_elegance_banner.png') center/cover no-repeat,
+    /* 3) Blob shapes (can swap to darker versions if needed) */
     url('css/blob-left.svg') bottom left/150px 150px no-repeat,
-    url('css/blob-right.svg') top right/200px 200px no-repeat,
-    linear-gradient(to bottom, var(--color-bg) 0%, var(--color-surface) 100%);
-  background-blend-mode: overlay;
-  background-attachment: scroll, scroll, scroll, fixed;
+    url('css/blob-right.svg') top right/200px 200px no-repeat;
+
+  /* Blend banner over the surface */
+  background-blend-mode: overlay, normal, normal, normal;
+
+  /* Parallax: banner fixed, blobs scroll normally */
+  background-attachment: fixed, scroll, scroll, scroll;
+
   padding: 4rem 0;
   position: relative;
   overflow: hidden;
