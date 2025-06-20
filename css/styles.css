@@ -15,23 +15,23 @@
   --padding:          2rem;
 
   /* Dark Palette */
-  --color-bg:              #121826;   /* Very dark navy */
-  --color-surface:         #1E2432;   /* Soft charcoal-blue */
-  --color-text-primary:    #E4E7EC;   /* Off-white */
-  --color-text-secondary:  #AFC8FF;   /* Light electric blue */
-  --color-primary:         #3F83F8;   /* Electric Blue */
-  --color-accent:          #2CE8E8;   /* Vibrant Cyan */
+  --color-bg:              #121826;
+  --color-surface:         #1E2432;
+  --color-text-primary:    #E4E7EC;
+  --color-text-secondary:  #AFC8FF;
+  --color-primary:         #3F83F8;
+  --color-accent:          #2CE8E8;
   --color-shadow:          rgba(0,0,0,0.5);
 }
 
 /* — Light Mode override — */
 :root[data-theme="light"] {
-  --color-bg:              #F5F7FA;   /* Snow */
-  --color-surface:         #FFFFFF;   /* White */
-  --color-text-primary:    #2E2E2E;   /* Charcoal */
-  --color-text-secondary:  #0A1F44;   /* Deep Navy */
-  --color-primary:         #3F83F8;   /* Electric Blue */
-  --color-accent:          #2CE8E8;   /* Vibrant Cyan */
+  --color-bg:              #F5F7FA;
+  --color-surface:         #FFFFFF;
+  --color-text-primary:    #2E2E2E;
+  --color-text-secondary:  #0A1F44;
+  --color-primary:         #3F83F8;
+  --color-accent:          #2CE8E8;
   --color-shadow:          rgba(0,0,0,0.1);
 }
 
@@ -44,23 +44,16 @@
 
 /* 4. Base Styles & Fluid Grid Layout */
 html {
-  /* Full-page gutters-only gradient, driven by theme variables */
   background-image:
-    /* vertical color fade */
     linear-gradient(
       to bottom,
       var(--color-bg)         0%,
       var(--color-accent)    50%,
       var(--color-primary)  100%
     ),
-    /* subtle stripes: use a semi-opaque contrasting color */
     repeating-linear-gradient(
       to bottom,
-      rgba(
-        /* if dark mode, white at 5%; if light, black at 5% */
-        var(--color-text-primary),
-        0.05
-      ) 0px,
+      rgba(var(--color-text-primary), 0.05) 0px,
       rgba(var(--color-text-primary), 0.05) 1px,
       transparent 1px,
       transparent 4px
@@ -70,7 +63,6 @@ html {
   background-size: auto 100%;
   scroll-behavior: smooth;
 }
-
 
 body {
   display: grid;
@@ -96,13 +88,14 @@ body {
   justify-content: space-between;
   align-items: center;
   background: transparent;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  color: var(--color-text-primary);
   z-index: 100;
 }
 #main-header.sticky {
-  position: fixed;
-  background: rgba( var(--color-surface) , 0.9 );
+  background: rgba(var(--color-surface), 0.9);
   box-shadow: 0 2px 8px var(--color-shadow);
+  color: var(--color-text-primary);
 }
 #main-header .logo h1 {
   font-family: var(--font-heading);
@@ -164,7 +157,7 @@ body {
   color: var(--color-text-primary);
   text-decoration: none;
   padding: 0.25rem 0.5rem;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
 .scroll-nav a::before {
   content: "";
@@ -172,7 +165,7 @@ body {
   left: 0; bottom: 0;
   width: 0; height: 2px;
   background: var(--color-secondary);
-  transition: width 0.3s;
+  transition: width 0.3s ease;
 }
 .scroll-nav a:hover,
 .scroll-nav a:focus {
@@ -225,22 +218,13 @@ h3 { font-size: 1.25rem; color: var(--color-primary); }
 /* 10. Hero Section with Theme-aware Blend */
 #hero {
   grid-column: 1 / -1;
-  /* hero banner on top of theme surface, then blobs */
   background:
-    /* 1) Base surface color from theme */
     var(--color-surface),
-    /* 2) Main banner image */
     url('css/tech_elegance_banner.png') center/cover no-repeat,
-    /* 3) Blob shapes (can swap to darker versions if needed) */
     url('css/blob-left.svg') bottom left/150px 150px no-repeat,
     url('css/blob-right.svg') top right/200px 200px no-repeat;
-
-  /* Blend banner over the surface */
   background-blend-mode: overlay, normal, normal, normal;
-
-  /* Parallax: banner fixed, blobs scroll normally */
   background-attachment: fixed, scroll, scroll, scroll;
-
   padding: 4rem 0;
   position: relative;
   overflow: hidden;
@@ -271,7 +255,7 @@ h3 { font-size: 1.25rem; color: var(--color-primary); }
   color: var(--color-surface);
   border-radius: 4px;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.2s ease;
 }
 .btn-cta:hover {
   background: var(--color-secondary);
