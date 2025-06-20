@@ -195,6 +195,9 @@ footer {
   font-size: 0.9rem;
   color: var(--color-neutral-dark);
   margin-top: 2rem;
+  padding: var(--padding) 0;
+  background-color: rgba(63, 131, 248, 0.05); /* subtle electric blue tint */
+  border-radius: 8px;
 }
 
 /* 15. Texture Overlay on Container */
