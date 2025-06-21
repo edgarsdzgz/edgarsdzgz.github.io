@@ -14,9 +14,9 @@
   --padding:          2rem;
   --max-width:        1200px;
 
-  /* Colors: Dark Mode (default) */
+  /* Dark Mode (default) */
   --color-bg:              #121826;
-  --color-surface:         #2E3340;
+  --color-surface:         #1E2432;                  /* dark panel color */
   --color-text-primary:    #E4E7EC;
   --color-text-secondary:  #C0DFFF;
   --color-primary:         #3F83F8;
@@ -24,10 +24,10 @@
   --color-shadow:          rgba(0,0,0,0.5);
 
   /* Section card background */
-  --card-bg: rgba(30,36,50,0.85);
+  --card-bg-dark: rgba(30,36,50,0.85);
+  --card-bg-light: rgba(255,255,255,0.9);
 }
 
-/* Light Mode Overrides */
 :root[data-theme="light"] {
   --color-bg:              #F5F7FA;
   --color-surface:         #FFFFFF;
@@ -37,8 +37,7 @@
   --color-accent:          #2CE8E8;
   --color-shadow:          rgba(0,0,0,0.1);
 
-  /* Light card background */
-  --card-bg: rgba(255,255,255,0.9);
+  --card-bg-dark: var(--card-bg-light);  /* reuse light card bg in light mode */
 }
 
 /* 3. Reset & Base Styles */
@@ -49,21 +48,16 @@
   margin: 0;
   padding: 0;
 }
-
 html {
   height: 100%;
   scroll-behavior: smooth;
-  background-image: linear-gradient(
+  background: linear-gradient(
     to bottom,
-    var(--color-bg)    0%,
+    var(--color-bg)      0%,
     var(--color-accent) 50%,
     var(--color-primary)100%
-  );
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+  ) fixed;
 }
-
 body {
   font-family: var(--font-body);
   font-size: var(--font-size-body);
@@ -72,7 +66,7 @@ body {
   min-height: 100vh;
 }
 
-/* 4. Two-Column Layout */
+/* 4. Two‐Column Layout */
 .layout-container {
   display: grid;
   grid-template-columns: minmax(320px, 1fr) 2fr;
@@ -85,14 +79,14 @@ body {
 .left-column {
   position: sticky;
   top: 0;
-  max-height: 100vh;
-  padding: var(--padding) 1.5rem var(--padding) 2rem;
-  background: transparent;
+  padding: var(--padding) 2rem;
+  background: var(--color-surface);    /* solid panel color */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   z-index: 10;
-  overflow-y: auto;
+  /* Remove internal scroll so page scrolls as one */
+  overflow: visible;
 }
 
 .right-column {
@@ -108,8 +102,7 @@ body {
   }
   .left-column {
     position: static;
-    max-height: none;
-    border-bottom: 1px solid rgba(100,120,170,0.09);
+    border-bottom: 1px solid rgba(100,120,170,0.1);
   }
 }
 
@@ -124,12 +117,11 @@ body {
 }
 
 .logo h1 {
-  white-space: nowrap;
+  white-space: nowrap; /* keep name on one line */
   font-family: var(--font-heading);
   font-size: var(--font-size-h1);
   color: var(--color-text-secondary);
   letter-spacing: -1px;
-  margin-bottom: 0.5rem;
 }
 
 .header-nav .tagline {
@@ -143,21 +135,19 @@ body {
   font-size: 0.95rem;
   color: var(--color-text-primary);
 }
-
 .header-nav .contact a {
   color: var(--color-primary);
   text-decoration: none;
   margin: 0 0.3rem;
 }
-
 .header-nav .contact a:hover {
   color: var(--color-accent);
 }
 
-/* Theme Toggle Button */
+/* Theme Toggle */
 #theme-toggle {
   margin-top: 1rem;
-  background: transparent;
+  background: none;
   border: none;
   font-size: 1.6rem;
   cursor: pointer;
@@ -174,13 +164,11 @@ body {
   gap: 1rem;
   margin-top: 2rem;
 }
-
 .social-sidebar a {
   font-size: 1.5rem;
   color: var(--color-text-secondary);
   transition: color 0.2s;
 }
-
 .social-sidebar a:hover {
   color: var(--color-accent);
 }
@@ -192,13 +180,11 @@ body {
   font-size: 0.85rem;
   color: var(--color-text-primary);
 }
-
 .sidebar-footer a {
   color: var(--color-primary);
   text-decoration: none;
   margin: 0 0.3rem;
 }
-
 .sidebar-footer a:hover {
   color: var(--color-accent);
 }
@@ -208,11 +194,9 @@ body {
   list-style: none;
   margin-top: 2rem;
 }
-
 .scroll-nav li {
   margin: 0.6rem 0;
 }
-
 .scroll-nav a {
   color: var(--color-text-secondary);
   text-decoration: none;
@@ -221,7 +205,6 @@ body {
   border-left: 3px solid transparent;
   transition: color 0.18s, border-color 0.25s;
 }
-
 .scroll-nav a:hover,
 .scroll-nav a.active {
   color: var(--color-primary);
@@ -231,27 +214,22 @@ body {
 /* 8. Hero (Right Column) */
 #hero {
   background: none;
-  padding: 0;
   margin-top: 3rem;
 }
-
 .hero-content {
   text-align: left;
 }
-
 .hero-content h2 {
   font-family: var(--font-heading);
   font-size: var(--font-size-h2);
   color: var(--color-primary);
   margin-bottom: 1rem;
 }
-
 .hero-content p {
   font-size: 1.1rem;
   color: var(--color-text-primary);
   margin-bottom: 1.5rem;
 }
-
 .btn-cta {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -261,75 +239,65 @@ body {
   text-decoration: none;
   transition: background 0.2s;
 }
-
 .btn-cta:hover {
   background: var(--color-accent);
 }
 
 /* 9. Section Cards */
 .right-column section {
-  background: var(--card-bg);
+  background: var(--card-bg-dark);
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 2px 12px var(--color-shadow);
   margin-bottom: 1rem;
 }
+:root[data-theme="light"] .right-column section {
+  background: var(--card-bg-light);
+}
 
-h2, h3 {
+/* Headings inside cards */
+.right-column section h2,
+.right-column section h3 {
   font-family: var(--font-heading);
   margin-bottom: 0.75rem;
 }
-
-h2 {
+.right-column section h2 {
   font-size: var(--font-size-h2);
   color: var(--color-primary);
 }
-
-h3 {
+.right-column section h3 {
   font-size: var(--font-size-h3);
   color: var(--color-text-secondary);
 }
 
-/* 10. Global Text & Link Tweaks */
+/* 10. Body Text & Links */
 body,
 .right-column section p,
 .right-column section li {
   color: var(--color-text-primary);
-  font-size: 1rem;
   line-height: 1.7;
-}
-
-.hero-content h2,
-.left-column .logo h1,
-.right-column section h2,
-.right-column section h3 {
-  font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 a {
   color: var(--color-accent);
   text-decoration: none;
 }
-
 a:hover {
   color: var(--color-primary);
   text-decoration: underline;
 }
 
-/* 11. Footer Below Content */
+/* 11. Footer */
 footer {
   text-align: center;
   color: var(--color-text-primary);
   padding: 1.5rem 0 0.5rem;
 }
-
 footer a {
   color: var(--color-primary);
   text-decoration: none;
   margin: 0 0.3rem;
 }
-
 footer a:hover {
   color: var(--color-accent);
 }
