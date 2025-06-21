@@ -47,7 +47,7 @@ body {
 /* Profile */
 .profile h1 {
   font-family: var(--font-serif);
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-bottom: 0.5rem;
 }
 .profile .title {
