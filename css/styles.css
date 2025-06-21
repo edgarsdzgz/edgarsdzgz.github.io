@@ -1,4 +1,4 @@
-/* 1. Import Google Fonts */
+/* 1. Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Merriweather:wght@300;400;700&display=swap');
 
 /* 2. CSS Variables */
@@ -12,26 +12,13 @@
   --line-height:     1.6;
   --padding:         2rem;
   --max-width:       1200px;
-
-  /* Dark Mode (default) */
-  --color-bg:              #121826;
-  --color-surface:         rgba(30,36,50,0.85);
-  --color-text-primary:    #E4E7EC;
-  --color-text-secondary:  #AFC8FF;
-  --color-primary:         #3F83F8;
-  --color-accent:          #2CE8E8;
-  --color-shadow:          rgba(0,0,0,0.5);
-
-  /* Light Mode Overrides */
-}
-:root[data-theme="light"] {
-  --color-bg:              #F5F7FA;
-  --color-surface:         #FFFFFF;
-  --color-text-primary:    #2E2E2E;
-  --color-text-secondary:  #0A1F44;
-  --color-primary:         #3F83F8;
-  --color-accent:          #2CE8E8;
-  --color-shadow:          rgba(0,0,0,0.1);
+  /* Color Palette */
+  --color-bg:              #10101f;    /* overall page background */
+  --color-surface:         #1e1f28;    /* cards & sidebar panels */
+  --color-text-primary:    #e4e7ec;    /* main text */
+  --color-text-secondary:  #afb8ff;    /* nav links, headings */
+  --color-accent:          #3f83f8;    /* buttons, active nav */
+  --color-shadow:          rgba(0, 0, 0, 0.5);
 }
 
 /* 3. Reset & Base */
@@ -43,11 +30,9 @@
   padding: 0;
 }
 html {
+  background: var(--color-bg);
   scroll-behavior: smooth;
-  background: linear-gradient(to bottom, var(--color-bg) 0%, var(--color-accent) 50%, var(--color-primary) 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
+  height: 100%;
 }
 body {
   font-family: var(--font-body);
@@ -55,118 +40,116 @@ body {
   line-height: var(--line-height);
   color: var(--color-text-primary);
   min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--padding) 0;
 }
 
 /* 4. Two-Column Layout */
 .layout-container {
   display: grid;
   grid-template-columns: minmax(280px, 1fr) 2fr;
+  gap: 2rem;
   max-width: var(--max-width);
-  margin: 0 auto;
-  min-height: 100vh;
-  gap: 1rem;
+  width: 100%;
+  min-height: calc(100vh - 2 * var(--padding));
 }
 .left-column {
   position: sticky;
-  top: 0;
-  padding: var(--padding);
-  background: transparent;         /* fully transparent */
-  display: flex;
-  flex-direction: column;
-  z-index: 10;
-}
-.right-column {
+  top: var(--padding);
+  align-self: start;
+  background: var(--color-surface);
   padding: var(--padding);
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px var(--color-shadow);
+}
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-top: calc(var(--font-size-h1) + var(--padding) / 2);
 }
 
-/* 4a. Mobile fallback */
+/* Mobile stack */
 @media (max-width: 900px) {
   .layout-container {
     grid-template-columns: 1fr;
   }
   .left-column {
-    position: relative;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: static;
+    width: auto;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .right-column {
+    padding-top: 0;
   }
 }
 
-/* 5. Header (Name / Title / Contact) */
+/* 5. Header (in sidebar) */
 #main-header {
-  background: none;
-  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 .logo h1 {
   font-family: var(--font-heading);
   font-size: var(--font-size-h1);
-  font-weight: 700;
   color: var(--color-text-secondary);
-  white-space: nowrap;            /* prevent wrapping */
+  white-space: nowrap;
 }
 .header-nav .tagline {
-  font-size: 1.1rem;
-  opacity: 0.85;
-  margin-top: 0.25rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  opacity: 0.9;
 }
 .header-nav .contact {
-  font-size: 0.95rem;
-  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
 }
 .header-nav .contact a {
-  color: var(--color-primary);
+  color: var(--color-accent);
   text-decoration: none;
   margin: 0 0.25rem;
 }
 .header-nav .contact a:hover {
-  color: var(--color-accent);
+  text-decoration: underline;
 }
 
-/* 6. Theme Toggle */
-#theme-toggle {
-  margin-top: 1rem;
-  background: none;
-  border: none;
-  font-size: 1.6rem;
-  cursor: pointer;
-  align-self: flex-end;
-  transition: filter 0.2s;
-}
-#theme-toggle:hover {
-  filter: brightness(1.3);
-}
-
-/* 7. Scroll-Spy Nav */
+/* 6. Vertical Nav */
 .scroll-nav ul {
   list-style: none;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
-.scroll-nav li {
-  margin: 0.6rem 0;
+.scroll-nav li + li {
+  margin-top: 0.75rem;
 }
 .scroll-nav a {
+  font-family: var(--font-heading);
+  font-weight: 600;
   color: var(--color-text-secondary);
   text-decoration: none;
-  font-weight: 600;
   padding-left: 0.5rem;
   border-left: 3px solid transparent;
   transition: color 0.2s, border-color 0.2s;
 }
 .scroll-nav a:hover,
 .scroll-nav a.active {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
-/* 8. Social Icons & Footer Links */
+/* 7. Social + Footer Links */
 .social-sidebar {
   display: flex;
   gap: 1rem;
-  margin-top: auto;               /* push to bottom */
+  margin-top: auto;
 }
 .social-sidebar a {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: var(--color-text-secondary);
   transition: color 0.2s;
 }
@@ -176,87 +159,60 @@ body {
 .sidebar-footer {
   margin-top: 1rem;
   font-size: 0.85rem;
+  color: var(--color-text-secondary);
 }
 .sidebar-footer a {
-  color: var(--color-primary);
-  text-decoration: none;
-  margin: 0 0.25rem;
-}
-.sidebar-footer a:hover {
   color: var(--color-accent);
-}
-
-/* 9. Right-Column Sections */
-.right-column section {
-  background: var(--color-surface);
-  padding: 1.8rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px var(--color-shadow);
-}
-.right-column h2 {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-h2);
-  color: var(--color-primary);
-  margin-bottom: 1rem;
-}
-.right-column h2 + p,
-.right-column h2 + ul {
-  margin-bottom: 1rem;
-}
-.right-column ul {
-  list-style: none;
-  padding-left: 0;
-}
-.right-column li {
-  margin-bottom: 0.6rem;
-}
-
-/* 10. Links & Buttons */
-a {
-  color: var(--color-accent);
-  text-decoration: underline;
-}
-a:hover {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-.btn-cta {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background: var(--color-primary);
-  color: var(--color-surface);
-  border-radius: 4px;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.btn-cta:hover {
-  background: var(--color-accent);
-}
-
-/* 11. Footer (After Content) */
-footer {
-  text-align: center;
-  padding: 2rem 0;
-  font-size: 0.9rem;
-  color: var(--color-text-primary);
-}
-footer a {
-  color: var(--color-primary);
   text-decoration: none;
   margin: 0 0.3rem;
 }
-footer a:hover {
-  color: var(--color-accent);
+.sidebar-footer a:hover {
+  text-decoration: underline;
 }
 
-/* 12. Readability Tweaks */
-body, .right-column p, .right-column li {
-  color: var(--color-text-primary);
-  line-height: 1.7;
-  font-size: var(--font-size-body);
+/* 8. Hero / Section Cards */
+.right-column section {
+  background: var(--color-surface);
+  padding: var(--padding);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px var(--color-shadow);
 }
-.hero-content h2,
-.left-column .logo h1,
-.right-column h2 {
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+section h2 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h2);
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+section p,
+section li {
+  color: var(--color-text-primary);
+}
+.btn-cta {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-accent);
+  color: var(--color-surface);
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.btn-cta:hover {
+  background: var(--color-primary);
+}
+
+/* 9. Final Footer (if used) */
+footer {
+  text-align: center;
+  color: var(--color-text-primary);
+  padding: 2rem 0 1rem;
+}
+footer a {
+  color: var(--color-accent);
+  text-decoration: none;
+  margin: 0 0.25rem;
+}
+footer a:hover {
+  text-decoration: underline;
 }
