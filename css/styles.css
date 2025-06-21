@@ -1,154 +1,262 @@
-/* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Slab:wght@300;700&display=swap');
+/* 1. Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Merriweather:wght@300;400;700&display=swap');
 
-/* Variables */
+/* 2. CSS Variables */
 :root {
-  --clr-bg-dark:    #0e1014;
-  --clr-bg-light:   #ffffff;
-  --clr-primary:    #64ffda;
-  --clr-text-light: #ccd6f6;
-  --clr-text-dark:  #0a192f;
-  --font-sans:      'Montserrat', sans-serif;
-  --font-serif:     'Roboto Slab', serif;
+  /* Typography */
+  --font-heading:    'Montserrat', sans-serif;
+  --font-body:       'Merriweather', serif;
+  --font-size-h1:    2.5rem;
+  --font-size-h2:    1.75rem;
+  --font-size-body:  1rem;
+  --line-height:     1.6;
+  --padding:         2rem;
+  --max-width:       1200px;
+
+  /* Dark Mode (default) */
+  --color-bg:              #121826;
+  --color-surface:         rgba(30,36,50,0.85);
+  --color-text-primary:    #E4E7EC;
+  --color-text-secondary:  #AFC8FF;
+  --color-primary:         #3F83F8;
+  --color-accent:          #2CE8E8;
+  --color-shadow:          rgba(0,0,0,0.5);
+
+  /* Light Mode Overrides */
+}
+:root[data-theme="light"] {
+  --color-bg:              #F5F7FA;
+  --color-surface:         #FFFFFF;
+  --color-text-primary:    #2E2E2E;
+  --color-text-secondary:  #0A1F44;
+  --color-primary:         #3F83F8;
+  --color-accent:          #2CE8E8;
+  --color-shadow:          rgba(0,0,0,0.1);
 }
 
-/* Global reset */
-* { box-sizing: border-box; margin:0; padding:0; }
-html { font-size: 16px; scroll-behavior: smooth; }
+/* 3. Reset & Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+  background: linear-gradient(to bottom, var(--color-bg) 0%, var(--color-accent) 50%, var(--color-primary) 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 body {
-  font-family: var(--font-sans);
-  color: var(--clr-text-light);
-  background: var(--clr-bg-dark);
-  line-height: 1.5;
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height);
+  color: var(--color-text-primary);
+  min-height: 100vh;
 }
 
-/* Layout */
-.layout {
+/* 4. Two-Column Layout */
+.layout-container {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  height: 100vh;
-  overflow: hidden;
+  grid-template-columns: minmax(280px, 1fr) 2fr;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  min-height: 100vh;
+  gap: 1rem;
 }
-.sidebar {
+.left-column {
   position: sticky;
-  top: 0; left:0;
-  background: var(--clr-bg-dark);
-  padding: 2rem;
+  top: 0;
+  padding: var(--padding);
+  background: transparent;         /* fully transparent */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  z-index: 10;
 }
-.content {
-  overflow-y: auto;
-  padding: 3rem;
-  background: var(--clr-bg-dark);
-}
-
-/* Profile */
-.profile h1 {
-  font-family: var(--font-serif);
-  font-size: 1.45rem;
-  margin-bottom: 0.5rem;
-}
-.profile .title {
-  font-size: 1rem;
-  color: var(--clr-primary);
-  margin-bottom: 1rem;
-}
-.profile .tagline {
-  font-size: 0.9rem;
-  color: var(--clr-text-light);
-  line-height: 1.4;
+.right-column {
+  padding: var(--padding);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-/* Sidebar Nav */
-.site-nav ul {
-  list-style: none;
+/* 4a. Mobile fallback */
+@media (max-width: 900px) {
+  .layout-container {
+    grid-template-columns: 1fr;
+  }
+  .left-column {
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
 }
-.site-nav a {
-  display: block;
-  font-weight: 500;
-  color: var(--clr-text-light);
-  padding: 0.5rem 0;
+
+/* 5. Header (Name / Title / Contact) */
+#main-header {
+  background: none;
+  margin-bottom: 1.5rem;
+}
+.logo h1 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h1);
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  white-space: nowrap;            /* prevent wrapping */
+}
+.header-nav .tagline {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin-top: 0.25rem;
+}
+.header-nav .contact {
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+.header-nav .contact a {
+  color: var(--color-primary);
   text-decoration: none;
+  margin: 0 0.25rem;
+}
+.header-nav .contact a:hover {
+  color: var(--color-accent);
+}
+
+/* 6. Theme Toggle */
+#theme-toggle {
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: filter 0.2s;
+}
+#theme-toggle:hover {
+  filter: brightness(1.3);
+}
+
+/* 7. Scroll-Spy Nav */
+.scroll-nav ul {
+  list-style: none;
+  margin-top: 2rem;
+}
+.scroll-nav li {
+  margin: 0.6rem 0;
+}
+.scroll-nav a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  padding-left: 0.5rem;
+  border-left: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.scroll-nav a:hover,
+.scroll-nav a.active {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* 8. Social Icons & Footer Links */
+.social-sidebar {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;               /* push to bottom */
+}
+.social-sidebar a {
+  font-size: 1.5rem;
+  color: var(--color-text-secondary);
   transition: color 0.2s;
 }
-.site-nav a:hover,
-.site-nav a.active {
-  color: var(--clr-primary);
+.social-sidebar a:hover {
+  color: var(--color-accent);
+}
+.sidebar-footer {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
+.sidebar-footer a {
+  color: var(--color-primary);
+  text-decoration: none;
+  margin: 0 0.25rem;
+}
+.sidebar-footer a:hover {
+  color: var(--color-accent);
 }
 
-/* Social */
-.social a {
-  margin-right: 1rem;
-  font-size: 1.25rem;
-  color: var(--clr-text-light);
-  transition: color 0.2s;
+/* 9. Right-Column Sections */
+.right-column section {
+  background: var(--color-surface);
+  padding: 1.8rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px var(--color-shadow);
 }
-.social a:hover {
-  color: var(--clr-primary);
-}
-
-/* Sections */
-.content section {
-  margin-bottom: 4rem;
-}
-.content section h2 {
-  font-family: var(--font-serif);
-  font-size: 1.75rem;
-  color: var(--clr-text-light);
-  margin-bottom: 1rem;
-  position: relative;
-}
-.content section h2::after {
-  content: '';
-  position: absolute;
-  width: 50px; height: 2px;
-  background: var(--clr-primary);
-  bottom: -0.5rem; left: 0;
-}
-.content section p {
-  color: var(--clr-text-light);
+.right-column h2 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h2);
+  color: var(--color-primary);
   margin-bottom: 1rem;
 }
-
-/* Project/Experience Cards */
-.card {
-  background: #112240;
-  border-radius: 4px;
-  padding: 1.5rem;
-  box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
-  margin-bottom: 2rem;
+.right-column h2 + p,
+.right-column h2 + ul {
+  margin-bottom: 1rem;
 }
-.card h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-  color: var(--clr-text-light);
+.right-column ul {
+  list-style: none;
+  padding-left: 0;
+}
+.right-column li {
+  margin-bottom: 0.6rem;
 }
 
-/* Call-to-action link */
+/* 10. Links & Buttons */
+a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+a:hover {
+  color: var(--color-primary);
+  text-decoration: none;
+}
 .btn-cta {
   display: inline-block;
-  color: var(--clr-bg-dark);
-  background: var(--clr-primary);
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-primary);
+  color: var(--color-surface);
   border-radius: 4px;
   text-decoration: none;
   transition: background 0.2s;
 }
 .btn-cta:hover {
-  background: #52e0c4;
+  background: var(--color-accent);
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; }
-  .sidebar {
-    flex-direction: row;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-  .site-nav ul { display: flex; gap: 1.5rem; }
-  .profile { display: none; } /* hide on mobile to reclaim space */
-  .content { padding: 2rem 1rem; }
+/* 11. Footer (After Content) */
+footer {
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
+}
+footer a {
+  color: var(--color-primary);
+  text-decoration: none;
+  margin: 0 0.3rem;
+}
+footer a:hover {
+  color: var(--color-accent);
+}
+
+/* 12. Readability Tweaks */
+body, .right-column p, .right-column li {
+  color: var(--color-text-primary);
+  line-height: 1.7;
+  font-size: var(--font-size-body);
+}
+.hero-content h2,
+.left-column .logo h1,
+.right-column h2 {
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
