@@ -1,31 +1,79 @@
-<div class="layout">
-  <aside class="sidebar">
-    <header class="profile">
-      <h1>Edgar Diaz-Gutierrez</h1>
-      <p class="title">Software Engineer</p>
-      <p class="tagline">Let's Code.</p>
-    </header>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edgar Diaz-Gutierrez</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    body { visibility: hidden; }
+  </style>
+  <script>
+    window.addEventListener('load', () => {
+      document.body.style.visibility = 'visible';
+    });
+  </script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <header class="profile">
+        <h1>Edgar Diaz-Gutierrez</h1>
+        <p class="title">Software Engineer</p>
+        <p class="tagline">Let's Code.</p>
+      </header>
+  
+      <nav class="site-nav">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+        </ul>
+      </nav>
+  
+      <footer class="social">
+        <a href="#"><i class="icon-github"></i></a>
+        <a href="#"><i class="icon-linkedin"></i></a>
+        <a href="#"><i class="icon-codepen"></i></a>
+        <a href="#"><i class="icon-instagram"></i></a>
+        <a href="#"><i class="icon-goodreads"></i></a>
+      </footer>
+    </aside>
+  
+    <main class="content">
+      <section id="about">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, eaque expedita. Voluptatem dolore id quod nemo voluptas facilis non tenetur assumenda vero magni tempore rem, similique soluta nesciunt asperiores dolorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, fuga odio. Et exercitationem animi cupiditate provident dolorum. Obcaecati, maiores, nesciunt consequatur ad facere nemo nostrum voluptates impedit praesentium eius exercitationem. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel ullam, minus, quod iure non ex recusandae tempore eius modi quidem cumque eligendi ipsam placeat dolor rem consequatur. Obcaecati, deserunt tempore?</section>
+      <section id="experience">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, eaque expedita. Voluptatem dolore id quod nemo voluptas facilis non tenetur assumenda vero magni tempore rem, similique soluta nesciunt asperiores dolorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, fuga odio. Et exercitationem animi cupiditate provident dolorum. Obcaecati, maiores, nesciunt consequatur ad facere nemo nostrum voluptates impedit praesentium eius exercitationem. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel ullam, minus, quod iure non ex recusandae tempore eius modi quidem cumque eligendi ipsam placeat dolor rem consequatur. Obcaecati, deserunt tempore?</section>
+      <section id="projects">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, eaque expedita. Voluptatem dolore id quod nemo voluptas facilis non tenetur assumenda vero magni tempore rem, similique soluta nesciunt asperiores dolorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, fuga odio. Et exercitationem animi cupiditate provident dolorum. Obcaecati, maiores, nesciunt consequatur ad facere nemo nostrum voluptates impedit praesentium eius exercitationem. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel ullam, minus, quod iure non ex recusandae tempore eius modi quidem cumque eligendi ipsam placeat dolor rem consequatur. Obcaecati, deserunt tempore?</section>
+    </main>
+  </div>
 
-    <nav class="site-nav">
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-      </ul>
-    </nav>
+  <script>
+    (function () {
+      const toggle = document.getElementById('theme-toggle');
+      const root = document.documentElement;
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      root.setAttribute('data-theme', savedTheme);
+      toggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
 
-    <footer class="social">
-      <a href="#"><i class="icon-github"></i></a>
-      <a href="#"><i class="icon-linkedin"></i></a>
-      <a href="#"><i class="icon-codepen"></i></a>
-      <a href="#"><i class="icon-instagram"></i></a>
-      <a href="#"><i class="icon-goodreads"></i></a>
-    </footer>
-  </aside>
+      toggle.addEventListener('click', () => {
+        const nextTheme = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', nextTheme);
+        localStorage.setItem('theme', nextTheme);
+        toggle.textContent = nextTheme === 'light' ? '🌙' : '☀️';
+      });
 
-  <main class="content">
-    <section id="about">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, eaque expedita. Voluptatem dolore id quod nemo voluptas facilis non tenetur assumenda vero magni tempore rem, similique soluta nesciunt asperiores dolorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, fuga odio. Et exercitationem animi cupiditate provident dolorum. Obcaecati, maiores, nesciunt consequatur ad facere nemo nostrum voluptates impedit praesentium eius exercitationem. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel ullam, minus, quod iure non ex recusandae tempore eius modi quidem cumque eligendi ipsam placeat dolor rem consequatur. Obcaecati, deserunt tempore?</section>
-    <section id="experience">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, eaque expedita. Voluptatem dolore id quod nemo voluptas facilis non tenetur assumenda vero magni tempore rem, similique soluta nesciunt asperiores dolorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, fuga odio. Et exercitationem animi cupiditate provident dolorum. Obcaecati, maiores, nesciunt consequatur ad facere nemo nostrum voluptates impedit praesentium eius exercitationem. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel ullam, minus, quod iure non ex recusandae tempore eius modi quidem cumque eligendi ipsam placeat dolor rem consequatur. Obcaecati, deserunt tempore?</section>
-    <section id="projects">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, eaque expedita. Voluptatem dolore id quod nemo voluptas facilis non tenetur assumenda vero magni tempore rem, similique soluta nesciunt asperiores dolorem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, fuga odio. Et exercitationem animi cupiditate provident dolorum. Obcaecati, maiores, nesciunt consequatur ad facere nemo nostrum voluptates impedit praesentium eius exercitationem. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel ullam, minus, quod iure non ex recusandae tempore eius modi quidem cumque eligendi ipsam placeat dolor rem consequatur. Obcaecati, deserunt tempore?</section>
-  </main>
-</div>
+      window.addEventListener('beforeunload', () => {
+        localStorage.setItem('scrollPosition', window.scrollY);
+      });
+
+      window.addEventListener('load', () => {
+        const scrollPosition = localStorage.getItem('scrollPosition');
+        if (scrollPosition !== null) {
+          window.scrollTo(0, parseInt(scrollPosition));
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
