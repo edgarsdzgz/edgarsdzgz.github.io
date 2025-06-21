@@ -16,13 +16,26 @@
   </script>
 </head>
 <body>
-  <!-- Left Sidebar -->
-  <aside class="left-sidebar">
-    <header>
-      <h1>Edgar Diaz-Gutierrez</h1>
-      <p class="tagline">Full-Stack Software Engineer</p>
-      <nav class="sidebar-nav">
+  <div class="layout-container">
+    <!-- LEFT COLUMN (sticky profile + nav) -->
+    <aside class="left-column">
+      <header id="main-header">
+        <div class="logo"><h1>Edgar Diaz-Gutierrez</h1></div>
+        <nav class="header-nav">
+          <p class="tagline">Full-Stack Software Engineer</p>
+          <p class="contact">
+            (619) 750-4888 |
+            <a href="mailto:edgar.s.dzgz@gmail.com">edgar.s.dzgz@gmail.com</a> |
+            <a href="https://linkedin…">LinkedIn</a> |
+            <a href="https://github…">GitHub</a>
+          </p>
+        </nav>
+        <button id="theme-toggle" aria-label="Toggle light/dark mode">☀️/🌙</button>
+      </header>
+
+      <nav class="scroll-nav">
         <ul>
+          <li><a href="#hero">Home</a></li>
           <li><a href="#introduction">Introduction</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#skills">Skills</a></li>
@@ -30,53 +43,32 @@
           <li><a href="#education">Education</a></li>
         </ul>
       </nav>
-      <div class="sidebar-social">
-        <a href="mailto:edgar.s.dzgz@gmail.com">✉️</a>
-        <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank">🔗</a>
-        <a href="https://github.com/edgarsdzgz" target="_blank">🐱</a>
+
+      <div class="social-sidebar">
+        <a href="mailto:…" aria-label="Email">✉️</a>
+        <a href="https://linkedin…" aria-label="LinkedIn">🔗</a>
+        <a href="https://github…" aria-label="GitHub">🐱</a>
       </div>
-    </header>
-  </aside>
+    </aside>
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <button id="theme-toggle" aria-label="Toggle theme">🌓</button>
+    <!-- RIGHT COLUMN (scrolling content) -->
+    <main class="right-column">
+      <section id="hero">
+        <div class="hero-content">
+          <h2>Building Resilient Systems, Inspiring Teams</h2>
+          <p>Driven by creativity and collaboration…</p>
+          <a href="#projects" class="btn-cta">Explore My Work</a>
+        </div>
+      </section>
 
-    <section id="hero">
-      <h2>Building Resilient Systems, Inspiring Teams</h2>
-      <p>Driven by creativity and collaboration, I craft elegant, high-impact software and guide tomorrow’s engineers toward shared success.</p>
-      <a href="#projects" class="btn-cta">Explore My Work</a>
-    </section>
+      <section id="introduction" class="container">…</section>
+      <section id="experience"     class="container">…</section>
+      <section id="skills"         class="container">…</section>
+      <section id="projects"       class="container">…</section>
+      <section id="education"      class="container">…</section>
 
-    <section id="introduction">
-      <h2>Introduction</h2>
-      <p>Your introduction content...</p>
-    </section>
-
-    <section id="experience">
-      <h2>Experience</h2>
-      <p>Your experience content...</p>
-    </section>
-
-    <section id="skills">
-      <h2>Technical Skills & Languages</h2>
-      <p>Your skills content...</p>
-    </section>
-
-    <section id="projects">
-      <h2>Projects</h2>
-      <p>Your projects content...</p>
-    </section>
-
-    <section id="education">
-      <h2>Education</h2>
-      <p>Your education content...</p>
-    </section>
-
-    <footer>
-      <p>Connect with me: <a href="mailto:edgar.s.dzgz@gmail.com">Email</a> | <a href="https://www.linkedin.com/in/edgar-dzgz/">LinkedIn</a> | <a href="https://github.com/edgarsdzgz">GitHub</a></p>
-    </footer>
-  </main>
+    </main>
+  </div>
 
   <script>
     (function () {
