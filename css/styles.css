@@ -23,15 +23,15 @@
   --color-shadow:          rgba(0,0,0,0.5);
 }
 
-/*  Light Mode Overrides */
+/* Light Mode Overrides */
 :root[data-theme="light"] {
-  --color-bg:             #F5F7FA;
-  --color-surface:        #FFFFFF;
-  --color-text-primary:   #2E2E2E;
-  --color-text-secondary: #0A1F44;
-  --color-primary:        #3F83F8;
-  --color-accent:         #2CE8E8;
-  --color-shadow:         rgba(0,0,0,0.1);
+  --color-bg:              #F5F7FA;
+  --color-surface:         #FFFFFF;
+  --color-text-primary:    #2E2E2E;
+  --color-text-secondary:  #0A1F44;
+  --color-primary:         #3F83F8;
+  --color-accent:          #2CE8E8;
+  --color-shadow:          rgba(0,0,0,0.1);
 }
 
 /* 3. Reset & Base */
@@ -66,22 +66,19 @@ body {
   position: sticky;
   top: 0;
   height: 100vh;
-  padding: var(--padding);
+  padding: var(--padding) 1.5rem;    /* tightened left padding */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   background: var(--color-surface);
   border-right: 1px solid rgba(100,120,170,0.07);
   z-index: 10;
-  overflow-y: auto;         /* allow internal scrolling */
-  padding-bottom: 3rem;     /* give space for footer links */
 }
 .right-column {
   padding: var(--padding) 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  background: transparent;
 }
 
 /* Responsive */
@@ -101,166 +98,11 @@ body {
 #main-header {
   background: none;
   box-shadow: none;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;               /* reduced gap */
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.3rem;                       /* tightened spacing */
 }
 .logo h1 {
   font-family: var(--font-heading);
-  font-size: var(--font-size-h1);
-  color: var(--color-text-secondary);
-  letter-spacing: -1px;
-}
-.header-nav .tagline {
-  font-size: 1.15rem;
-  font-weight: 500;
-  color: var(--color-text-primary);
-  opacity: 0.85;
-}
-.header-nav .contact {
-  font-size: 0.95rem;
-  color: var(--color-text-primary);
-}
-.header-nav .contact a {
-  color: var(--color-primary);
-  text-decoration: none;
-  margin: 0 0.3rem;
-}
-.header-nav .contact a:hover {
-  color: var(--color-accent);
-}
-
-/* Theme Toggle Button */
-#theme-toggle {
-  margin-top: 1rem;
-  background: transparent;
-  border: none;
-  font-size: 1.6rem;
-  cursor: pointer;
-  align-self: flex-end;
-  transition: filter 0.2s;
-}
-#theme-toggle:hover {
-  filter: brightness(1.3);
-}
-
-/* 6. Social Icons */
-.social-sidebar {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-.social-sidebar a {
-  font-size: 1.5rem;
-  color: var(--color-text-secondary);
-  transition: color 0.2s;
-}
-.social-sidebar a:hover {
-  color: var(--color-accent);
-}
-.sidebar-footer {
-  margin-top: auto;               /* push to bottom of left-column */
-  padding-top: 1rem;
-  font-size: 0.85rem;
-  color: var(--color-text-primary);
-}
-.sidebar-footer a {
-  color: var(--color-primary);
-  text-decoration: none;
-  margin: 0 0.3rem;
-}
-.sidebar-footer a:hover {
-  color: var(--color-accent);
-}
-
-/* 7. Scroll-Spy Nav */
-.scroll-nav ul {
-  list-style: none;
-  margin-top: 2rem;
-}
-.scroll-nav li {
-  margin: 0.6rem 0;
-}
-.scroll-nav a {
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  font-weight: 500;
-  padding-left: 0.5rem;
-  border-left: 3px solid transparent;
-  transition: color 0.18s, border-color 0.25s;
-}
-.scroll-nav a:hover,
-.scroll-nav a.active {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
-}
-
-/* 8. Hero (Right Column) */
-#hero {
-  background: none;
-  padding: 0;
-  margin-top: 3rem;
-}
-.hero-content {
-  text-align: left;
-}
-.hero-content h2 {
-  font-family: var(--font-heading);
-  font-size: 2.1rem;
-  color: var(--color-primary);
-  margin-bottom: 1rem;
-}
-.hero-content p {
-  font-size: 1.1rem;
-  color: var(--color-text-primary);
-  margin-bottom: 1.5rem;
-}
-.btn-cta {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background: var(--color-primary);
-  color: var(--color-surface);
-  border-radius: 4px;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.btn-cta:hover {
-  background: var(--color-accent);
-}
-
-/* 9. Section Cards */
-.right-column section {
-  background: var(--color-surface);
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px var(--color-shadow);
-  margin-bottom: 1rem;
-}
-h2, h3 {
-  font-family: var(--font-heading);
-  margin-bottom: 0.75rem;
-}
-h2 {
-  font-size: var(--font-size-h2);
-  color: var(--color-primary);
-}
-h3 {
-  font-size: 1.1rem;
-  color: var(--color-text-secondary);
-}
-
-/* 10. Footer */
-footer {
-  text-align: center;
-  color: var(--color-text-primary);
-  padding: 1.5rem 0 0.5rem;
-}
-footer a {
-  color: var(--color-primary);
-  text-decoration: none;
-  margin: 0 0.3rem;
-}
-footer a:hover {
-  color: var(--color-accent);
-}
+  font-size:
