@@ -43,12 +43,19 @@
   margin: 0;
   padding: 0;
 }
-
 html {
   scroll-behavior: smooth;
   height: 100%;
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-bg)    0%,
+    var(--color-accent) 50%,
+    var(--color-primary)100%
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
-
 body {
   font-family: var(--font-body);
   font-size: var(--font-size-body);
@@ -75,10 +82,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background: var(--color-surface);
+  background: transparent !important;
   border-right: 1px solid rgba(100,120,170,0.07);
   z-index: 10;
-  overflow-y: auto;
+  overflow-y: visible !important;
   padding-bottom: 3rem;
 }
 
@@ -112,6 +119,7 @@ body {
 }
 
 .logo h1 {
+  white-space: nowrap;
   font-family: var(--font-heading);
   font-size: var(--font-size-h1);
   color: var(--color-text-secondary);
