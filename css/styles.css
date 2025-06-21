@@ -73,6 +73,8 @@ body {
   background: var(--color-surface);
   border-right: 1px solid rgba(100,120,170,0.07);
   z-index: 10;
+  overflow-y: auto;         /* allow internal scrolling */
+  padding-bottom: 3rem;     /* give space for footer links */
 }
 .right-column {
   padding: var(--padding) 2rem;
@@ -155,6 +157,20 @@ body {
   transition: color 0.2s;
 }
 .social-sidebar a:hover {
+  color: var(--color-accent);
+}
+.sidebar-footer {
+  margin-top: auto;               /* push to bottom of left-column */
+  padding-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--color-text-primary);
+}
+.sidebar-footer a {
+  color: var(--color-primary);
+  text-decoration: none;
+  margin: 0 0.3rem;
+}
+.sidebar-footer a:hover {
   color: var(--color-accent);
 }
 
