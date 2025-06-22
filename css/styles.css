@@ -228,3 +228,20 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+
+/* Theme Toggle Button – transparent background */
+#theme-toggle {
+  background: transparent;    /* no white box */
+  border: none;               /* no border */
+  padding: 0.25rem;           /* small hit area around icon */
+  font-size: 1.6rem;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: filter 0.2s;
+}
+
+#theme-toggle:hover,
+#theme-toggle:focus {
+  filter: brightness(1.3);
+  outline: none;              /* remove default focus ring, if desired */
+}
