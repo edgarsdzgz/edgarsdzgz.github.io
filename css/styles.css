@@ -69,42 +69,54 @@ body {
 }
 
 /* 4. Two-Column Layout */
+/* 4. Two-Column Layout – updated for 1:1 split & tighter gutters */
 .layout-container {
   display: grid;
-  /* 1fr·1fr gives equal halves; you can tweak the ratio if you like */
-  grid-template-columns: minmax(280px, 1fr) 1fr;
-  gap: 0.5rem;
-  /* tighten the gutter between columns */
-  max-width: 90vw;
-  /* allow the layout to stretch almost full-width */
+  /* 1fr 1fr makes it exactly half/half */
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;                   /* smaller gutter */
+  max-width: var(--max-width);
   margin: 0 auto;
   min-height: 100vh;
+  padding: 0 var(--padding);   /* keep some side breathing room */
 }
 
+/* Sidebar (left) */
 .left-column {
   position: sticky;
   top: 0;
-  bottom: 0;
-  /* keep it stuck from top through bottom */
-  overflow-y: auto;
-  /* scroll its own contents if they overflow */
-  padding: 1rem;
-  /* your existing padding */
-  background: transparent;
-  /* ensure you see the page background */
+  height: 100vh;
+  /* pull in the padding on both sides */
+  padding: var(--padding) 1rem;
+  background: transparent;     /* fully see-through now */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   z-index: 10;
 }
 
+/* Main content (right) */
 .right-column {
-  padding: 1rem;
-  /* cut the padding in half */
+  /* match horizontal padding to left */
+  padding: var(--padding) 1rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  /* slightly tighter between cards */
+  gap: 2rem;
+  background: transparent;
+}
+
+/* Mobile fallback remains the same */
+@media (max-width: 900px) {
+  .layout-container {
+    grid-template-columns: 1fr;
+  }
+  .left-column {
+    position: static;
+    height: auto;
+    padding: var(--padding) 1rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(100,120,170,0.09);
+  }
 }
 
 /* ─── Step 3: Hover Highlight + Dim Siblings ───────────────────────────────── */
