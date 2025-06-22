@@ -45,14 +45,15 @@ body {
   padding: var(--padding) 0;
 }
 
-/* 4. Two-Column Layout */
+/* 4. Two-Column Layout: 50/50 split */
 .layout-container {
   display: grid;
-  grid-template-columns: minmax(320px, 1fr) 2fr;
-  gap: 2rem;                /* wider gutter so columns never touch */
+  grid-template-columns: 1fr 1fr;     /* equal half/half */
+  gap: 2rem;                         /* gutter between columns */
   max-width: var(--max-width);
   margin: 0 auto;
   min-height: 100vh;
+  padding: 0 var(--padding);        /* horizontal breathing room */
 }
 
 .left-column {
