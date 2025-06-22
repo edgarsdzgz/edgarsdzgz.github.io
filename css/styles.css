@@ -25,14 +25,14 @@
 
 /* — Light Mode Overrides — */
 :root[data-theme="light"] {
-  /* keep it soft—no pure whites */
-  --color-bg:              #f2f2ee;  /* light cream page background */
-  --color-surface:         #ffffff;  /* cards & panels */
-  --color-text-primary:    #2e2e2e;  /* main text darker charcoal */
-  --color-text-secondary:  #5b6473;  /* muted headings/nav */
-  --color-accent:          #3f83f8;  /* keep your brand blue */
-  --color-shadow:          rgba(0, 0, 0, 0.1);
+  --color-bg:              #edf7ff;  
+  --color-surface:         #ffffff;  
+  --color-text-primary:    #2e3a59;  
+  --color-text-secondary:  #5a6b8c;  
+  --color-accent:          #3367d6;  
+  --color-shadow:          rgba(0, 0, 0, 0.08);
 }
+
 
 /* 3. Reset & Base */
 *,
