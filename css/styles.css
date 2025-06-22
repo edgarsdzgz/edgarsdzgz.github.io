@@ -252,17 +252,17 @@ footer a:hover {
 
 /* Theme Toggle Button – transparent background */
 #theme-toggle {
-  background: transparent;    /* no white box */
-  border: none;               /* no border */
-  padding: 0.25rem;           /* small hit area around icon */
-  font-size: 1.6rem;
+  position: fixed;           /* take it out of the grid/columns */
+  bottom: var(--padding);
+  right:  var(--padding);
+  background: transparent;   /* only the icon shows */
+  border: none;
+  font-size: 1.8rem;         /* bump up the tap target */
   cursor: pointer;
-  align-self: flex-end;
+  z-index: 1000;             /* float above everything */
   transition: filter 0.2s;
 }
 
-#theme-toggle:hover,
-#theme-toggle:focus {
+#theme-toggle:hover {
   filter: brightness(1.3);
-  outline: none;              /* remove default focus ring, if desired */
 }
