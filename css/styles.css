@@ -82,9 +82,10 @@ body {
 .left-column {
   position: sticky;
   top: 0;
-  height: 100vh;
-  padding: 1rem;             /* cut the padding in half */
-  background: transparent;   
+  bottom: 0;              /* keep it stuck from top through bottom */
+  overflow-y: auto;       /* scroll its own contents if they overflow */
+  padding: 1rem;          /* your existing padding */
+  background: transparent;/* ensure you see the page background */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
