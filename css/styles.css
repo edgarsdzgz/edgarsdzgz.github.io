@@ -205,11 +205,17 @@ body {
 
 /* 8. Hero / Section Cards */
 .right-column section {
-  background: var(--color-surface);
+  /* no panel background */
+  background: none;
+  /* no shadow or rounded corners */
+  box-shadow: none;
+  border-radius: 0;
+
+  /* keep your padding/margin for breathing room */
   padding: var(--padding);
-  border-radius: 8px;
-  box-shadow: 0 4px 16px var(--color-shadow);
+  margin-bottom: var(--padding);
 }
+
 section h2 {
   font-family: var(--font-heading);
   font-size: var(--font-size-h2);
