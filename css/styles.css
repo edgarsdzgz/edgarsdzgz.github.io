@@ -362,14 +362,13 @@ footer a:hover {
 
 /* Org link within title */
 .timeline-content h3 a {
-  color: var(--color-accent);
-  text-decoration: none;
-  transition: color 0.2s;
+  color: var(--color-text-secondary);
 }
 
-.timeline-content h3 a:hover {
-  color: var(--color-primary);
+.timeline-content:hover h3 a {
+  color: var(--color-accent);
 }
+
 
 /* Description text */
 .timeline-content p {
