@@ -48,24 +48,27 @@ body {
 /* 4. Two-Column Layout */
 .layout-container {
   display: grid;
-  grid-template-columns: minmax(280px, 1fr) 2fr;
-  gap: 2rem;
+  grid-template-columns: minmax(320px, 1fr) 2fr;
+  gap: 2rem;                /* wider gutter so columns never touch */
   max-width: var(--max-width);
-  width: 100%;
-  min-height: calc(100vh - 2 * var(--padding));
+  margin: 0 auto;
+  min-height: 100vh;
 }
+
 .left-column {
   position: sticky;
-  top: var(--padding);
-  align-self: start;
-  background: var(--color-surface);
-  padding: var(--padding);
+  top: 0;
+  height: 100vh;
+  padding: var(--padding);  /* uniform padding on all sides */
+  padding-right: 2.5rem;    /* extra right padding so content can’t bleed */
+  background: transparent;  /* drop any solid fill */
+  border-right: none;       /* remove any divider line */
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px var(--color-shadow);
+  justify-content: flex-start;
+  z-index: 10;
 }
+
 .right-column {
   display: flex;
   flex-direction: column;
@@ -95,12 +98,20 @@ body {
   flex-direction: column;
   gap: 0.25rem;
 }
+
 .logo h1 {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-h1);
-  color: var(--color-text-secondary);
-  white-space: nowrap;
+  font-family:   var(--font-heading);
+  font-size:     var(--font-size-h1);
+  color:         var(--color-text-secondary);
+  letter-spacing: -1px;
+
+  /* force single line, gracefully ellipsize if too long */
+  white-space:    nowrap;
+  overflow:       hidden;
+  text-overflow:  ellipsis;
+  max-width:      100%;
 }
+
 .header-nav .tagline {
   font-weight: 600;
   color: var(--color-text-secondary);
