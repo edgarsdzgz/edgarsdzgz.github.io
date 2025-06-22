@@ -3,25 +3,36 @@
 /* 2. CSS Variables */
 
 /* — Dark Mode (default) — */
+/* 2. CSS Variables */
 :root {
   /* Typography */
-  --font-heading: 'Montserrat', sans-serif;
-  --font-body: 'Merriweather', serif;
-  --font-size-h1: 2.5rem;
-  --font-size-h2: 1.75rem;
-  --font-size-body: 1rem;
-  --line-height: 1.6;
-  --padding: 2rem;
-  --max-width: 1200px;
+  --font-heading:    'Montserrat', sans-serif;
+  --font-body:       'Merriweather', serif;
+  --font-size-h1:    2.5rem;
+  --font-size-h2:    1.75rem;
+  --font-size-h3:    1.5rem;
+  --font-size-body:  1rem;
+  --line-height-body:1.65;
+  --padding:         2rem;
+  --max-width:       1200px;
 
-  /* Color Palette */
-  --color-bg: #10101f;
-  --color-surface: #1e1f28;
-  --color-text-primary: #e4e7ec;
-  --color-text-secondary: #afb8ff;
-  --color-accent: #3f83f8;
-  --color-shadow: rgba(0, 0, 0, 0.5);
-  --color-surface-hover: rgba(30, 36, 50, 0.85);
+  /* Dark Mode Palette (default) */
+  --color-bg:              #10101f;
+  --color-surface:         #1e1f28;
+  --color-text-primary:    #e4e7ec;
+  --color-text-secondary:  #d0e4ff;    /* bumped for AA contrast */
+  --color-accent:          #289bd2;    /* warmer, higher contrast */
+  --color-shadow:          rgba(0, 0, 0, 0.5);
+}
+
+/* Light Mode Overrides */
+:root[data-theme="light"] {
+  --color-bg:              #f0f4fa;    /* soft cream-blue */
+  --color-surface:         #ffffff;
+  --color-text-primary:    #2e2e2e;
+  --color-text-secondary:  #005a99;    /* deeper navy for links/nav */
+  --color-accent:          #289bd2;    /* same accent for consistency */
+  --color-shadow:          rgba(0, 0, 0, 0.1);
 }
 
 /* — Light Mode Overrides (brighter blues—not pure white) — */
