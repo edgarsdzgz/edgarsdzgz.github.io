@@ -73,8 +73,10 @@ body {
   display: grid;
   /* 1fr·1fr gives equal halves; you can tweak the ratio if you like */
   grid-template-columns: minmax(280px, 1fr) 1fr;
-  gap: 0.5rem;                /* tighten the gutter between columns */
-  max-width: 90vw;            /* allow the layout to stretch almost full-width */
+  gap: 0.5rem;
+  /* tighten the gutter between columns */
+  max-width: 90vw;
+  /* allow the layout to stretch almost full-width */
   margin: 0 auto;
   min-height: 100vh;
 }
@@ -82,10 +84,14 @@ body {
 .left-column {
   position: sticky;
   top: 0;
-  bottom: 0;              /* keep it stuck from top through bottom */
-  overflow-y: auto;       /* scroll its own contents if they overflow */
-  padding: 1rem;          /* your existing padding */
-  background: transparent;/* ensure you see the page background */
+  bottom: 0;
+  /* keep it stuck from top through bottom */
+  overflow-y: auto;
+  /* scroll its own contents if they overflow */
+  padding: 1rem;
+  /* your existing padding */
+  background: transparent;
+  /* ensure you see the page background */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -93,10 +99,12 @@ body {
 }
 
 .right-column {
-  padding: 1rem;             /* cut the padding in half */
+  padding: 1rem;
+  /* cut the padding in half */
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;               /* slightly tighter between cards */
+  gap: 1.5rem;
+  /* slightly tighter between cards */
 }
 
 /* ─── Step 3: Hover Highlight + Dim Siblings ───────────────────────────────── */
@@ -340,6 +348,23 @@ footer a:hover {
   position: relative;
   /* for stacking */
   z-index: 0;
+}
+
+/* 4. Dim non-hovered siblings */
+/* ------------------------------------
+  When you hover anywhere in the .timeline
+  container, fade out every .timeline-item
+  that is NOT being hovered.
+------------------------------------ */
+.timeline {
+  /* make sure pointer events bubble up */
+  position: relative;
+}
+
+.timeline:hover .timeline-item:not(:hover) {
+  opacity: 0.4;
+  /* dimmed */
+  transition: opacity 0.3s ease;
 }
 
 /* DIM ALL CARDS WHEN THE COLUMN IS HOVERED */
