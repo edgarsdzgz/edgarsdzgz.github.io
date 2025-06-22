@@ -356,14 +356,12 @@ footer a:hover {
   gap: 1rem;
   align-items: start;
   padding: 1.5rem;
-  background: transparent;
+  background: transparent;           /* ← make transparent */
   border-radius: 8px;
-  opacity: 1; /* ensure fully opaque by default */
   transition:
-    opacity 0.3s ease,
     transform 0.3s ease,
     box-shadow 0.3s ease,
-    background 0.3s ease;
+    opacity 0.3s ease;
 }
 
 /* Hover/focus: lift + highlight + full opacity */
@@ -388,21 +386,18 @@ footer a:hover {
   transition: color 0.3s ease;
 }
 
-/* Content card wrapper (you can drop any hover here) */
+/* ─────────────────────────────────────────────
+  1) Base content wrapper: fully transparent
+───────────────────────────────────────────── */
 .timeline-item .timeline-content {
-  background: var(--color-surface);
+  background: transparent;                   /* ← no fill until hover */
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px var(--color-shadow);
+  box-shadow: none;                          /* ← remove default shadow */
   transition:
+    background 0.3s ease,
     transform 0.3s ease,
-    box-shadow 0.3s ease,
-    background 0.3s ease;
-}
-.timeline-item:hover .timeline-content {
-  /* secondary lift if you want it on inner wrapper */
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px var(--color-shadow);
+    box-shadow 0.3s ease;
 }
 
 /* Job title styling */
