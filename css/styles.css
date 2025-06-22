@@ -16,16 +16,12 @@
 
   /* Color Palette */
   --color-bg: #10101f;
-  /* overall page background */
   --color-surface: #1e1f28;
-  /* cards & sidebar panels */
   --color-text-primary: #e4e7ec;
-  /* main body text */
   --color-text-secondary: #afb8ff;
-  /* headings, nav links */
   --color-accent: #3f83f8;
-  /* buttons, active nav */
   --color-shadow: rgba(0, 0, 0, 0.5);
+  --color-surface-hover: rgba(30, 36, 50, 0.85);
 }
 
 /* — Light Mode Overrides (brighter blues—not pure white) — */
@@ -109,6 +105,14 @@ body {
   flex-direction: column;
   gap: 2rem;
   padding-top: calc(var(--font-size-h1) + var(--padding) / 2);
+}
+
+/* ─── Step 3: Hover Highlight + Dim Siblings ───────────────────────────────── */
+
+/* 1) When any timeline-item is hovered, dim all others by default */
+.right-column:hover .timeline-item {
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
 }
 
 /* Mobile stack */
@@ -363,6 +367,17 @@ footer a:hover {
   margin: 0.5rem 0 0;
   color: var(--color-text-primary);
   line-height: var(--line-height-body);
+}
+
+.timeline-item:hover {
+  opacity: 1 !important;                           /* override the dim */
+  background: var(--color-surface-hover);          /* subtle highlight */
+  transform: translateY(-4px);                     /* slight “lift” */
+  box-shadow: 0 8px 16px var(--color-shadow);      /* stronger shadow */
+}
+
+.timeline-item:hover .timeline-content h3 {
+  color: var(--color-accent);
 }
 
 /* Date column styling */
