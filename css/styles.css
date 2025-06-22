@@ -329,46 +329,62 @@ footer a:hover {
 /* —————————————————————————————
    Timeline Item (Career Highlights)
    ————————————————————————————— */
-   .timeline-item {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1rem;
-    align-items: start;
-    padding: 1.5rem;
-    background: transparent;                         /* keep it see-through */
-    border-radius: 8px;
-    opacity: 0.6;                                     /* dim by default */
-    transition:
-      background 0.3s ease,
-      transform 0.3s ease,
-      box-shadow 0.3s ease,
-      opacity 0.3s ease;
-    position: relative;                               /* for stacking */
-    z-index: 0;
-  }
-  
-  /* — Dim all when hovering any one — */
-  .right-column .timeline-item:hover ~ .timeline-item,
-  .right-column .timeline-item:hover ~ .timeline-item ~ .timeline-item,
-  .right-column .timeline-item:hover ~ .timeline-item ~ .timeline-item ~ .timeline-item {
-    opacity: 0.6;    /* ensure non-hovered stay dim */
-  }
-  
-  /* — Hover / Focus styles — */
-  .timeline-item:hover,
-  .timeline-item:focus-within {
-    opacity: 1 !important;                            /* override the dim */
-    background: var(--color-surface-hover);           /* subtle highlight */
-    transform: translateY(-4px);                      /* slight “lift” */
-    box-shadow: 0 8px 16px var(--color-shadow);       /* stronger shadow */
-    z-index: 2;                                       /* float above siblings */
-    outline: none;
-  }
-  
-  /* — Ensure keyboard users see the same effect — */
-  .timeline-item:focus-within {
-    /* if you have an inner focusable element, ensure it doesn’t show default outline */
-  }
+.timeline-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.5rem;
+  background: transparent;
+  /* keep it see-through */
+  border-radius: 8px;
+  opacity: 0.6;
+  /* dim by default */
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+  position: relative;
+  /* for stacking */
+  z-index: 0;
+}
+
+/* DIM ALL CARDS WHEN THE COLUMN IS HOVERED */
+.right-column:hover .timeline-item {
+  opacity: 0.6;
+}
+
+/* UN-DIM & LIFT THE ONE YOU’RE HOVERING */
+.timeline-item:hover {
+  opacity: 1 !important;
+  /* full brightness */
+  background: var(--color-surface-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px var(--color-shadow);
+  z-index: 2;
+}
+
+/* — Hover / Focus styles — */
+.timeline-item:hover,
+.timeline-item:focus-within {
+  opacity: 1 !important;
+  /* override the dim */
+  background: var(--color-surface-hover);
+  /* subtle highlight */
+  transform: translateY(-4px);
+  /* slight “lift” */
+  box-shadow: 0 8px 16px var(--color-shadow);
+  /* stronger shadow */
+  z-index: 2;
+  /* float above siblings */
+  outline: none;
+}
+
+/* — Ensure keyboard users see the same effect — */
+.timeline-item:focus-within {
+  /* if you have an inner focusable element, ensure it doesn’t show default outline */
+}
 
 .timeline-item:hover .timeline-content h3 {
   color: var(--color-accent);
