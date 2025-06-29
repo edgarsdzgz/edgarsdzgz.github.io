@@ -54,9 +54,10 @@ html {
 /*———————————————————————————————————
   4. Two-Column Grid
 ———————————————————————————————————*/
+/* Two-column layout: 1fr (sidebar) : 3fr (main) */
 .layout-container {
   display: grid;
-  grid-template-columns: minmax(auto, 280px) 1fr;
+  grid-template-columns: 1fr 3fr;
   gap: var(--spacing);
   min-height: 100vh;
 }
