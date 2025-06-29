@@ -1,53 +1,41 @@
-/* 1. Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Merriweather:wght@300;400;700&display=swap');
-/* 2. CSS Variables */
+/* styles.css */
 
-/* — Dark Mode (default) — */
-/* 2. CSS Variables */
+/*———————————————————————————————————
+  1. Google Fonts
+———————————————————————————————————*/
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+/*———————————————————————————————————
+  2. Theme Variables
+———————————————————————————————————*/
 /* Dark-mode defaults + design system */
 :root {
-  /* Core colors (already used elsewhere) */
-  --color-bg-start: #0a0f23;
-  --color-bg-end:   #171b36;
-  --color-bg:       linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
+  /* Core colors */
+  --color-bg-start:     #0a0f23;
+  --color-bg-end:       #171b36;
+  --color-bg:           linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
   --color-text-primary: #e6e8f0;
 
   /* Type scale & spacing */
-  --font-size-h1: 3rem;
-  --font-size-h2: 1.25rem;
-  --font-size-base: 1rem;
-  --line-height-base: 1.6;
-  --spacing: 1.5rem;
+  --font-size-h1:       3rem;
+  --font-size-h2:       1.25rem;
+  --font-size-base:     1rem;
+  --line-height-base:   1.6;
+  --spacing:            1.5rem;
 }
 
 /* Light-mode overrides */
-[data-theme='light'] {
-  --color-bg-start: #f5f5f5;
-  --color-bg-end:   #ffffff;
-  --color-bg:       linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
+[data-theme="light"] {
+  --color-bg-start:     #f5f5f5;
+  --color-bg-end:       #ffffff;
+  --color-bg:           linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
   --color-text-primary: #1a1a1a;
 }
 
-/* — Light Mode Overrides (brighter blues—not pure white) — */
-:root[data-theme="light"] {
-  /* pale sky blue page background */
-  --color-bg: #e0f7ff;
-  /* almost-white cards with just a whisper of blue */
-  --color-surface: #f0fcff;
-  /* dark-navy text for high contrast */
-  --color-text-primary: #1f2a44;
-  /* softer steel-blue for secondary text/nav */
-  --color-text-secondary: #3a4d7a;
-  /* vivid azure accent (buttons, links, active nav) */
-  --color-accent: #0077cc;
-  /* subtle shadows so cards float just a touch */
-  --color-shadow: rgba(0, 0, 0, 0.1);
-}
-
-
-
-/* 3. Reset & Base */
-/* 2a. Reset box model & remove default spacing */
+/*———————————————————————————————————
+  3. Reset & Base Styles
+———————————————————————————————————*/
+/* 3a. Reset box model & remove default spacing */
 *,
 *::before,
 *::after {
@@ -56,7 +44,7 @@
   padding: 0;
 }
 
-/* 2b. Smooth scroll + base typography */
+/* 3b. Smooth scroll + base typography */
 html {
   scroll-behavior: smooth;
   font-family: "Inter", sans-serif;
@@ -66,124 +54,79 @@ html {
   background: var(--color-bg);
 }
 
-/* 2c. Ensure full-height and gradient background */
+/* 3c. Two-column layout (sidebar + main) */
 body {
   min-height: 100vh;
   background: var(--color-bg);
-  display: grid;
-  grid-template-columns: minmax(auto, 280px) 1fr;
 }
 
-h1 {
-  font-size: var(--font-size-h1);
-  font-weight: 700;
-}
-
-h2 {
-  font-size: var(--font-size-h2);
-  font-weight: 600;
-}
-
-.u-padding {
-  padding: var(--spacing) 2rem;
-}
-
-.u-max-width {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* 4. Two-Column Layout */
-/* 4. Two-Column Layout – updated for 1:1 split & tighter gutters */
+/*———————————————————————————————————
+  4. Two-Column Grid Container
+———————————————————————————————————*/
 .layout-container {
   display: grid;
-  /* 1fr 1fr makes it exactly half/half */
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;                   /* smaller gutter */
-  max-width: var(--max-width);
-  margin: 0 auto;
+  grid-template-columns: minmax(auto, 280px) 1fr;
+  gap: var(--spacing);
   min-height: 100vh;
-  padding: 0 var(--padding);   /* keep some side breathing room */
 }
 
-/* Sidebar (left) */
+/* Mobile fallback */
+@media (max-width: 900px) {
+  .layout-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*———————————————————————————————————
+  5. Sidebar (left-column)
+———————————————————————————————————*/
 .left-column {
   position: sticky;
   top: 0;
   height: 100vh;
-  /* pull in the padding on both sides */
-  padding: var(--padding) 1rem;
-  background: transparent;     /* fully see-through now */
+  padding: var(--spacing) 1rem;
+  background: transparent;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   z-index: 10;
 }
 
-/* Main content (right) */
+/*———————————————————————————————————
+  6. Main content (right-column)
+———————————————————————————————————*/
 .right-column {
-  /* match horizontal padding to left */
-  padding: var(--padding) 1rem;
+  padding: var(--spacing) 1rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   background: transparent;
 }
 
-/* Mobile fallback remains the same */
+/* Mobile adjustments */
 @media (max-width: 900px) {
-  .layout-container {
-    grid-template-columns: 1fr;
-  }
   .left-column {
     position: static;
     height: auto;
-    padding: var(--padding) 1rem;
-    border-right: none;
+    padding: var(--spacing) 1rem;
     border-bottom: 1px solid rgba(100,120,170,0.09);
   }
-}
-
-/* ─── Step 3: Hover Highlight + Dim Siblings ───────────────────────────────── */
-
-/* 1) When any timeline-item is hovered, dim all others by default */
-.right-column:hover .timeline-item {
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-/* Mobile stack */
-@media (max-width: 900px) {
-  .layout-container {
-    grid-template-columns: 1fr;
-  }
-
-  .left-column {
-    position: static;
-    width: auto;
-    box-shadow: none;
-    border-radius: 0;
-  }
-
   .right-column {
     padding-top: 0;
   }
 }
 
-/* 5. Header (in sidebar) */
+/*———————————————————————————————————
+  7. Header (Logo Area)
+———————————————————————————————————*/
 header#main-header {
   padding: var(--spacing) 2rem;
 }
 
-/* 5. Header (in sidebar) – fluidly scale name so it never ellipsizes */
 .logo h1 {
-  font-family: var(--font-heading);
-  /* fluid scale from 2rem up to 2.75rem depending on viewport */
   font-size: clamp(2rem, 6vw, var(--font-size-h1));
   line-height: 1.1;
-  color: var(--color-text-secondary);
-
-  /* ensure a single line, but no clipping */
+  color: var(--color-text-primary);
   white-space: nowrap;
   overflow: visible;
   text-overflow: clip;
@@ -191,17 +134,15 @@ header#main-header {
 
 .header-nav .tagline {
   font-weight: 600;
-  color: var(--color-text-secondary);
   opacity: 0.9;
 }
 
 .header-nav .contact {
   font-size: 0.9rem;
-  color: var(--color-text-primary);
 }
 
 .header-nav .contact a {
-  color: var(--color-accent);
+  color: var(--color-text-primary);
   text-decoration: none;
   margin: 0 0.25rem;
 }
@@ -210,7 +151,9 @@ header#main-header {
   text-decoration: underline;
 }
 
-/* 6. Vertical Nav */
+/*———————————————————————————————————
+  8. Navigation & Animated Underline
+———————————————————————————————————*/
 nav.scroll-nav {
   padding: var(--spacing) 2rem;
 }
@@ -247,13 +190,54 @@ nav.scroll-nav a.active::after {
   width: 100%;
 }
 
-/* 7. Social + Footer Links */
-
-
-/* 8. Hero / Section Cards */
+/*———————————————————————————————————
+  9. Main Content Sections
+———————————————————————————————————*/
 .right-column section {
   padding: var(--spacing) 2rem;
 }
+
+.right-column section#summary {
+  max-width: 600px;
+}
+
+section h2 {
+  font-size: var(--font-size-h2);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--color-text-primary);
+}
+
+section p,
+section li {
+  color: var(--color-text-primary);
+  line-height: var(--line-height-base);
+  font-size: var(--font-size-base);
+}
+
+/*———————————————————————————————————
+ 10. Buttons & CTAs
+———————————————————————————————————*/
+.btn-cta {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-text-primary);
+  color: var(--color-bg-end);
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-cta:hover {
+  background: var(--color-text-primary);
+  filter: brightness(0.9);
+}
+
+/*———————————————————————————————————
+ 11. Footer & Social Icons
+———————————————————————————————————*/
 .social-sidebar,
 footer {
   padding: var(--spacing) 2rem;
@@ -284,69 +268,23 @@ footer a:hover svg {
   transform: scale(1.1);
 }
 
-.right-column section#summary {
-  max-width: 600px;
-}
-
-section h2 {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-h2);
-  color: var(--color-accent);
-  margin-bottom: 0.75rem;
-}
-
-section p,
-section li {
-  color: var(--color-text-primary);
-}
-
-.btn-cta {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.75rem 1.5rem;
-  background: var(--color-accent);
-  color: var(--color-surface);
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.2s;
-}
-
-.btn-cta:hover {
-  background: var(--color-primary);
-}
-
-/* 9. Final Footer (if used) */
 footer {
   text-align: center;
-  color: var(--color-text-primary);
   padding: 2rem 0 1rem;
 }
 
-footer a {
-  color: var(--color-accent);
-  text-decoration: none;
-  margin: 0 0.25rem;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* Theme Toggle Button – transparent background */
+/*———————————————————————————————————
+ 12. Theme Toggle Button
+———————————————————————————————————*/
 #theme-toggle {
   position: fixed;
-  /* take it out of the grid/columns */
-  bottom: var(--padding);
-  right: var(--padding);
+  bottom: var(--spacing);
+  right: var(--spacing);
   background: transparent;
-  /* only the icon shows */
   border: none;
   font-size: 1.8rem;
-  /* bump up the tap target */
   cursor: pointer;
   z-index: 1000;
-  /* float above everything */
   transition: filter 0.2s;
 }
 
@@ -354,88 +292,66 @@ footer a:hover {
   filter: brightness(1.3);
 }
 
-/* ───────────────────────────────────────────────────────── */
-/* 4. TIMELINE (dim siblings + lift hovered)                  */
-/* ───────────────────────────────────────────────────────── */
+/*———————————————————————————————————
+ 13. Timeline Hover Effects
+———————————————————————————————————*/
 .timeline {
-  position: relative; /* so :hover on this container works */
+  position: relative;
 }
 
-/* Dim every card except the one under the mouse */
 .timeline:hover .timeline-item:not(:hover) {
   opacity: 0.4;
   transition: opacity 0.3s ease;
 }
 
-/* Base state for each card */
 .timeline-item {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 1rem;
   align-items: start;
   padding: 1.5rem;
-  background: transparent;           /* ← make transparent */
+  background: transparent;
   border-radius: 8px;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    opacity 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 }
 
-/* Hover/focus: lift + highlight + full opacity */
 .timeline-item:hover,
 .timeline-item:focus-within {
-  opacity: 1 !important;                     /* override any dim */
-  background: var(--color-surface-hover);    /* subtle card highlight */
-  transform: translateY(-4px);               /* slight “lift” */
-  box-shadow: 0 8px 16px var(--color-shadow);
-  z-index: 2;                                /* above siblings */
+  opacity: 1 !important;
+  background: var(--color-bg-start);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 2;
   outline: none;
 }
 
-/* Date column styling */
 .timeline-item .timeline-date {
-  font-family: var(--font-body);
   font-size: 0.85rem;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   text-transform: uppercase;
   white-space: nowrap;
   line-height: 1.4;
-  transition: color 0.3s ease;
 }
 
-/* ─────────────────────────────────────────────
-  1) Base content wrapper: fully transparent
-───────────────────────────────────────────── */
 .timeline-item .timeline-content {
-  background: transparent;                   /* ← no fill until hover */
+  background: transparent;
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: none;                          /* ← remove default shadow */
-  transition:
-    background 0.3s ease,
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  box-shadow: none;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Job title styling */
 .timeline-item .timeline-content h3 {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-h3);
+  font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 0.5rem;
-  color: var(--color-text-primary);
-  transition: color 0.3s ease;
-}
-.timeline-item:hover .timeline-content h3 a,
-.timeline-item:hover .timeline-content h3 {
-  color: var(--color-accent);
 }
 
-/* Body text */
-.timeline-item .timeline-content p {
-  margin: 0;
+.timeline-item:hover .timeline-content h3,
+.timeline-item:focus-within .timeline-content h3 {
   color: var(--color-text-primary);
-  line-height: var(--line-height-body);
-  font-size: var(--font-size-body);
 }
+
+/* ————————————————————————————————————
+   Any additional custom styles below…
+   ———————————————————————————————————— */
