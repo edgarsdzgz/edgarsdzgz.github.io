@@ -1,13 +1,13 @@
 // js/main.js
+// Prevent FOUC
+window.addEventListener('load', () => {
+  document.body.style.visibility = 'visible';
+});
+
 
 // Scroll-spy
 const links = document.querySelectorAll('nav.scroll-nav a');
 const sections = document.querySelectorAll('main section[id]');
-
-sections.forEach(sec => {
-  sec.classList.add('reveal');
-  observer.observe(sec);
-});
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -16,6 +16,11 @@ const observer = new IntersectionObserver((entries) => {
     }
   });
 }, { rootMargin: '0px 0px -20% 0px', threshold: 0 });
+
+sections.forEach(sec => {
+  sec.classList.add('reveal');
+  observer.observe(sec);
+});
 
 sections.forEach(sec => observer.observe(sec));
 
