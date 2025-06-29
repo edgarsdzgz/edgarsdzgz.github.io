@@ -97,10 +97,11 @@ header#main-header {
   padding-bottom: var(--spacing);
 }
 
+/* Heading: never wrap, fluid size between 2rem and 2.5rem */
 .logo h1 {
-  font-size: var(--font-size-h1);
-  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 2.5rem);
   line-height: 1.1;
+  white-space: nowrap;
 }
 
 .header-nav .tagline {
