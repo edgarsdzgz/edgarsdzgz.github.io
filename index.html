@@ -137,37 +137,8 @@
     </main>
   </div>
 
-  <!-- theme toggle sits above the grid -->
   <button id="theme-toggle" aria-label="Toggle theme">🌓</button>
 
-  <script>
-    (function () {
-      // Scroll-Spy
-      const links = document.querySelectorAll('.scroll-nav a');
-      const sections = document.querySelectorAll('main section[id]');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          const link = document.querySelector(`.scroll-nav a[href="#${e.target.id}"]`);
-          if (e.isIntersecting) {
-            links.forEach(a => a.classList.remove('active'));
-            link?.classList.add('active');
-          }
-        });
-      }, { threshold: 0.5 });
-      sections.forEach(s => observer.observe(s));
-
-      // Sticky header toggle
-      const header = document.getElementById('main-header');
-      window.addEventListener('scroll', () =>
-        header.classList.toggle('sticky', window.scrollY > 20)
-      );
-
-      // Theme toggle + persistence
-      const toggle = document.getElementById('theme-toggle');
-      const root = document.documentElement;
-      const saved = localStorage.getItem('theme') || 'dark';
-      root.setAttribute('data-theme', saved);
-      toggle.textContent = saved === 'light' ? '🌙' : '☀️';
-      toggle.addEventListener('click', () => {
-        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-        root.set
+  <script src="js/main.js" defer></script>
+</body>
+</html>
