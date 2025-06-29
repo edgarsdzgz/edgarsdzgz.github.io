@@ -64,10 +64,20 @@ html {
   min-height: 100vh;
 }
 
+
 /* Mobile fallback: single column */
 @media (max-width: 900px) {
   .layout-container {
     grid-template-columns: 1fr;
+  }
+  .left-column {
+    position: static;
+    height: auto;
+    padding: var(--spacing) 2rem;
+    border-bottom: 1px solid rgba(100,120,170,0.09);
+  }
+  .right-column {
+    padding-top: 0;
   }
 }
 
@@ -96,6 +106,7 @@ html {
   gap: 2rem;
   background: transparent;
 }
+
 
 /*———————————————————————————————————
   7. Header (Logo Area)
