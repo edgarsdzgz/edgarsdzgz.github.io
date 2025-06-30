@@ -1,27 +1,22 @@
-/* styles.css */
-
-/*———————————————————————————————————
-  1. Font Import
-———————————————————————————————————*/
+/* 1. Font Import */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
-/*———————————————————————————————————
-  2. Theme Variables
-———————————————————————————————————*/
-/* Dark-mode defaults + design system */
+/* 2. Theme & Design-System Variables */
 :root {
+  /* Core colors */
   --color-bg-start:      #0a0f23;
   --color-bg-end:        #171b36;
   --color-bg:            linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
   --color-text-primary:  #e6e8f0;
-  --color-accent: #64ffda;
+  --color-text-secondary:#a0a4b6;
+  --color-accent:        #64ffda;
 
-  /* Type scale & spacing */
+  /* Typography & spacing */
   --font-size-h1:        3rem;
   --font-size-h2:        1.25rem;
   --font-size-base:      1rem;
   --line-height-base:    1.6;
-  --spacing:             1.0rem;
+  --spacing:             1.5rem;
 }
 
 /* Light-mode overrides */
@@ -30,11 +25,10 @@
   --color-bg-end:        #ffffff;
   --color-bg:            linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
   --color-text-primary:  #1a1a1a;
+  --color-text-secondary:#555;
 }
 
-/*———————————————————————————————————
-  3. Reset & Base Styles
-———————————————————————————————————*/
+/* 3. Reset & Base */
 *,
 *::before,
 *::after {
@@ -52,13 +46,15 @@ html {
   background: var(--color-bg);
 }
 
-/*———————————————————————————————————
-  4. Two-Column Grid
-———————————————————————————————————*/
-/* Two-column layout: 1fr (sidebar) : 3fr (main) */
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* 4. Grid Layout */
 .layout-container {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 3fr; /* 1:3 ratio */
   gap: var(--spacing);
   min-height: 100vh;
 }
@@ -69,9 +65,7 @@ html {
   }
 }
 
-/*———————————————————————————————————
-  5. Sidebar (left-column)
-———————————————————————————————————*/
+/* 5. Sidebar */
 .left-column {
   position: sticky;
   top: 0;
@@ -79,26 +73,24 @@ html {
   padding: var(--spacing) 2rem;
   display: flex;
   flex-direction: column;
+  background: transparent;
+  z-index: 10;
 }
 
-/*———————————————————————————————————
-  6. Main Content (right-column)
-———————————————————————————————————*/
+/* 6. Main */
 .right-column {
   padding: var(--spacing) 2rem;
   display: flex;
   flex-direction: column;
   gap: var(--spacing);
+  background: transparent;
 }
 
-/*———————————————————————————————————
-  7. Header Styles
-———————————————————————————————————*/
+/* 7. Header */
 header#main-header {
   padding-bottom: var(--spacing);
 }
 
-/* Heading: never wrap, fluid size between 2rem and 2.5rem */
 .logo h1 {
   font-size: clamp(2rem, 6vw, 2.5rem);
   line-height: 1.1;
@@ -106,48 +98,33 @@ header#main-header {
 }
 
 .header-nav .tagline {
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
   font-size: var(--font-size-h2);
   font-weight: 400;
 }
 
 .header-nav .contact {
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   font-size: 0.875rem;
 }
 
-.header-nav .contact a {
-  color: var(--color-text-primary);
-  text-decoration: none;
-  margin: 0 0.25rem;
-}
 .header-nav .contact a:hover {
   text-decoration: underline;
 }
 
-/*———————————————————————————————————
-  8. Sidebar Nav
-———————————————————————————————————*/
-/* Sidebar Nav Container */
+/* 8. Sidebar Nav & Indicator */
 nav.scroll-nav {
   position: relative;
   padding: var(--spacing) 0;
 }
 
-/* Hide the old underline */
-nav.scroll-nav a::after {
-  display: none;
-}
-
-/* Vertical list */
 nav.scroll-nav ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing);
+  gap: 1rem;
 }
 
-/* Links style */
 nav.scroll-nav a {
   text-decoration: none;
   text-transform: uppercase;
@@ -155,152 +132,121 @@ nav.scroll-nav a {
   font-weight: 600;
   display: block;
   padding: 0.25em 0.5em;
-  transition: color 0.3s ease;
   color: var(--color-text-secondary);
+  transition: color 0.3s ease, background 0.3s ease;
 }
 
-/* Active/hover text color */
 nav.scroll-nav a:hover,
 nav.scroll-nav a.active {
   color: var(--color-accent);
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
 }
 
-/* The moving rail indicator */
-nav.scroll-nav .nav-indicator {
+/* the moving rail */
+.nav-indicator {
   position: absolute;
   left: 0;
   width: 3px;
   background: var(--color-accent);
   border-radius: 2px;
   transition: top 0.3s ease, height 0.3s ease;
-  /* start hidden until JS positions it */
-  top: 0;
-  height: 0;
 }
 
-/*———————————————————————————————————
-  9. Sections & Typography
-———————————————————————————————————*/
+/* 9. Reveal Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 10. Sections & Typography */
 .right-column section {
   padding-bottom: var(--spacing);
 }
-
-.right-column section#summary {
+.right-column section#summary,
+.right-column section#tech {
   max-width: 600px;
   margin: 0 auto;
 }
-
 section h2 {
   font-size: var(--font-size-h2);
   font-weight: 600;
   margin-bottom: 0.75rem;
 }
 
-/*———————————————————————————————————
- 10. Timeline Styles
-———————————————————————————————————*/
+/* 11. Timeline */
 .timeline {
   position: relative;
 }
-
 .timeline:hover .timeline-item:not(:hover) {
   opacity: 0.4;
-  transition: opacity 0.3s ease;
 }
-
 .timeline-item {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--spacing);
-  align-items: start;
   padding: var(--spacing);
   background: transparent;
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 }
-
 .timeline-item:hover,
 .timeline-item:focus-within {
   opacity: 1 !important;
   background: var(--color-bg-start);
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   z-index: 2;
 }
-
 .timeline-item .timeline-date {
   font-size: 0.85rem;
   text-transform: uppercase;
 }
-
-.timeline-item .timeline-content {
-  padding: 0;
-  background: transparent;
-}
-
 .timeline-item .timeline-content h3 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-/*———————————————————————————————————
- 11. Projects & Education Lists
-———————————————————————————————————*/
+/* 12. Lists */
 section#projects ul,
 section#education ul {
   list-style: none;
   padding-left: 0;
 }
-
 section#projects li,
 section#education li {
   margin-bottom: var(--spacing);
 }
 
-/*———————————————————————————————————
- 12. Tech Stack
-———————————————————————————————————*/
-section#tech p {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/*———————————————————————————————————
- 13. Social Icons
-———————————————————————————————————*/
-.social-sidebar,
-footer {
+/* 13. Social Icons */
+.social-sidebar {
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: var(--spacing);
-  padding-top: var(--spacing);
 }
-
-.social-sidebar a,
-footer a {
+.social-sidebar a {
   width: 24px;
   height: 24px;
-  color: var(--color-text-primary);
 }
-
-.social-sidebar svg,
-footer svg {
+.social-sidebar svg {
   width: 100%;
   height: 100%;
   fill: currentColor;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
-
-.social-sidebar a:hover svg,
-footer a:hover svg {
+.social-sidebar a:hover svg {
   opacity: 0.8;
   transform: scale(1.1);
 }
 
-/*———————————————————————————————————
- 14. Theme Toggle
-———————————————————————————————————*/
+/* 14. Theme Toggle */
 #theme-toggle {
   position: fixed;
   bottom: var(--spacing);
@@ -312,17 +258,6 @@ footer a:hover svg {
   z-index: 1000;
   transition: filter 0.2s;
 }
-
 #theme-toggle:hover {
   filter: brightness(1.3);
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
 }

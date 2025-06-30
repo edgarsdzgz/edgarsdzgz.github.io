@@ -1,15 +1,18 @@
-// js/main.js
+// Prevent FOUC
+window.addEventListener('load', () => {
+  document.body.style.visibility = 'visible';
+});
 
 (() => {
-  // Grab key elements
-  const nav = document.querySelector('nav.scroll-nav');
-  const links = document.querySelectorAll('nav.scroll-nav a');
+  // Element references
+  const nav      = document.querySelector('nav.scroll-nav');
+  const links    = nav.querySelectorAll('a');
   const sections = document.querySelectorAll('main section[id]');
-  const header = document.getElementById('main-header');
-  const toggle = document.getElementById('theme-toggle');
-  const root = document.documentElement;
+  const header   = document.getElementById('main-header');
+  const toggle   = document.getElementById('theme-toggle');
+  const root     = document.documentElement;
 
-  // 1️⃣ Create & append the moving “rail” indicator
+  // Create the moving rail indicator
   const indicator = document.createElement('div');
   indicator.className = 'nav-indicator';
   nav.appendChild(indicator);
@@ -21,7 +24,7 @@
     indicator.style.height = linkRect.height + 'px';
   }
 
-  // 2️⃣ Reveal‐on‐scroll observer
+  // 1. Reveal-on-scroll observer
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -34,13 +37,13 @@
     threshold: 0
   });
 
-  // 3️⃣ Scroll‐spy observer
+  // 2. Scroll-spy observer
   const spyObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         // clear previous
         links.forEach(a => a.classList.remove('active'));
-        // activate this link + move rail
+        // activate this link and move rail
         const link = nav.querySelector(`a[href="#${entry.target.id}"]`);
         if (link) {
           link.classList.add('active');
@@ -53,38 +56,39 @@
     threshold: 0
   });
 
-  // 4️⃣ Initialize each section
+  // Observe sections
   sections.forEach(sec => {
-    sec.classList.add('reveal');          // start hidden
-    revealObserver.observe(sec);          // animate into view
-    spyObserver.observe(sec);             // drive scroll-spy
+    sec.classList.add('reveal');    // start hidden
+    revealObserver.observe(sec);    // reveal animations
+    spyObserver.observe(sec);       // scroll-spy
   });
 
-  // 5️⃣ On initial load, position rail
+  // On load: position rail at the first active link
   window.addEventListener('load', () => {
     const initial = nav.querySelector('a.active') || links[0];
     if (initial) moveIndicator(initial);
-
-    // Restore scroll position if any
-    const y = +localStorage.getItem('scrollY') || 0;
-    if (y) window.scrollTo({ top: y });
   });
 
-  // 6️⃣ Sticky header
+  // Sticky header
   window.addEventListener('scroll', () => {
     header.classList.toggle('sticky', window.scrollY > 20);
-    // persist scroll position
     localStorage.setItem('scrollY', window.scrollY);
   });
 
-  // 7️⃣ Theme toggle + persistence
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  root.setAttribute('data-theme', savedTheme);
-  toggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+  // Theme toggle & persistence
+  const saved = localStorage.getItem('theme') || 'dark';
+  root.setAttribute('data-theme', saved);
+  toggle.textContent = saved === 'light' ? '🌙' : '☀️';
   toggle.addEventListener('click', () => {
     const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     root.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
     toggle.textContent = next === 'light' ? '🌙' : '☀️';
+  });
+
+  // Restore scroll position
+  window.addEventListener('load', () => {
+    const y = +localStorage.getItem('scrollY') || 0;
+    if (y) window.scrollTo({ top: y });
   });
 })();
