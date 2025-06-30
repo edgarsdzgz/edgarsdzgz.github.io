@@ -4,28 +4,28 @@
 /* 2. Theme & Design-System Variables */
 :root {
   /* Core colors */
-  --color-bg-start:      #0a0f23;
-  --color-bg-end:        #171b36;
-  --color-bg:            linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
-  --color-text-primary:  #e6e8f0;
-  --color-text-secondary:#a0a4b6;
-  --color-accent:        #64ffda;
+  --color-bg-start: #0a0f23;
+  --color-bg-end: #171b36;
+  --color-bg: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
+  --color-text-primary: #e6e8f0;
+  --color-text-secondary: #a0a4b6;
+  --color-accent: #64ffda;
 
   /* Typography & spacing */
-  --font-size-h1:        3rem;
-  --font-size-h2:        1.25rem;
-  --font-size-base:      1rem;
-  --line-height-base:    1.6;
-  --spacing:             1.5rem;
+  --font-size-h1: 3rem;
+  --font-size-h2: 1.25rem;
+  --font-size-base: 1rem;
+  --line-height-base: 1.6;
+  --spacing: 1.5rem;
 }
 
 /* Light-mode overrides */
 [data-theme="light"] {
-  --color-bg-start:      #f5f5f5;
-  --color-bg-end:        #ffffff;
-  --color-bg:            linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
-  --color-text-primary:  #1a1a1a;
-  --color-text-secondary:#555;
+  --color-bg-start: #f5f5f5;
+  --color-bg-end: #ffffff;
+  --color-bg: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #555;
 }
 
 /* 3. Reset & Base */
@@ -54,7 +54,8 @@ body {
 /* 4. Grid Layout */
 .layout-container {
   display: grid;
-  grid-template-columns: 1fr 3fr; /* 1:3 ratio */
+  grid-template-columns: 1fr 3fr;
+  /* 1:3 ratio */
   gap: var(--spacing);
   min-height: 100vh;
 }
@@ -139,7 +140,7 @@ nav.scroll-nav a {
 nav.scroll-nav a:hover,
 nav.scroll-nav a.active {
   color: var(--color-accent);
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 4px;
 }
 
@@ -159,6 +160,7 @@ nav.scroll-nav a.active {
   transform: translateY(20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
+
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
@@ -168,11 +170,13 @@ nav.scroll-nav a.active {
 .right-column section {
   padding-bottom: var(--spacing);
 }
+
 .right-column section#summary,
 .right-column section#tech {
   max-width: 600px;
   margin: 0 auto;
 }
+
 section h2 {
   font-size: var(--font-size-h2);
   font-weight: 600;
@@ -186,7 +190,7 @@ section h2 {
 
 /* ── Timeline: hover one item, dim all the others ──── */
 .timeline:hover .timeline-item:not(:hover) {
-  opacity: 0.4;
+  opacity: 0.4 !important;
   transition: opacity 0.3s ease;
 }
 
@@ -198,8 +202,8 @@ section h2 {
   background: transparent;
   border-radius: 8px;
   transition: transform 0.3s ease,
-              box-shadow 0.3s ease,
-              opacity 0.3s ease; /* <–– this line */
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .timeline-item:hover,
@@ -207,13 +211,15 @@ section h2 {
   opacity: 1 !important;
   background: var(--color-bg-start);
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 2;
 }
+
 .timeline-item .timeline-date {
   font-size: 0.85rem;
   text-transform: uppercase;
 }
+
 .timeline-item .timeline-content h3 {
   font-size: 1.25rem;
   font-weight: 600;
@@ -226,6 +232,7 @@ section#education ul {
   list-style: none;
   padding-left: 0;
 }
+
 section#projects li,
 section#education li {
   margin-bottom: var(--spacing);
@@ -238,16 +245,19 @@ section#education li {
   flex-direction: column;
   gap: var(--spacing);
 }
+
 .social-sidebar a {
   width: 24px;
   height: 24px;
 }
+
 .social-sidebar svg {
   width: 100%;
   height: 100%;
   fill: currentColor;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
+
 .social-sidebar a:hover svg {
   opacity: 0.8;
   transform: scale(1.1);
@@ -265,6 +275,7 @@ section#education li {
   z-index: 1000;
   transition: filter 0.2s;
 }
+
 #theme-toggle:hover {
   filter: brightness(1.3);
 }
