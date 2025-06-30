@@ -4,7 +4,6 @@ window.addEventListener('load', () => {
 });
 
 (() => {
-  // Element references
   const nav      = document.querySelector('nav.scroll-nav');
   const links    = nav.querySelectorAll('a');
   const sections = document.querySelectorAll('main section[id]');
@@ -12,61 +11,31 @@ window.addEventListener('load', () => {
   const toggle   = document.getElementById('theme-toggle');
   const root     = document.documentElement;
 
-  // Create the moving rail indicator
-  const indicator = document.createElement('div');
-  indicator.className = 'nav-indicator';
-  nav.appendChild(indicator);
-
-  function moveIndicator(link) {
-    const linkRect = link.getBoundingClientRect();
-    const navRect  = nav.getBoundingClientRect();
-    indicator.style.top    = (linkRect.top - navRect.top) + 'px';
-    indicator.style.height = linkRect.height + 'px';
-  }
-
-  // 1. Reveal-on-scroll observer
+  // Reveal-on-scroll
   const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
       }
     });
-  }, {
-    rootMargin: '0px 0px -20% 0px',
-    threshold: 0
-  });
+  }, { rootMargin: '0px 0px -20% 0px', threshold: 0 });
 
-  // 2. Scroll-spy observer
+  // Scroll-spy
   const spyObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // clear previous
+    entries.forEach(e => {
+      if (e.isIntersecting) {
         links.forEach(a => a.classList.remove('active'));
-        // activate this link and move rail
-        const link = nav.querySelector(`a[href="#${entry.target.id}"]`);
-        if (link) {
-          link.classList.add('active');
-          moveIndicator(link);
-        }
+        const activeLink = nav.querySelector(`a[href="#${e.target.id}"]`);
+        activeLink?.classList.add('active');
       }
     });
-  }, {
-    rootMargin: '0px 0px -66% 0px',
-    threshold: 0
-  });
+  }, { rootMargin: '0px 0px -75% 0px', threshold: 0 });
 
-  // Observe sections
   sections.forEach(sec => {
-    sec.classList.add('reveal');    // start hidden
-    revealObserver.observe(sec);    // reveal animations
-    spyObserver.observe(sec);       // scroll-spy
-  });
-
-  // On load: position rail at the first active link
-  window.addEventListener('load', () => {
-    const initial = nav.querySelector('a.active') || links[0];
-    if (initial) moveIndicator(initial);
+    sec.classList.add('reveal');
+    revealObserver.observe(sec);
+    spyObserver.observe(sec);
   });
 
   // Sticky header
@@ -75,7 +44,7 @@ window.addEventListener('load', () => {
     localStorage.setItem('scrollY', window.scrollY);
   });
 
-  // Theme toggle & persistence
+  // Theme toggle
   const saved = localStorage.getItem('theme') || 'dark';
   root.setAttribute('data-theme', saved);
   toggle.textContent = saved === 'light' ? '🌙' : '☀️';
@@ -86,7 +55,7 @@ window.addEventListener('load', () => {
     toggle.textContent = next === 'light' ? '🌙' : '☀️';
   });
 
-  // Restore scroll position
+  // Restore scroll
   window.addEventListener('load', () => {
     const y = +localStorage.getItem('scrollY') || 0;
     if (y) window.scrollTo({ top: y });

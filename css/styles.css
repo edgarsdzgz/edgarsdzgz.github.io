@@ -1,281 +1,81 @@
-/* 1. Font Import */
+/* 1. Font + Design System */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
-
-/* 2. Theme & Design-System Variables */
 :root {
-  /* Core colors */
-  --color-bg-start: #0a0f23;
-  --color-bg-end: #171b36;
-  --color-bg: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
-  --color-text-primary: #e6e8f0;
-  --color-text-secondary: #a0a4b6;
-  --color-accent: #64ffda;
-
-  /* Typography & spacing */
-  --font-size-h1: 3rem;
-  --font-size-h2: 1.25rem;
-  --font-size-base: 1rem;
-  --line-height-base: 1.6;
-  --spacing: 1.5rem;
+  --color-bg-start:#0a0f23; --color-bg-end:#171b36;
+  --color-bg:linear-gradient(135deg,var(--color-bg-start),var(--color-bg-end));
+  --color-text-primary:#e6e8f0; --color-text-secondary:#a0a4b6;
+  --color-accent:#64ffda;
+  --font-size-h1:3rem; --font-size-h2:1.25rem; --font-size-base:1rem;
+  --line-height-base:1.6; --spacing:1.5rem;
 }
-
-/* Light-mode overrides */
 [data-theme="light"] {
-  --color-bg-start: #f5f5f5;
-  --color-bg-end: #ffffff;
-  --color-bg: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #555;
+  --color-bg-start:#f5f5f5; --color-bg-end:#ffffff;
+  --color-bg:linear-gradient(135deg,var(--color-bg-start),var(--color-bg-end));
+  --color-text-primary:#1a1a1a; --color-text-secondary:#555;
 }
 
-/* 3. Reset & Base */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* 2. Reset & Base */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-family:"Inter",sans-serif;font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-text-primary);background:var(--color-bg);}
+body{margin:0;min-height:100vh;}
 
-html {
-  scroll-behavior: smooth;
-  font-family: "Inter", sans-serif;
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
-  color: var(--color-text-primary);
-  background: var(--color-bg);
-}
+/* 3. Layout */
+.layout-container{display:grid;grid-template-columns:1fr 3fr;gap:var(--spacing);min-height:100vh;}
+@media(max-width:900px){.layout-container{grid-template-columns:1fr;}}
 
-body {
-  margin: 0;
-  min-height: 100vh;
-}
+/* 4. Sidebar & Header */
+.left-column{position:sticky;top:0;height:100vh;padding:var(--spacing) 2rem;display:flex;flex-direction:column;}
+header#main-header{padding-bottom:var(--spacing);}
+.logo h1{font-size:clamp(2rem,6vw,2.5rem);line-height:1.1;white-space:nowrap;}
+.header-nav .tagline{margin-top:0.25rem;font-size:var(--font-size-h2);font-weight:400;}
+.header-nav .contact{margin-top:0.5rem;font-size:0.875rem;}
+.header-nav .contact a:hover{text-decoration:underline;}
 
-/* 4. Grid Layout */
-.layout-container {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  /* 1:3 ratio */
-  gap: var(--spacing);
-  min-height: 100vh;
+/* 5. Sidebar Nav (new horizontal lines) */
+nav.scroll-nav{padding:var(--spacing) 0;}
+nav.scroll-nav ul{list-style:none;display:flex;flex-direction:column;gap:1rem;}
+nav.scroll-nav a{
+  position:relative;display:inline-block;font-size:0.9rem;
+  text-transform:uppercase;letter-spacing:0.05em;font-weight:600;
+  padding-left:1rem;color:var(--color-text-secondary);
+  transition:color 0.3s ease,transform 0.3s ease;margin:var(--spacing) 0;
 }
-
-@media (max-width: 900px) {
-  .layout-container {
-    grid-template-columns: 1fr;
-  }
+nav.scroll-nav a::before{
+  content:"";position:absolute;left:0;top:50%;width:0;height:2px;
+  background:var(--color-accent);transform:translateY(-50%);
+  transition:width 0.3s ease;
 }
-
-/* 5. Sidebar */
-.left-column {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  padding: var(--spacing) 2rem;
-  display: flex;
-  flex-direction: column;
-  background: transparent;
-  z-index: 10;
-}
-
-/* 6. Main */
-.right-column {
-  padding: var(--spacing) 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing);
-  background: transparent;
-}
-
-/* 7. Header */
-header#main-header {
-  padding-bottom: var(--spacing);
-}
-
-.logo h1 {
-  font-size: clamp(2rem, 6vw, 2.5rem);
-  line-height: 1.1;
-  white-space: nowrap;
-}
-
-.header-nav .tagline {
-  margin-top: 0.25rem;
-  font-size: var(--font-size-h2);
-  font-weight: 400;
-}
-
-.header-nav .contact {
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-}
-
-.header-nav .contact a:hover {
-  text-decoration: underline;
-}
-
-/* 8. Sidebar Nav & Indicator */
-nav.scroll-nav {
-  position: relative;
-  padding: var(--spacing) 0;
-}
-
-nav.scroll-nav ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-nav.scroll-nav a {
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
-  display: block;
-  padding: 0.25em 0.5em;
-  color: var(--color-text-secondary);
-  transition: color 0.3s ease, background 0.3s ease;
-}
-
 nav.scroll-nav a:hover,
-nav.scroll-nav a.active {
-  color: var(--color-accent);
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
+nav.scroll-nav a.active{
+  color:var(--color-accent);transform:translateX(4px);
 }
+nav.scroll-nav a:hover::before,
+nav.scroll-nav a.active::before{width:1rem;}
 
-/* the moving rail */
-.nav-indicator {
-  position: absolute;
-  left: 0;
-  width: 3px;
-  background: var(--color-accent);
-  border-radius: 2px;
-  transition: top 0.3s ease, height 0.3s ease;
-}
-
-/* 9. Reveal Animations */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 10. Sections & Typography */
-.right-column section {
-  padding-bottom: var(--spacing);
-}
-
+/* 6. Main Content & Reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease-out,transform 0.6s ease-out;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.right-column{padding:var(--spacing) 2rem;display:flex;flex-direction:column;gap:var(--spacing);}
+.right-column section{padding-bottom:var(--spacing);}
 .right-column section#summary,
-.right-column section#tech {
-  max-width: 600px;
-  margin: 0 auto;
-}
+.right-column section#tech{max-width:600px;margin:0 auto;}
+section h2{font-size:var(--font-size-h2);font-weight:600;margin-bottom:0.75rem;}
 
-section h2 {
-  font-size: var(--font-size-h2);
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-}
-
-/* 11. Timeline */
-.timeline {
-  position: relative;
-}
-
-/* ── Timeline: hover one item, dim all the others ──── */
-.timeline:hover .timeline-item:not(:hover) {
-  opacity: 0.4 !important;
-  transition: opacity 0.3s ease;
-}
-
-.timeline-item {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--spacing);
-  padding: var(--spacing);
-  background: transparent;
-  border-radius: 8px;
-  transition: transform 0.3s ease,
-    box-shadow 0.3s ease,
-    opacity 0.3s ease;
-}
-
+/* 7. Timeline hover effect */
+.timeline:hover .timeline-item:not(:hover){opacity:0.4;transition:opacity 0.3s ease;}
+.timeline-item{display:grid;grid-template-columns:auto 1fr;gap:var(--spacing);padding:var(--spacing);transition:transform 0.3s ease,box-shadow 0.3s ease,opacity 0.3s ease;}
 .timeline-item:hover,
-.timeline-item:focus-within {
-  opacity: 1 !important;
-  background: var(--color-bg-start);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-}
+.timeline-item:focus-within{opacity:1!important;background:var(--color-bg-start);transform:translateY(-4px);box-shadow:0 8px 16px rgba(0,0,0,0.2);z-index:2;}
+.timeline-item .timeline-date{font-size:0.85rem;text-transform:uppercase;}
 
-.timeline-item .timeline-date {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-}
+/* 8. Lists & Social */
+section#projects ul,section#education ul{list-style:none;padding-left:0;}
+section#projects li,section#education li{margin-bottom:var(--spacing);}
+.social-sidebar{margin-top:auto;display:flex;flex-direction:column;gap:var(--spacing);}
+.social-sidebar a{width:24px;height:24px;}
+.social-sidebar svg{width:100%;height:100%;fill:currentColor;transition:transform 0.2s ease,opacity 0.2s ease;}
+.social-sidebar a:hover svg{opacity:0.8;transform:scale(1.1);}
 
-.timeline-item .timeline-content h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-/* 12. Lists */
-section#projects ul,
-section#education ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-section#projects li,
-section#education li {
-  margin-bottom: var(--spacing);
-}
-
-/* 13. Social Icons */
-.social-sidebar {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing);
-}
-
-.social-sidebar a {
-  width: 24px;
-  height: 24px;
-}
-
-.social-sidebar svg {
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.social-sidebar a:hover svg {
-  opacity: 0.8;
-  transform: scale(1.1);
-}
-
-/* 14. Theme Toggle */
-#theme-toggle {
-  position: fixed;
-  bottom: var(--spacing);
-  right: var(--spacing);
-  background: transparent;
-  border: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  z-index: 1000;
-  transition: filter 0.2s;
-}
-
-#theme-toggle:hover {
-  filter: brightness(1.3);
-}
+/* 9. Theme Toggle */
+#theme-toggle{position:fixed;bottom:var(--spacing);right:var(--spacing);background:transparent;border:none;font-size:1.8rem;cursor:pointer;z-index:1000;transition:filter 0.2s;}
+#theme-toggle:hover{filter:brightness(1.3);}
