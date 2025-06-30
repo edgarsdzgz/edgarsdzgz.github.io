@@ -128,10 +128,18 @@ header#main-header {
 /*———————————————————————————————————
   8. Sidebar Nav
 ———————————————————————————————————*/
+/* Sidebar Nav Container */
 nav.scroll-nav {
+  position: relative;
   padding: var(--spacing) 0;
 }
 
+/* Hide the old underline */
+nav.scroll-nav a::after {
+  display: none;
+}
+
+/* Vertical list */
 nav.scroll-nav ul {
   list-style: none;
   display: flex;
@@ -139,35 +147,36 @@ nav.scroll-nav ul {
   gap: var(--spacing);
 }
 
+/* Links style */
 nav.scroll-nav a {
-  transition: color 0.3s, background 0.3s;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  display: block;
   padding: 0.25em 0.5em;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  position: relative;
+  transition: color 0.3s ease;
+  color: var(--color-text-secondary);
 }
 
-nav.scroll-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 2px;
-  background: var(--color-accent);
-  transition: width 0.3s ease;
-}
-
+/* Active/hover text color */
 nav.scroll-nav a:hover,
 nav.scroll-nav a.active {
   color: var(--color-accent);
-  background: rgba(255,255,255,0.05);
 }
 
-nav.scroll-nav a.active::after {
-  width: 100%;
+/* The moving rail indicator */
+nav.scroll-nav .nav-indicator {
+  position: absolute;
+  left: 0;
+  width: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  transition: top 0.3s ease, height 0.3s ease;
+  /* start hidden until JS positions it */
+  top: 0;
+  height: 0;
 }
-
 
 /*———————————————————————————————————
   9. Sections & Typography
