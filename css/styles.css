@@ -7,7 +7,7 @@
   --color-bg: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
   --color-text-primary: #e6e8f0;
   --color-text-secondary: #a0a4b6;
-  --color-accent: #64ffda;
+  --color-accent: #5A7D99;
   --font-size-h1: 3rem;
   --font-size-h2: 1.25rem;
   --font-size-base: 1rem;
@@ -21,6 +21,7 @@
   --color-bg: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
   --color-text-primary: #1a1a1a;
   --color-text-secondary: #555;
+  --color-accent: #5A7D99;
 }
 
 /* 2. Reset & Base */
