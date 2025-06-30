@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edgar Diaz-Gutierrez</title>
-  <!-- hide body until our JS makes it visible to prevent FOUC -->
   <style>
     body {
       visibility: hidden;
@@ -17,7 +16,6 @@
 
 <body>
   <div class="layout-container">
-    <!-- LEFT SIDEBAR -->
     <aside class="left-column">
       <header id="main-header">
         <div class="logo">
@@ -26,8 +24,7 @@
         <nav class="header-nav">
           <p class="tagline">Full-Stack Software Engineer</p>
           <p class="contact">
-            <a href="mailto:edgar.s.dzgz@gmail.com">edgar.s.dzgz@gmail.com</a> |
-            (619) 750-4888
+            <a href="mailto:edgar.s.dzgz@gmail.com">edgar.s.dzgz@gmail.com</a> | (619) 750-4888
           </p>
         </nav>
       </header>
@@ -41,8 +38,6 @@
           <li><a href="#education">Education</a></li>
           <li><a href="#closing">Let’s Connect</a></li>
         </ul>
-        <!-- this rail will be positioned by JS -->
-        <div class="nav-indicator"></div>
       </nav>
 
       <div class="social-sidebar">
@@ -52,9 +47,7 @@
       </div>
     </aside>
 
-    <!-- RIGHT MAIN CONTENT -->
     <main class="right-column">
-      <!-- 1. Summary -->
       <section id="summary">
         <p>I’m a Full-Stack Software Engineer with 3+ years building mission-critical emergency command-and-control web
           applications at Valcom, and a former Coding Dojo instructor who’s guided cohorts of 50+ students. Powered by a
@@ -64,65 +57,67 @@
 
       <!-- 2. Career Timeline -->
       <section id="career">
-        <!-- Valcom -->
-        <div class="timeline-item">
-          <div class="timeline-date">Jan 2022 — Present</div>
-          <div class="timeline-content">
-            <h3>
-              <a href="https://www.linkedin.com/company/valcom-inc/" target="_blank" rel="noopener">Valcom</a>
-              · Full-Stack Developer
-            </h3>
-            <p>Architected and maintained an Express/React emergency management platform; led code reviews and
-              mentorship.</p>
+        <div class="timeline">
+          <!-- Valcom -->
+          <div class="timeline-item">
+            <div class="timeline-date">Jan 2022 — Present</div>
+            <div class="timeline-content">
+              <h3>
+                <a href="https://www.linkedin.com/company/valcom-inc/" target="_blank" rel="noopener">Valcom</a>
+                · Full-Stack Developer
+              </h3>
+              <p>Architected and maintained an Express/React emergency management platform; led code reviews and
+                mentorship.</p>
+            </div>
           </div>
-        </div>
 
-        <!-- Coding Dojo -->
-        <div class="timeline-item">
-          <div class="timeline-date">Dec 2020 — Jan 2024</div>
-          <div class="timeline-content">
-            <h3>
-              <a href="https://www.linkedin.com/school/codingdojo/" target="_blank" rel="noopener">Coding Dojo</a>
-              · Instructor (Full-Stack & Cybersecurity)
-            </h3>
-            <p>Fostered hands-on problem-solving in cohorts of 50+; guided students through Java, Python, and security
-              bootcamps.</p>
+          <!-- Coding Dojo -->
+          <div class="timeline-item">
+            <div class="timeline-date">Dec 2020 — Jan 2024</div>
+            <div class="timeline-content">
+              <h3>
+                <a href="https://www.linkedin.com/school/codingdojo/" target="_blank" rel="noopener">Coding Dojo</a>
+                · Instructor (Full-Stack & Cybersecurity)
+              </h3>
+              <p>Fostered hands-on problem-solving in cohorts of 50+; guided students through Java, Python, and security
+                bootcamps.</p>
+            </div>
           </div>
-        </div>
 
-        <!-- ScoreShuttle -->
-        <div class="timeline-item">
-          <div class="timeline-date">Aug 2018 — Oct 2019</div>
-          <div class="timeline-content">
-            <h3>
-              <a href="https://www.linkedin.com/company/scoreshuttle/" target="_blank" rel="noopener">ScoreShuttle</a>
-              · Team Lead, Customer Service
-            </h3>
-            <p>Led a team supporting logistics software; optimized support workflows and SLA compliance.</p>
+          <!-- ScoreShuttle -->
+          <div class="timeline-item">
+            <div class="timeline-date">Aug 2018 — Oct 2019</div>
+            <div class="timeline-content">
+              <h3>
+                <a href="https://www.linkedin.com/company/scoreshuttle/" target="_blank" rel="noopener">ScoreShuttle</a>
+                · Team Lead, Customer Service
+              </h3>
+              <p>Led a team supporting logistics software; optimized support workflows and SLA compliance.</p>
+            </div>
           </div>
-        </div>
 
-        <!-- Docupop -->
-        <div class="timeline-item">
-          <div class="timeline-date">Jan 2017 — Aug 2018</div>
-          <div class="timeline-content">
-            <h3>
-              <a href="https://www.linkedin.com/company/docupop/" target="_blank" rel="noopener">Docupop</a>
-              · Senior Student Loan Debt Coordinator
-            </h3>
-            <p>Managed high-volume loan portfolios; built custom tools to automate reconciliation processes.</p>
+          <!-- Docupop -->
+          <div class="timeline-item">
+            <div class="timeline-date">Jan 2017 — Aug 2018</div>
+            <div class="timeline-content">
+              <h3>
+                <a href="https://www.linkedin.com/company/docupop/" target="_blank" rel="noopener">Docupop</a>
+                · Senior Student Loan Debt Coordinator
+              </h3>
+              <p>Managed high-volume loan portfolios; built custom tools to automate reconciliation processes.</p>
+            </div>
           </div>
-        </div>
 
-        <!-- Hibrid Solar -->
-        <div class="timeline-item">
-          <div class="timeline-date">Aug 2016 — Jan 2017</div>
-          <div class="timeline-content">
-            <h3>
-              <a href="https://www.linkedin.com/company/hibrid-solar/" target="_blank" rel="noopener">Hibrid Solar</a>
-              · Sales Operations
-            </h3>
-            <p>Drove CRM integrations and process automation to streamline sales workflows and reporting.</p>
+          <!-- Hibrid Solar -->
+          <div class="timeline-item">
+            <div class="timeline-date">Aug 2016 — Jan 2017</div>
+            <div class="timeline-content">
+              <h3>
+                <a href="https://www.linkedin.com/company/hibrid-solar/" target="_blank" rel="noopener">Hibrid Solar</a>
+                · Sales Operations
+              </h3>
+              <p>Drove CRM integrations and process automation to streamline sales workflows and reporting.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -171,8 +166,6 @@
 
   <!-- theme toggle sits above the grid -->
   <button id="theme-toggle" aria-label="Toggle theme">🌓</button>
-
-  <!-- external JS -->
   <script src="js/main.js" defer></script>
 </body>
 
