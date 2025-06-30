@@ -4,12 +4,12 @@ window.addEventListener('load', () => {
 });
 
 (() => {
-  const nav      = document.querySelector('nav.scroll-nav');
-  const links    = nav.querySelectorAll('a');
+  const nav = document.querySelector('nav.scroll-nav');
+  const links = nav.querySelectorAll('a');
   const sections = document.querySelectorAll('main section[id]');
-  const header   = document.getElementById('main-header');
-  const toggle   = document.getElementById('theme-toggle');
-  const root     = document.documentElement;
+  const header = document.getElementById('main-header');
+  const toggle = document.getElementById('theme-toggle');
+  const root = document.documentElement;
 
   // Reveal-on-scroll
   const revealObserver = new IntersectionObserver((entries) => {
@@ -19,9 +19,12 @@ window.addEventListener('load', () => {
         revealObserver.unobserve(e.target);
       }
     });
-  }, { rootMargin: '0px 0px -20% 0px', threshold: 0 });
+  }, {
+    rootMargin: '0px 0px -20% 0px',
+    threshold: 0
+  });
 
-  // Scroll-spy
+  // Scroll-spy (20% down trigger)
   const spyObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -30,8 +33,12 @@ window.addEventListener('load', () => {
         activeLink?.classList.add('active');
       }
     });
-  }, { rootMargin: '0px 0px -75% 0px', threshold: 0 });
+  }, {
+    rootMargin: '0px 0px -80% 0px',
+    threshold: 0
+  });
 
+  // Observe sections
   sections.forEach(sec => {
     sec.classList.add('reveal');
     revealObserver.observe(sec);
@@ -44,7 +51,7 @@ window.addEventListener('load', () => {
     localStorage.setItem('scrollY', window.scrollY);
   });
 
-  // Theme toggle
+  // Theme toggle & persistence
   const saved = localStorage.getItem('theme') || 'dark';
   root.setAttribute('data-theme', saved);
   toggle.textContent = saved === 'light' ? '🌙' : '☀️';
@@ -55,7 +62,7 @@ window.addEventListener('load', () => {
     toggle.textContent = next === 'light' ? '🌙' : '☀️';
   });
 
-  // Restore scroll
+  // Restore scroll position
   window.addEventListener('load', () => {
     const y = +localStorage.getItem('scrollY') || 0;
     if (y) window.scrollTo({ top: y });
