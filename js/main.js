@@ -38,12 +38,26 @@ window.addEventListener('load', () => {
     threshold: 0
   });
 
-  // Observe sections
-  sections.forEach(sec => {
-    sec.classList.add('reveal');
-    revealObserver.observe(sec);
-    spyObserver.observe(sec);
+// 1) Observe sections
+sections.forEach(sec => {
+  sec.classList.add('reveal');
+  revealObserver.observe(sec);
+  spyObserver.observe(sec);
+});
+
+// 2) Smooth-scroll “About” back to top and highlight it
+const aboutLink = nav.querySelector('a[href="#summary"]');
+if (aboutLink) {
+  aboutLink.addEventListener('click', e => {
+    e.preventDefault();                        // stop default anchor jump
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // update active state immediately
+    links.forEach(a => a.classList.remove('active'));
+    aboutLink.classList.add('active');
+    // update URL hash without reload
+    history.replaceState(null, '', '#summary');
   });
+}
 
   // Sticky header
   window.addEventListener('scroll', () => {
