@@ -183,9 +183,13 @@ section h2 {
 .timeline {
   position: relative;
 }
+
+/* ── Timeline: hover one item, dim all the others ──── */
 .timeline:hover .timeline-item:not(:hover) {
   opacity: 0.4;
+  transition: opacity 0.3s ease;
 }
+
 .timeline-item {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -193,8 +197,11 @@ section h2 {
   padding: var(--spacing);
   background: transparent;
   border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.3s ease,
+              box-shadow 0.3s ease,
+              opacity 0.3s ease; /* <–– this line */
 }
+
 .timeline-item:hover,
 .timeline-item:focus-within {
   opacity: 1 !important;
