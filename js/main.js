@@ -241,7 +241,7 @@ class CounterManager {
         // Update button text with next level cost
         if (this.shopButtonText) {
             const cost = this.calculateUpgradeCost();
-            this.shopButtonText.innerHTML = `Lv Up <span class="counter-currency">ED</span>${formatNumber(cost)}`;
+            this.shopButtonText.innerHTML = `Level Up <span class="counter-currency">ED</span>${formatNumber(cost)}`;
         }
     }
 
@@ -571,6 +571,8 @@ class CounterManager {
                     // Level up!
                     this.agenticClickerLevel++;
                     setStorageItem(CONFIG.agenticClickerLevelKey, this.agenticClickerLevel);
+
+                    // Update shop display immediately (before auto-clicker restart)
                     this.updateShopDisplay();
 
                     // Start or restart auto-clicker with new speed
