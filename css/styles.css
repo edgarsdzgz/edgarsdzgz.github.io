@@ -850,6 +850,10 @@ img {
     width: 100%;
     background: rgba(255, 255, 255, 0.9);
     transform-origin: left;
+    transform: scaleX(0);
+}
+
+.toast.show .toast-progress-bar::after {
     animation: progressDeplete 3s linear forwards;
 }
 
