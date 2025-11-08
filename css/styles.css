@@ -1102,12 +1102,18 @@ img {
 }
 
 /* Dim everything when dialog is open, except counter and toast */
-body.dialog-open .nav-links,
 body.dialog-open .hero,
 body.dialog-open .section,
 body.dialog-open .footer {
     filter: brightness(0.3);
     pointer-events: none;
+}
+
+/* Hide nav links when dialog is open */
+body.dialog-open .nav-links {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 /* Keep counter bright and interactive */
@@ -1195,6 +1201,54 @@ body.dialog-open .toast {
     }
 }
 
+/* Shop Tabs */
+.shop-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+}
+
+.shop-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+}
+
+.shop-tab:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.shop-tab.active {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.shop-tab svg {
+    opacity: 0.8;
+}
+
+.shop-tab.active svg {
+    opacity: 1;
+}
+
 .dialog-body {
     padding: 2rem;
     display: flex;
@@ -1234,24 +1288,12 @@ body.dialog-open .toast {
 .cog-icon {
     flex-shrink: 0;
     color: var(--accent-primary);
-    transition: opacity 0.3s ease;
-}
-
-.cog-icon.spinning {
-    animation: cogRotate linear infinite;
+    transition: transform 0.15s ease-out, opacity 0.3s ease;
+    transform: rotate(0deg);
 }
 
 .cog-icon.stopped {
     opacity: 0.3;
-}
-
-@keyframes cogRotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
 }
 
 .upgrade-stat-level {

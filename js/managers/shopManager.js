@@ -12,6 +12,7 @@ export class ShopManager {
         this.themeManager = themeManager;
         this.achievementManager = achievementManager;
         this.dialogOpen = false;
+        this.cogRotation = 0; // Track current rotation angle
 
         // DOM elements
         this.agenticClickerLevelEl = document.getElementById('agentic-clicker-level');
@@ -26,6 +27,9 @@ export class ShopManager {
     init() {
         this.setupDialog();
         this.updateDisplay();
+
+        // Register for auto-clicker tick callbacks
+        this.counterManager.registerTickCallback(() => this.tickCog());
     }
 
     setupDialog() {
@@ -229,19 +233,22 @@ export class ShopManager {
 
         if (level === 0) {
             // No agents - cog is stopped
-            this.cogIconEl.classList.remove('spinning');
             this.cogIconEl.classList.add('stopped');
-            this.cogIconEl.style.animationDuration = '';
         } else {
-            // Agents working - cog spins
-            this.cogIconEl.classList.add('spinning');
+            // Agents working - cog is active
             this.cogIconEl.classList.remove('stopped');
-
-            // Calculate rotation speed based on auto-clicker interval
-            const interval = this.counterManager.getAutoClickerInterval();
-            // Make one full rotation per click (interval in ms)
-            this.cogIconEl.style.animationDuration = `${interval}ms`;
         }
+    }
+
+    tickCog() {
+        if (!this.cogIconEl) return;
+
+        const level = this.counterManager.getAgenticClickerLevel();
+        if (level === 0) return; // Don't tick if no agents
+
+        // Rotate 45 degrees (1/8th of a turn) on each tick
+        this.cogRotation += 45;
+        this.cogIconEl.style.transform = `rotate(${this.cogRotation}deg)`;
     }
 
     handleAgenticClickerPurchase() {

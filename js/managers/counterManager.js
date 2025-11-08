@@ -14,6 +14,7 @@ export class CounterManager {
         this.agenticClickerLevel = 0;
         this.darkModeUnlocked = false;
         this.autoClickerIntervalId = null;
+        this.tickCallbacks = []; // Callbacks to trigger on each auto-click tick
 
         // DOM elements
         this.clickCounterEl = document.getElementById('clickCounter');
@@ -140,6 +141,9 @@ export class CounterManager {
                     this.clickCounterEl.style.transform = 'scale(1)';
                 }, 100);
             }
+
+            // Trigger all tick callbacks
+            this.triggerTickCallbacks();
         }, interval);
     }
 
@@ -153,6 +157,21 @@ export class CounterManager {
 
     restartAutoClicker() {
         this.startAutoClicker();
+    }
+
+    // Tick callback system
+    registerTickCallback(callback) {
+        this.tickCallbacks.push(callback);
+    }
+
+    triggerTickCallbacks() {
+        this.tickCallbacks.forEach(callback => {
+            try {
+                callback();
+            } catch (error) {
+                console.error('[COUNTER] Error in tick callback:', error);
+            }
+        });
     }
 
     // Getters
