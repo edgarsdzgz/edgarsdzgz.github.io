@@ -14,21 +14,25 @@
 <body>
     <!-- Theme Toggle -->
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-        <!-- Light Mode Rune (Sun/Fire Rune) -->
-        <svg class="light-rune" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
-            <path d="M12 2 L12 6 M12 18 L12 22 M22 12 L18 12 M6 12 L2 12"/>
-            <path d="M19 5 L16 8 M8 16 L5 19 M19 19 L16 16 M8 8 L5 5"/>
-            <path d="M12 7 L14 10 L12 13 L10 10 Z" fill="currentColor" opacity="0.2"/>
+        <!-- Light Mode Symbol: Lightning Bolt / Energy Crystal -->
+        <svg class="light-rune" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <!-- Geometric lightning bolt -->
+            <path d="M13 2 L4 14 L11 14 L8 22 L20 9 L13 9 Z" fill="currentColor" opacity="0.3" stroke="currentColor"/>
+            <!-- Energy sparkles -->
+            <circle cx="18" cy="5" r="1" fill="currentColor"/>
+            <circle cx="6" cy="19" r="1" fill="currentColor"/>
+            <path d="M20 7 L21 8 L20 9 M3 16 L4 17 L3 18" stroke="currentColor" stroke-width="1.5"/>
         </svg>
-        <!-- Dark Mode Rune (Moon/Night Rune) -->
-        <svg class="dark-rune" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor" opacity="0.3"/>
-            <path d="M8 8 L10 6 L8 4 M16 8 L14 6 L16 4 M8 16 L10 18 L8 20"/>
-            <circle cx="9" cy="8" r="0.5" fill="currentColor"/>
-            <circle cx="15" cy="7" r="0.5" fill="currentColor"/>
-            <circle cx="8" cy="15" r="0.5" fill="currentColor"/>
-            <path d="M4 12 L6 12 L5 10 Z M20 12 L18 12 L19 14 Z" fill="currentColor" opacity="0.4"/>
+        <!-- Dark Mode Symbol: Flowing Waves / Mist -->
+        <svg class="dark-rune" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <!-- Flowing wave lines -->
+            <path d="M2 8 Q 6 6, 10 8 T 18 8 T 22 8" stroke="currentColor" fill="none"/>
+            <path d="M2 12 Q 6 10, 10 12 T 18 12 T 22 12" stroke="currentColor" fill="none" opacity="0.7"/>
+            <path d="M2 16 Q 6 14, 10 16 T 18 16 T 22 16" stroke="currentColor" fill="none" opacity="0.5"/>
+            <!-- Mist droplets -->
+            <circle cx="8" cy="6" r="0.8" fill="currentColor" opacity="0.6"/>
+            <circle cx="15" cy="10" r="0.8" fill="currentColor" opacity="0.6"/>
+            <circle cx="11" cy="18" r="0.8" fill="currentColor" opacity="0.6"/>
         </svg>
     </button>
 
@@ -422,6 +426,14 @@
             <p class="footer-note">Built with HTML, CSS, and vanilla JavaScript. Hosted on GitHub Pages.</p>
         </div>
     </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <span id="toast-message" class="toast-message">FIVE CLICKS!</span>
+        </div>
+        <div class="toast-progress-bar"></div>
+    </div>
 
     <script src="js/main.js"></script>
 </body>

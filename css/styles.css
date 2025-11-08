@@ -788,6 +788,72 @@ img {
 }
 
 /* ===============================================
+   TOAST NOTIFICATION
+   =============================================== */
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--card-bg);
+    border: 2px solid var(--accent-primary);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    box-shadow: var(--shadow-lg);
+    z-index: 1002;
+    min-width: 200px;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease;
+}
+
+.toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.toast-content {
+    margin-bottom: 0.5rem;
+}
+
+.toast-message {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    display: block;
+    text-align: center;
+}
+
+.toast-progress-bar {
+    height: 4px;
+    background: var(--bg-tertiary);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.toast-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--accent-gradient);
+    transform-origin: left;
+    animation: progressDeplete 3s linear forwards;
+}
+
+@keyframes progressDeplete {
+    from {
+        transform: scaleX(1);
+    }
+    to {
+        transform: scaleX(0);
+    }
+}
+
+/* ===============================================
    ANIMATIONS
    =============================================== */
 

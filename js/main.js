@@ -184,7 +184,41 @@ class CounterManager {
                     this.clickCounterEl.style.transform = 'scale(1)';
                 }, 200);
             }
+
+            // Show toast every 5 clicks
+            if (this.clickCount % 5 === 0) {
+                this.showToast('FIVE CLICKS!');
+            }
         });
+    }
+
+    showToast(message, duration = 3000) {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+        const progressBar = toast.querySelector('.toast-progress-bar::after');
+
+        if (!toast) return;
+
+        // Update message
+        if (toastMessage) {
+            toastMessage.textContent = message;
+        }
+
+        // Remove any existing show class and animation
+        toast.classList.remove('show');
+
+        // Force reflow to restart animation
+        void toast.offsetWidth;
+
+        // Show toast with bounce animation
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 10);
+
+        // Hide toast after duration
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, duration);
     }
 
     // DISABLED - Tick counter will be added with button later
