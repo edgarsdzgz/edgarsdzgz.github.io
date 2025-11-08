@@ -158,7 +158,8 @@ class CounterManager {
         this.autoClickerIntervalId = null; // Auto-clicker interval ID
         // this.tickCount = 0; // DISABLED - Tick counter removed
         this.clickCounterEl = document.getElementById('clickCounter');
-        this.shopButtonSubtitle = document.getElementById('shop-button-subtitle');
+        this.agenticClickerLevelEl = document.getElementById('agentic-clicker-level');
+        this.shopButtonText = document.getElementById('shop-button-text');
         // this.tickCounterEl = document.getElementById('tickCounter'); // DISABLED
         // this.resetClicksBtn = document.getElementById('resetClicks'); // DISABLED
         // this.resetTicksBtn = document.getElementById('resetTicks'); // DISABLED
@@ -171,7 +172,7 @@ class CounterManager {
 
         // Initialize displays
         this.updateClickDisplay();
-        this.updateShopButtonSubtitle();
+        this.updateShopDisplay();
         // this.updateTickDisplay(); // DISABLED
 
         // Setup click counter
@@ -231,11 +232,16 @@ class CounterManager {
         }
     }
 
-    updateShopButtonSubtitle() {
-        if (this.shopButtonSubtitle) {
-            const nextLevel = this.agenticClickerLevel + 1;
+    updateShopDisplay() {
+        // Update current level display
+        if (this.agenticClickerLevelEl) {
+            this.agenticClickerLevelEl.textContent = `Lv ${this.agenticClickerLevel}`;
+        }
+
+        // Update button text with next level cost
+        if (this.shopButtonText) {
             const cost = this.calculateUpgradeCost();
-            this.shopButtonSubtitle.innerHTML = `Level ${nextLevel} <span class="counter-currency">ED</span>${formatNumber(cost)}`;
+            this.shopButtonText.innerHTML = `Lv Up <span class="counter-currency">ED</span>${formatNumber(cost)}`;
         }
     }
 
@@ -565,7 +571,7 @@ class CounterManager {
                     // Level up!
                     this.agenticClickerLevel++;
                     setStorageItem(CONFIG.agenticClickerLevelKey, this.agenticClickerLevel);
-                    this.updateShopButtonSubtitle();
+                    this.updateShopDisplay();
 
                     // Start or restart auto-clicker with new speed
                     this.startAutoClicker();

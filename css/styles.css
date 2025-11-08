@@ -1025,6 +1025,32 @@ img {
 
 .dialog-body {
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.upgrade-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.upgrade-stat-label {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.upgrade-stat-level {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    font-family: 'Courier New', monospace;
 }
 
 .dialog-footer {
@@ -1036,15 +1062,14 @@ img {
 /* Shop button */
 .shop-button {
     width: 100%;
-    padding: 2rem;
+    padding: 1.5rem;
     background: var(--accent-gradient);
     border: 2px solid var(--accent-primary);
     border-radius: 12px;
     cursor: pointer;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 0.5rem;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
@@ -1063,22 +1088,22 @@ img {
     pointer-events: none;
 }
 
-.shop-button-title {
-    font-size: 1.5rem;
+.shop-button-text {
+    font-size: 1.25rem;
     font-weight: 700;
     color: white;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.shop-button-subtitle {
-    font-size: 1rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.shop-button-subtitle .counter-currency {
+.shop-button-text .counter-currency {
     margin-right: 0.15rem;
     margin-left: 0.5rem;
+    /* Override gradient for readability on button background */
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: white;
+    background-clip: unset;
+    color: white;
 }
 
 .btn-close {
