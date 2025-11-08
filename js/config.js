@@ -10,6 +10,8 @@ export const CONFIG = {
     themeKey: 'theme',
     agenticClickerLevelKey: 'agenticClickerLevel',
     darkModeUnlockedKey: 'darkModeUnlocked',
+    synthwaveUnlockedKey: 'synthwaveUnlocked',
+    maritimeUnlockedKey: 'maritimeUnlocked',
     achievementsKey: 'earnedAchievements', // Array of earned achievement IDs
     unlockedLoreKey: 'unlockedLore', // Array of unlocked lore IDs
     maxAgenticClickerLevel: 10, // Maximum level for agentic clicker
@@ -67,8 +69,8 @@ export const ACHIEVEMENTS = [
         title: 'Everything Must Go!',
         description: 'Purchased everything available in the shop',
         checkType: 'shop_completion',
-        condition: (agenticLevel, darkModeUnlocked, maxLevel) => {
-            return agenticLevel >= maxLevel && darkModeUnlocked;
+        condition: (agenticLevel, darkModeUnlocked, synthwaveUnlocked, maritimeUnlocked, maxLevel) => {
+            return agenticLevel >= maxLevel && darkModeUnlocked && synthwaveUnlocked && maritimeUnlocked;
         }
     },
     {

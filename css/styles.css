@@ -60,6 +60,44 @@
     --nav-bg: rgba(26, 26, 46, 0.95);
 }
 
+/* Synthwave Theme */
+[data-theme="synthwave"] {
+    --bg-primary: #2d1b69;
+    --bg-secondary: #1f1347;
+    --bg-tertiary: #150d30;
+    --text-primary: #00ffff;
+    --text-secondary: #ff00ff;
+    --text-tertiary: #ff10f0;
+    --accent-primary: #ff10f0;
+    --accent-secondary: #00ffff;
+    --accent-gradient: linear-gradient(135deg, #ff10f0 0%, #00ffff 100%);
+    --border-color: #ff10f0;
+    --shadow-sm: 0 2px 4px rgba(255, 16, 240, 0.3);
+    --shadow-md: 0 4px 12px rgba(255, 16, 240, 0.4);
+    --shadow-lg: 0 8px 24px rgba(255, 16, 240, 0.5);
+    --card-bg: #1f1347;
+    --nav-bg: rgba(45, 27, 105, 0.95);
+}
+
+/* Maritime Sunset Theme */
+[data-theme="maritime"] {
+    --bg-primary: #FDF0D5;
+    --bg-secondary: #F5E6C8;
+    --bg-tertiary: #E8D4B0;
+    --text-primary: #780000;
+    --text-secondary: #003049;
+    --text-tertiary: #8B4513;
+    --accent-primary: #C1121F;
+    --accent-secondary: #003049;
+    --accent-gradient: linear-gradient(135deg, #C1121F 0%, #003049 100%);
+    --border-color: #D4C5A9;
+    --shadow-sm: 0 2px 4px rgba(193, 18, 31, 0.2);
+    --shadow-md: 0 4px 12px rgba(193, 18, 31, 0.25);
+    --shadow-lg: 0 8px 24px rgba(193, 18, 31, 0.3);
+    --card-bg: #FFFEF9;
+    --nav-bg: rgba(253, 240, 213, 0.95);
+}
+
 /* ===============================================
    RESET & BASE STYLES
    =============================================== */

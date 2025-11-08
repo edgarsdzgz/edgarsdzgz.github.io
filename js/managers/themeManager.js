@@ -9,15 +9,22 @@ export class ThemeManager {
     constructor() {
         this.themeToggle = document.getElementById('theme-toggle');
         this.darkModeUnlocked = false;
+        this.synthwaveUnlocked = false;
+        this.maritimeUnlocked = false;
         this.init();
     }
 
     init() {
-        // Check if dark mode is unlocked
-        const unlockedValue = getStorageItem(CONFIG.darkModeUnlockedKey);
-        this.darkModeUnlocked = unlockedValue === 'true';
+        // Check which themes are unlocked
+        const darkUnlockedValue = getStorageItem(CONFIG.darkModeUnlockedKey);
+        const synthwaveUnlockedValue = getStorageItem(CONFIG.synthwaveUnlockedKey);
+        const maritimeUnlockedValue = getStorageItem(CONFIG.maritimeUnlockedKey);
 
-        // Default to light mode (dark mode locked by default)
+        this.darkModeUnlocked = darkUnlockedValue === 'true';
+        this.synthwaveUnlocked = synthwaveUnlockedValue === 'true';
+        this.maritimeUnlocked = maritimeUnlockedValue === 'true';
+
+        // Default to light mode (all other modes locked by default)
         const savedTheme = getStorageItem(CONFIG.themeKey);
         const theme = savedTheme || 'light';
 
@@ -52,11 +59,27 @@ export class ThemeManager {
         this.setTheme('dark');
     }
 
+    unlockSynthwave() {
+        this.synthwaveUnlocked = true;
+        setStorageItem(CONFIG.synthwaveUnlockedKey, 'true');
+        this.updateToggleState();
+        // Automatically switch to synthwave when unlocked
+        this.setTheme('synthwave');
+    }
+
+    unlockMaritime() {
+        this.maritimeUnlocked = true;
+        setStorageItem(CONFIG.maritimeUnlockedKey, 'true');
+        this.updateToggleState();
+        // Automatically switch to maritime when unlocked
+        this.setTheme('maritime');
+    }
+
     setTheme(theme, save = true) {
-        // Only allow dark mode if unlocked
-        if (theme === 'dark' && !this.darkModeUnlocked) {
-            return;
-        }
+        // Check if theme is allowed
+        if (theme === 'dark' && !this.darkModeUnlocked) return;
+        if (theme === 'synthwave' && !this.synthwaveUnlocked) return;
+        if (theme === 'maritime' && !this.maritimeUnlocked) return;
 
         document.documentElement.setAttribute('data-theme', theme);
         if (save) {
@@ -70,7 +93,16 @@ export class ThemeManager {
         }
 
         const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        // Build theme cycle based on what's unlocked: light → dark → synthwave? → maritime? → light
+        const themes = ['light', 'dark'];
+        if (this.synthwaveUnlocked) themes.push('synthwave');
+        if (this.maritimeUnlocked) themes.push('maritime');
+
+        const currentIndex = themes.indexOf(currentTheme);
+        const nextIndex = (currentIndex + 1) % themes.length;
+        const newTheme = themes[nextIndex];
+
         this.setTheme(newTheme);
 
         // Play swish sound

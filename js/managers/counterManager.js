@@ -13,6 +13,8 @@ export class CounterManager {
         this.totalClicks = 0; // Lifetime clicks
         this.agenticClickerLevel = 0;
         this.darkModeUnlocked = false;
+        this.synthwaveUnlocked = false;
+        this.maritimeUnlocked = false;
         this.autoClickerIntervalId = null;
         this.tickCallbacks = []; // Callbacks to trigger on each auto-click tick
 
@@ -46,11 +48,15 @@ export class CounterManager {
         const savedTotalClicks = getStorageItem(CONFIG.totalClicksKey);
         const savedLevel = getStorageItem(CONFIG.agenticClickerLevelKey);
         const savedDarkModeUnlocked = getStorageItem(CONFIG.darkModeUnlockedKey);
+        const savedSynthwaveUnlocked = getStorageItem(CONFIG.synthwaveUnlockedKey);
+        const savedMaritimeUnlocked = getStorageItem(CONFIG.maritimeUnlockedKey);
 
         this.clickCount = savedClicks ? parseInt(savedClicks, 10) : 0;
         this.totalClicks = savedTotalClicks ? parseInt(savedTotalClicks, 10) : 0;
         this.agenticClickerLevel = savedLevel ? parseInt(savedLevel, 10) : 0;
         this.darkModeUnlocked = savedDarkModeUnlocked === 'true';
+        this.synthwaveUnlocked = savedSynthwaveUnlocked === 'true';
+        this.maritimeUnlocked = savedMaritimeUnlocked === 'true';
 
         // Handle NaN cases
         if (isNaN(this.clickCount)) this.clickCount = 0;
@@ -63,12 +69,14 @@ export class CounterManager {
         this.totalClicks = 0;
         this.agenticClickerLevel = 0;
         this.darkModeUnlocked = false;
+        this.synthwaveUnlocked = false;
+        this.maritimeUnlocked = false;
         this.updateDisplay();
     }
 
     updateDisplay() {
         if (this.clickCounterEl) {
-            this.clickCounterEl.innerHTML = `<span class="counter-currency">ED</span> ${formatNumber(this.clickCount)}`;
+            this.clickCounterEl.innerHTML = `${formatNumber(this.clickCount)}<span class="counter-currency">ED</span>`;
         }
     }
 
@@ -191,6 +199,14 @@ export class CounterManager {
         return this.darkModeUnlocked;
     }
 
+    isSynthwaveUnlocked() {
+        return this.synthwaveUnlocked;
+    }
+
+    isMaritimeUnlocked() {
+        return this.maritimeUnlocked;
+    }
+
     getAutoClickerInterval() {
         return this.calculateAutoClickerInterval();
     }
@@ -210,5 +226,15 @@ export class CounterManager {
     unlockDarkMode() {
         this.darkModeUnlocked = true;
         setStorageItem(CONFIG.darkModeUnlockedKey, 'true');
+    }
+
+    unlockSynthwave() {
+        this.synthwaveUnlocked = true;
+        setStorageItem(CONFIG.synthwaveUnlockedKey, 'true');
+    }
+
+    unlockMaritime() {
+        this.maritimeUnlocked = true;
+        setStorageItem(CONFIG.maritimeUnlockedKey, 'true');
     }
 }
