@@ -11,6 +11,8 @@ export class CounterManager {
         this.achievementManager = achievementManager;
         this.clickCount = 0;
         this.totalClicks = 0; // Lifetime clicks
+        this.manualClicks = 0; // Lifetime manual clicks only
+        this.agentClicks = 0; // Lifetime agent clicks only
         this.agenticClickerLevel = 0;
         this.darkModeUnlocked = false;
         this.synthwaveUnlocked = false;
@@ -46,6 +48,8 @@ export class CounterManager {
     loadState() {
         const savedClicks = getStorageItem(CONFIG.clickKey);
         const savedTotalClicks = getStorageItem(CONFIG.totalClicksKey);
+        const savedManualClicks = getStorageItem(CONFIG.manualClicksKey);
+        const savedAgentClicks = getStorageItem(CONFIG.agentClicksKey);
         const savedLevel = getStorageItem(CONFIG.agenticClickerLevelKey);
         const savedDarkModeUnlocked = getStorageItem(CONFIG.darkModeUnlockedKey);
         const savedSynthwaveUnlocked = getStorageItem(CONFIG.synthwaveUnlockedKey);
@@ -53,6 +57,8 @@ export class CounterManager {
 
         this.clickCount = savedClicks ? parseInt(savedClicks, 10) : 0;
         this.totalClicks = savedTotalClicks ? parseInt(savedTotalClicks, 10) : 0;
+        this.manualClicks = savedManualClicks ? parseInt(savedManualClicks, 10) : 0;
+        this.agentClicks = savedAgentClicks ? parseInt(savedAgentClicks, 10) : 0;
         this.agenticClickerLevel = savedLevel ? parseInt(savedLevel, 10) : 0;
         this.darkModeUnlocked = savedDarkModeUnlocked === 'true';
         this.synthwaveUnlocked = savedSynthwaveUnlocked === 'true';
@@ -61,12 +67,16 @@ export class CounterManager {
         // Handle NaN cases
         if (isNaN(this.clickCount)) this.clickCount = 0;
         if (isNaN(this.totalClicks)) this.totalClicks = 0;
+        if (isNaN(this.manualClicks)) this.manualClicks = 0;
+        if (isNaN(this.agentClicks)) this.agentClicks = 0;
         if (isNaN(this.agenticClickerLevel)) this.agenticClickerLevel = 0;
     }
 
     resetState() {
         this.clickCount = 0;
         this.totalClicks = 0;
+        this.manualClicks = 0;
+        this.agentClicks = 0;
         this.agenticClickerLevel = 0;
         this.darkModeUnlocked = false;
         this.synthwaveUnlocked = false;
@@ -85,10 +95,12 @@ export class CounterManager {
         document.addEventListener('click', (event) => {
             this.clickCount++;
             this.totalClicks++;
-            console.log('[DEBUG] Click detected! Current:', this.clickCount, 'Total:', this.totalClicks);
+            this.manualClicks++;
+            console.log('[DEBUG] Manual click! Current:', this.clickCount, 'Total:', this.totalClicks, 'Manual:', this.manualClicks);
 
             setStorageItem(CONFIG.clickKey, this.clickCount);
             setStorageItem(CONFIG.totalClicksKey, this.totalClicks);
+            setStorageItem(CONFIG.manualClicksKey, this.manualClicks);
             this.updateDisplay();
 
             // Add a subtle animation to nav counter
@@ -101,6 +113,7 @@ export class CounterManager {
 
             // Check for click-based achievements
             this.achievementManager.checkAchievements('click', this.totalClicks);
+            this.achievementManager.checkAchievements('manual_clicks', this.manualClicks);
         });
     }
 
@@ -138,8 +151,9 @@ export class CounterManager {
 
         this.autoClickerIntervalId = setInterval(() => {
             this.clickCount++;
-            // Note: totalClicks is NOT incremented for auto-clicks, only manual clicks count
+            this.agentClicks++;
             setStorageItem(CONFIG.clickKey, this.clickCount);
+            setStorageItem(CONFIG.agentClicksKey, this.agentClicks);
             this.updateDisplay();
 
             // Add subtle animation
@@ -149,6 +163,9 @@ export class CounterManager {
                     this.clickCounterEl.style.transform = 'scale(1)';
                 }, 100);
             }
+
+            // Check agent click achievements
+            this.achievementManager.checkAchievements('agent_clicks', this.agentClicks);
 
             // Trigger all tick callbacks
             this.triggerTickCallbacks();

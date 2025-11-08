@@ -6,6 +6,8 @@ export const CONFIG = {
     storagePrefix: 'edgar_tech_',
     clickKey: 'clickCount',
     totalClicksKey: 'totalClicks', // Lifetime clicks (never decreases)
+    manualClicksKey: 'manualClicks', // Lifetime manual clicks only
+    agentClicksKey: 'agentClicks', // Lifetime agent clicks only
     tickKey: 'tickCount',
     themeKey: 'theme',
     agenticClickerLevelKey: 'agenticClickerLevel',
@@ -86,6 +88,162 @@ export const ACHIEVEMENTS = [
         description: 'Clicked on the name to make it pop and glow',
         checkType: 'name_click',
         condition: (clicked) => clicked === true
+    },
+    // Manual Click Achievements
+    {
+        id: 'first_step',
+        title: 'First Step',
+        description: 'Made your first manual click',
+        checkType: 'manual_clicks',
+        condition: (manualClicks) => manualClicks >= 1
+    },
+    {
+        id: 'getting_started',
+        title: 'Getting Started',
+        description: 'Manually clicked 25 times',
+        checkType: 'manual_clicks',
+        condition: (manualClicks) => manualClicks >= 25
+    },
+    {
+        id: 'dedicated_clicker',
+        title: 'Dedicated Clicker',
+        description: 'Manually clicked 100 times',
+        checkType: 'manual_clicks',
+        condition: (manualClicks) => manualClicks >= 100
+    },
+    {
+        id: 'century_club',
+        title: 'Century Club',
+        description: 'Manually clicked 500 times',
+        checkType: 'manual_clicks',
+        condition: (manualClicks) => manualClicks >= 500
+    },
+    {
+        id: 'click_enthusiast',
+        title: 'Click Enthusiast',
+        description: 'Manually clicked 1,000 times',
+        checkType: 'manual_clicks',
+        condition: (manualClicks) => manualClicks >= 1000
+    },
+    {
+        id: 'click_fanatic',
+        title: 'Click Fanatic',
+        description: 'Manually clicked 5,000 times',
+        checkType: 'manual_clicks',
+        condition: (manualClicks) => manualClicks >= 5000
+    },
+    {
+        id: 'click_legend',
+        title: 'Click Legend',
+        description: 'Manually clicked 10,000 times',
+        checkType: 'manual_clicks',
+        condition: (manualClicks) => manualClicks >= 10000
+    },
+    {
+        id: 'click_champion',
+        title: 'Click Champion',
+        description: 'Manually clicked 50,000 times',
+        checkType: 'manual_clicks',
+        condition: (manualClicks) => manualClicks >= 50000
+    },
+    {
+        id: 'click_master',
+        title: 'Click Master',
+        description: 'Manually clicked 100,000 times',
+        checkType: 'manual_clicks',
+        condition: (manualClicks) => manualClicks >= 100000
+    },
+    {
+        id: 'click_deity',
+        title: 'Click Deity',
+        description: 'Manually clicked 500,000 times',
+        checkType: 'manual_clicks',
+        condition: (manualClicks) => manualClicks >= 500000
+    },
+    {
+        id: 'manual_mastery',
+        title: 'MANUAL MASTERY',
+        description: 'Achieved ultimate manual clicking mastery with 500,000 clicks',
+        checkType: 'manual_clicks',
+        condition: (manualClicks) => manualClicks >= 500000
+    },
+    // Agent Click Achievements
+    {
+        id: 'automation_begins',
+        title: 'Automation Begins',
+        description: 'Let agents click 100 times for you',
+        checkType: 'agent_clicks',
+        condition: (agentClicks) => agentClicks >= 100
+    },
+    {
+        id: 'delegation_started',
+        title: 'Delegation Started',
+        description: 'Let agents click 500 times for you',
+        checkType: 'agent_clicks',
+        condition: (agentClicks) => agentClicks >= 500
+    },
+    {
+        id: 'working_smarter',
+        title: 'Working Smarter',
+        description: 'Let agents click 1,000 times for you',
+        checkType: 'agent_clicks',
+        condition: (agentClicks) => agentClicks >= 1000
+    },
+    {
+        id: 'agent_army',
+        title: 'Agent Army',
+        description: 'Let agents click 5,000 times for you',
+        checkType: 'agent_clicks',
+        condition: (agentClicks) => agentClicks >= 5000
+    },
+    {
+        id: 'automated_empire',
+        title: 'Automated Empire',
+        description: 'Let agents click 10,000 times for you',
+        checkType: 'agent_clicks',
+        condition: (agentClicks) => agentClicks >= 10000
+    },
+    {
+        id: 'bot_battalion',
+        title: 'Bot Battalion',
+        description: 'Let agents click 50,000 times for you',
+        checkType: 'agent_clicks',
+        condition: (agentClicks) => agentClicks >= 50000
+    },
+    {
+        id: 'agent_overlord',
+        title: 'Agent Overlord',
+        description: 'Let agents click 100,000 times for you',
+        checkType: 'agent_clicks',
+        condition: (agentClicks) => agentClicks >= 100000
+    },
+    {
+        id: 'silicon_workforce',
+        title: 'Silicon Workforce',
+        description: 'Let agents click 500,000 times for you',
+        checkType: 'agent_clicks',
+        condition: (agentClicks) => agentClicks >= 500000
+    },
+    {
+        id: 'automated_dynasty',
+        title: 'Automated Dynasty',
+        description: 'Let agents click 1,000,000 times for you',
+        checkType: 'agent_clicks',
+        condition: (agentClicks) => agentClicks >= 1000000
+    },
+    {
+        id: 'agent_ascension',
+        title: 'Agent Ascension',
+        description: 'Let agents click 5,000,000 times for you',
+        checkType: 'agent_clicks',
+        condition: (agentClicks) => agentClicks >= 5000000
+    },
+    {
+        id: 'agent_mastery',
+        title: 'AGENT MASTERY',
+        description: 'Achieved ultimate automation mastery with 5,000,000 agent clicks',
+        checkType: 'agent_clicks',
+        condition: (agentClicks) => agentClicks >= 5000000
     }
 ];
 
