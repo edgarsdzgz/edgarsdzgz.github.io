@@ -17,6 +17,7 @@ export class CounterManager {
         this.darkModeUnlocked = false;
         this.synthwaveUnlocked = false;
         this.maritimeUnlocked = false;
+        this.bgmUnlocked = false;
         this.autoClickerIntervalId = null;
         this.tickCallbacks = []; // Callbacks to trigger on each auto-click tick
 
@@ -54,6 +55,7 @@ export class CounterManager {
         const savedDarkModeUnlocked = getStorageItem(CONFIG.darkModeUnlockedKey);
         const savedSynthwaveUnlocked = getStorageItem(CONFIG.synthwaveUnlockedKey);
         const savedMaritimeUnlocked = getStorageItem(CONFIG.maritimeUnlockedKey);
+        const savedBgmUnlocked = getStorageItem(CONFIG.bgmUnlockedKey);
 
         this.clickCount = savedClicks ? parseInt(savedClicks, 10) : 0;
         this.totalClicks = savedTotalClicks ? parseInt(savedTotalClicks, 10) : 0;
@@ -63,6 +65,7 @@ export class CounterManager {
         this.darkModeUnlocked = savedDarkModeUnlocked === 'true';
         this.synthwaveUnlocked = savedSynthwaveUnlocked === 'true';
         this.maritimeUnlocked = savedMaritimeUnlocked === 'true';
+        this.bgmUnlocked = savedBgmUnlocked === 'true';
 
         // Handle NaN cases
         if (isNaN(this.clickCount)) this.clickCount = 0;
@@ -81,6 +84,7 @@ export class CounterManager {
         this.darkModeUnlocked = false;
         this.synthwaveUnlocked = false;
         this.maritimeUnlocked = false;
+        this.bgmUnlocked = false;
         this.updateDisplay();
     }
 
@@ -253,5 +257,14 @@ export class CounterManager {
     unlockMaritime() {
         this.maritimeUnlocked = true;
         setStorageItem(CONFIG.maritimeUnlockedKey, 'true');
+    }
+
+    isBGMUnlocked() {
+        return this.bgmUnlocked;
+    }
+
+    unlockBGM() {
+        this.bgmUnlocked = true;
+        setStorageItem(CONFIG.bgmUnlockedKey, 'true');
     }
 }

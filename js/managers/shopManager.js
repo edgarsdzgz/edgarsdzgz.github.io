@@ -7,10 +7,11 @@ import { getStorageItem, setStorageItem, storageAvailable } from '../utils/stora
 import { formatNumber } from '../utils/helpers.js';
 
 export class ShopManager {
-    constructor(counterManager, themeManager, achievementManager) {
+    constructor(counterManager, themeManager, achievementManager, bgmManager = null) {
         this.counterManager = counterManager;
         this.themeManager = themeManager;
         this.achievementManager = achievementManager;
+        this.bgmManager = bgmManager;
         this.dialogOpen = false;
         this.cogRotation = 0; // Track current rotation angle
 
@@ -20,10 +21,12 @@ export class ShopManager {
         this.darkModeLevelEl = document.getElementById('dark-mode-level');
         this.synthwaveLevelEl = document.getElementById('synthwave-level');
         this.maritimeLevelEl = document.getElementById('maritime-level');
+        this.bgmLevelEl = document.getElementById('bgm-level');
         this.shopButtonText = document.getElementById('shop-button-text');
         this.darkModeButtonText = document.getElementById('dark-mode-button-text');
         this.synthwaveButtonText = document.getElementById('synthwave-button-text');
         this.maritimeButtonText = document.getElementById('maritime-button-text');
+        this.bgmButtonText = document.getElementById('bgm-button-text');
 
         this.init();
     }
@@ -43,6 +46,7 @@ export class ShopManager {
         const darkModeBtn = document.getElementById('buy-dark-mode');
         const synthwaveBtn = document.getElementById('buy-synthwave');
         const maritimeBtn = document.getElementById('buy-maritime');
+        const bgmBtn = document.getElementById('buy-bgm');
         const clearDataBtn = document.getElementById('clear-data-btn');
 
         // Toggle dialog when clicking counter
@@ -99,6 +103,13 @@ export class ShopManager {
         if (maritimeBtn) {
             maritimeBtn.addEventListener('click', () => {
                 this.handleMaritimePurchase();
+            });
+        }
+
+        // Handle BGM purchase
+        if (bgmBtn) {
+            bgmBtn.addEventListener('click', () => {
+                this.handleBGMPurchase();
             });
         }
 
@@ -287,6 +298,31 @@ export class ShopManager {
             maritimeBtn.disabled = unlocked;
             maritimeBtn.style.opacity = unlocked ? '0.5' : '1';
             maritimeBtn.style.cursor = unlocked ? 'not-allowed' : 'pointer';
+        }
+
+        // Update BGM display
+        if (this.bgmLevelEl) {
+            const unlocked = this.counterManager.isBGMUnlocked();
+            this.bgmLevelEl.textContent = unlocked ? 'Unlocked' : 'Locked';
+        }
+
+        // Update BGM button
+        if (this.bgmButtonText) {
+            const unlocked = this.counterManager.isBGMUnlocked();
+            if (unlocked) {
+                this.bgmButtonText.innerHTML = `<span style="opacity: 0.6;">Already Unlocked</span>`;
+            } else {
+                this.bgmButtonText.innerHTML = `Unlock 250<span class="counter-currency">ED</span>`;
+            }
+        }
+
+        // Update BGM button disabled state
+        const bgmBtn = document.getElementById('buy-bgm');
+        if (bgmBtn) {
+            const unlocked = this.counterManager.isBGMUnlocked();
+            bgmBtn.disabled = unlocked;
+            bgmBtn.style.opacity = unlocked ? '0.5' : '1';
+            bgmBtn.style.cursor = unlocked ? 'not-allowed' : 'pointer';
         }
     }
 
@@ -525,6 +561,54 @@ export class ShopManager {
             this.checkShopCompletion();
 
             console.log('[MARITIME MODE] Unlocked!');
+        });
+    }
+
+    handleBGMPurchase() {
+        const cost = 250;
+        const currentClicks = this.counterManager.getClickCount();
+
+        // Check if already unlocked
+        if (this.counterManager.isBGMUnlocked()) {
+            return;
+        }
+
+        // Check if user has enough clicks
+        if (currentClicks < cost) {
+            const shortage = cost - currentClicks;
+            this.showInsufficientFundsNotification(shortage);
+            return;
+        }
+
+        // Add purchasing animation to button
+        const bgmBtn = document.getElementById('buy-bgm');
+        if (bgmBtn) {
+            bgmBtn.classList.add('purchasing');
+            setTimeout(() => {
+                bgmBtn.classList.remove('purchasing');
+            }, 500);
+        }
+
+        // Animate energy siphon
+        this.animateEnergySiphon();
+
+        // Play sound
+        this.playPurchaseSound();
+
+        // Deduct clicks with animation
+        this.animateCounterDeduction(cost, () => {
+            // After deduction completes, unlock BGM
+            this.counterManager.unlockBGM();
+
+            // Update shop display
+            this.updateDisplay();
+
+            // Unlock and activate BGM in BGM manager (if available)
+            if (this.bgmManager) {
+                this.bgmManager.unlock();
+            }
+
+            console.log('[BGM] Unlocked!');
         });
     }
 

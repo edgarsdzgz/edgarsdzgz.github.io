@@ -28,6 +28,13 @@
         </svg>
     </button>
 
+    <!-- BGM Controls -->
+    <div id="bgm-controls" class="bgm-controls" style="display: none;">
+        <button id="bgm-play-pause" class="bgm-button" aria-label="Play/Pause BGM">▶</button>
+        <input type="range" id="bgm-volume" class="bgm-slider" min="0" max="100" value="50">
+        <span id="bgm-volume-display" class="bgm-volume-text">50%</span>
+    </div>
+
     <!-- Navigation -->
     <nav id="nav">
         <div class="nav-container">
@@ -431,6 +438,7 @@
         <div class="container">
             <p>&copy; 2024 Edgar Diaz-Gutierrez. All rights reserved.</p>
             <p class="footer-note">Built with HTML, CSS, and vanilla JavaScript. Hosted on GitHub Pages.</p>
+            <p class="footer-note">Background music: <a href="https://www.FesliyanStudios.com" target="_blank" rel="noopener">8 Bit Adventure by Fesliyan Studios</a></p>
         </div>
     </footer>
 
@@ -490,6 +498,16 @@
                     </div>
                     <button id="buy-maritime" class="shop-button">
                         <span id="maritime-button-text" class="shop-button-text">Unlock 200<span class="counter-currency">ED</span></span>
+                    </button>
+                </div>
+
+                <div class="upgrade-container">
+                    <div class="upgrade-stat">
+                        <span class="upgrade-stat-label">Background Music</span>
+                        <span id="bgm-level" class="upgrade-stat-level">Locked</span>
+                    </div>
+                    <button id="buy-bgm" class="shop-button">
+                        <span id="bgm-button-text" class="shop-button-text">Unlock 250<span class="counter-currency">ED</span></span>
                     </button>
                 </div>
             </div>

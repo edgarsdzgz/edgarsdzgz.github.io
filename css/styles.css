@@ -202,6 +202,96 @@ img {
 }
 
 /* ===============================================
+   BGM CONTROLS
+   =============================================== */
+
+.bgm-controls {
+    position: fixed;
+    bottom: 1rem;
+    left: 5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--card-bg);
+    border-radius: 2rem;
+    box-shadow: var(--shadow-md);
+    z-index: 1001;
+    transition: all var(--transition-base);
+}
+
+.bgm-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+}
+
+.bgm-button:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.bgm-button:active {
+    transform: scale(0.95);
+}
+
+.bgm-slider {
+    width: 100px;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--border-color);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.bgm-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.bgm-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.bgm-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    cursor: pointer;
+    border: none;
+    transition: all var(--transition-base);
+}
+
+.bgm-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+.bgm-volume-text {
+    min-width: 3rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* ===============================================
    NAVIGATION
    =============================================== */
 
