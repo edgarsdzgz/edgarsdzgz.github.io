@@ -1,221 +1,424 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edgar Diaz-Gutierrez</title>
-  <style>
-    body {
-      visibility: hidden;
-    }
-  </style>
-  <link rel="stylesheet" href="css/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Edgar Diaz-Gutierrez - Full-Stack Software Engineer with 3+ years building mission-critical emergency command-and-control web applications.">
+    <meta name="author" content="Edgar Diaz-Gutierrez">
+    <title>Edgar Diaz-Gutierrez | Full-Stack Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
-  <div class="layout-container">
-    <aside class="left-column">
-      <header id="main-header">
-        <div class="logo">
-          <h1>Edgar Diaz-Gutierrez</h1>
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">ED</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#counters">Counters</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
-        <nav class="header-nav">
-          <p class="tagline">Full-Stack Software Engineer</p>
-          <p class="contact">
-            <a href="mailto:edgar.s.dzgz@gmail.com">edgar.s.dzgz@gmail.com</a> | (619) 750-4888
-          </p>
-        </nav>
-      </header>
+    </nav>
 
-      <nav class="scroll-nav">
-        <ul>
-          <li><a href="#summary">About</a></li>
-          <li><a href="#career">Career</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#tech">Tech Stack</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="#closing">Let’s Connect</a></li>
-        </ul>
-      </nav>
-
-      <div class="social-sidebar">
-        <!-- GitHub -->
-        <a href="https://github.com/edgarsdzgz" target="_blank" aria-label="GitHub">
-          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <title>GitHub</title>
-            <path fill="currentColor" d="M12 0C5.37 0 0 5.372 0 12c0 5.303 
-              3.438 9.8 8.205 11.387.6.11.82-.26.82-.577v-2.234
-              C6.672 20.587 5.968 18.92 5.968 18.92c-.546-1.387
-              -1.333-1.757-1.333-1.757-1.09-.746.083-.731.083-.731
-              1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.807
-              1.305 3.492.998.108-.775.42-1.305.763-1.605
-              -4.22-.48-8.647-2.11-8.647-9.395 0-2.075.745-3.767
-              1.965-5.096-.197-.48-.855-2.415.184-5.036 0 0
-              1.605-.513 5.26 1.956A18.39 18.39 0 0112 5.797
-              c1.626.007 3.26.22 4.786.647 3.647-2.47 5.253
-              -1.956 5.253-1.956 1.04 2.62.384 4.556.188
-              5.036 1.223 1.33 1.964 3.02 1.964 5.096 0
-              7.29-4.432 8.91-8.653 9.385.432.373.816 1.107.816
-              2.23v3.305c0 .32.216.694.825.576C20.565 21.796
-              24 17.302 24 12c0-6.628-5.373-12-12-12z" />
-          </svg>
-        </a>
-
-        <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank" aria-label="LinkedIn">
-          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <title>LinkedIn</title>
-            <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328
-              -.027-3.037-1.85-3.037-1.853 0-2.136 1.445-2.136
-              2.94v5.666h-3.554V9h3.414v1.561h.049c.476-.9
-              1.637-1.85 3.369-1.85 3.599 0 4.266 2.368
-              4.266 5.452v6.289zM5.337 7.433c-1.144 0-2.07
-              -.927-2.07-2.07 0-1.144.926-2.071 2.07
-              -2.071s2.07.927 2.07 2.071c0 1.143-.926
-              2.07-2.07 2.07zM7.119 20.452H3.554V9h3.565v11.452zM22.225
-              0H1.771C.792 0 0 .771 0 1.724v20.552C0
-              23.23.792 24 1.771 24h20.451C23.2 24 24
-              23.23 24 22.276V1.724C24 .771 23.2 0 22.225 0z" />
-          </svg>
-        </a>
-
-        <!-- Email -->
-        <a href="mailto:edgar.s.dzgz@gmail.com" aria-label="Email">
-          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <title>Email</title>
-            <path fill="currentColor" d="M1.5 4.5A1.5 1.5 0 013 3h18a1.5
-              1.5 0 011.5 1.5v15A1.5 1.5 0 0121 21h-18a1.5
-              1.5 0 01-1.5-1.5v-15zm3.576.552a.75.75 0
-              00-.798 1.232l7.647 6.78a.75.75 0 00.952
-              0l7.647-6.78a.75.75 0 00-.798-1.232L12
-              11.444 5.076 5.052z" clip-rule="evenodd" />
-          </svg>
-        </a>
-      </div>
-    </aside>
-
-    <main class="right-column">
-      <section id="summary">
-        <p>I’m a Full-Stack Software Engineer with 3+ years building mission-critical emergency command-and-control web
-          applications at Valcom, and a former Coding Dojo instructor who’s guided cohorts of 50+ students. Powered by a
-          Film &amp; Theater background, I blend creative leadership with deep technical expertise in TypeScript, React,
-          Node.js, and more.</p>
-      </section>
-
-      <!-- 2. Career Timeline -->
-      <section id="career">
-        <div class="timeline">
-          <!-- Valcom -->
-          <div class="timeline-item">
-            <div class="timeline-date">Jan 2022 — Present</div>
-            <div class="timeline-content">
-              <h3>
-                <a href="https://www.linkedin.com/company/valcom-inc/" target="_blank" rel="noopener">Valcom</a>
-                · Full-Stack Developer
-              </h3>
-              <p>Architected and maintained an Express/React emergency management platform; led code reviews and
-                mentorship.</p>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Hi, I'm <span class="highlight">Edgar Diaz-Gutierrez</span>
+                </h1>
+                <p class="hero-subtitle">Full-Stack Software Engineer</p>
+                <p class="hero-description">
+                    Building mission-critical emergency command-and-control applications with TypeScript, React, and Node.js.
+                    Former Coding Dojo instructor with a passion for creative problem-solving.
+                </p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="#projects" class="btn btn-secondary">View Projects</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/edgarsdzgz" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:edgar.s.dzgz@gmail.com" aria-label="Email">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                </div>
             </div>
-          </div>
-
-          <!-- Coding Dojo -->
-          <div class="timeline-item">
-            <div class="timeline-date">Dec 2020 — Jan 2024</div>
-            <div class="timeline-content">
-              <h3>
-                <a href="https://www.linkedin.com/school/codingdojo/" target="_blank" rel="noopener">Coding Dojo</a>
-                · Instructor (Full-Stack & Cybersecurity)
-              </h3>
-              <p>Fostered hands-on problem-solving in cohorts of 50+; guided students through Java, Python, and security
-                bootcamps.</p>
-            </div>
-          </div>
-
-          <!-- ScoreShuttle -->
-          <div class="timeline-item">
-            <div class="timeline-date">Aug 2018 — Oct 2019</div>
-            <div class="timeline-content">
-              <h3>
-                <a href="https://www.linkedin.com/company/scoreshuttle/" target="_blank" rel="noopener">ScoreShuttle</a>
-                · Team Lead, Customer Service
-              </h3>
-              <p>Led a team supporting logistics software; optimized support workflows and SLA compliance.</p>
-            </div>
-          </div>
-
-          <!-- Docupop -->
-          <div class="timeline-item">
-            <div class="timeline-date">Jan 2017 — Aug 2018</div>
-            <div class="timeline-content">
-              <h3>
-                <a href="https://www.linkedin.com/company/docupop/" target="_blank" rel="noopener">Docupop</a>
-                · Senior Student Loan Debt Coordinator
-              </h3>
-              <p>Managed high-volume loan portfolios; built custom tools to automate reconciliation processes.</p>
-            </div>
-          </div>
-
-          <!-- Hibrid Solar -->
-          <div class="timeline-item">
-            <div class="timeline-date">Aug 2016 — Jan 2017</div>
-            <div class="timeline-content">
-              <h3>
-                <a href="https://www.linkedin.com/company/hibrid-solar/" target="_blank" rel="noopener">Hibrid Solar</a>
-                · Sales Operations
-              </h3>
-              <p>Drove CRM integrations and process automation to streamline sales workflows and reporting.</p>
-            </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <!-- 3. Projects -->
-      <section id="projects">
-        <ul>
-          <li><a href="https://github.com/edgarsdzgz/edgarsdzgz.github.io" target="_blank">Personal Website</a> —
-            Responsive HTML/CSS portfolio showcasing my experience and design sensibility.</li>
-          <li><a href="https://github.com/edgarsdzgz/edgarsdzgz_site" target="_blank">edgarsdzgz_site</a> — Modern React
-            &amp; TypeScript front end with interactive components and clean architecture.</li>
-          <li><a href="https://github.com/edgarsdzgz/recommend2me" target="_blank">recommend2me</a> — Full-stack
-            Node.js/TypeScript app for capturing &amp; organizing personal recommendations.</li>
-          <li><a href="https://github.com/edgarsdzgz/rtk-query-basic" target="_blank">RTK Query Demo</a> — Illustration
-            of efficient data fetching and cache management in React.</li>
-          <li><a href="https://github.com/edgarsdzgz/typeorm-backend-basic" target="_blank">Banking API</a> — Secure
-            RESTful service built with Express, TypeORM &amp; TypeScript.</li>
-          <!-- add others as needed -->
-        </ul>
-      </section>
+    <!-- About Section -->
+    <section id="about" class="about section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm a Full-Stack Software Engineer with 3+ years building mission-critical emergency
+                        command-and-control web applications at Valcom, and a former Coding Dojo instructor
+                        who's guided cohorts of 50+ students.
+                    </p>
+                    <p>
+                        Powered by a Film & Theater background, I blend creative leadership with deep technical
+                        expertise in TypeScript, React, Node.js, and more. I'm passionate about building scalable,
+                        maintainable applications that make a real difference.
+                    </p>
+                </div>
+                <div class="tech-stack">
+                    <h3>Tech Stack</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Redux Toolkit</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">TypeORM</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">REST APIs</span>
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">Git</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <!-- 4. Tech Stack -->
-      <section id="tech">
-        <p>TypeScript · JavaScript · React · Redux Toolkit · Node.js · Express · TypeORM · PostgreSQL · MySQL · Python ·
-          Django · Flask · Spring Boot · REST APIs · HTML · CSS · Git · Docker</p>
-      </section>
+    <!-- Experience Section -->
+    <section id="experience" class="experience section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <!-- Valcom -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Full-Stack Developer</h3>
+                            <span class="timeline-date">Jan 2022 — Present</span>
+                        </div>
+                        <h4 class="company">
+                            <a href="https://www.linkedin.com/company/valcom-inc/" target="_blank" rel="noopener noreferrer">
+                                Valcom
+                            </a>
+                        </h4>
+                        <p>
+                            Architected and maintained an Express/React emergency management platform;
+                            led code reviews and mentorship for the development team.
+                        </p>
+                    </div>
+                </div>
 
-      <!-- 5. Education -->
-      <section id="education">
-        <ul>
-          <li><strong>San Diego State University</strong> — B.A. Film &amp; Media Arts</li>
-          <li><strong>Coding Dojo</strong> — Full-Stack Web Dev Certificate (Java &amp; Python), Top of Class</li>
-        </ul>
-      </section>
+                <!-- Coding Dojo -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Instructor (Full-Stack & Cybersecurity)</h3>
+                            <span class="timeline-date">Dec 2020 — Jan 2024</span>
+                        </div>
+                        <h4 class="company">
+                            <a href="https://www.linkedin.com/school/codingdojo/" target="_blank" rel="noopener noreferrer">
+                                Coding Dojo
+                            </a>
+                        </h4>
+                        <p>
+                            Fostered hands-on problem-solving in cohorts of 50+; guided students through
+                            Java, Python, and security bootcamps.
+                        </p>
+                    </div>
+                </div>
 
-      <!-- 6. Closing -->
-      <section id="closing">
-        <p>I’m always looking for new challenges where I can leverage my blend of creative leadership and full-stack
-          expertise. Feel free to reach out—let’s build something great together.</p>
-        <p><a href="mailto:edgar.s.dzgz@gmail.com">edgar.s.dzgz@gmail.com</a> | (619) 750-4888 | <a
-            href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank">LinkedIn</a> | <a
-            href="https://github.com/edgarsdzgz" target="_blank">GitHub</a></p>
-      </section>
-    </main>
-  </div>
+                <!-- ScoreShuttle -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Team Lead, Customer Service</h3>
+                            <span class="timeline-date">Aug 2018 — Oct 2019</span>
+                        </div>
+                        <h4 class="company">
+                            <a href="https://www.linkedin.com/company/scoreshuttle/" target="_blank" rel="noopener noreferrer">
+                                ScoreShuttle
+                            </a>
+                        </h4>
+                        <p>
+                            Led a team supporting logistics software; optimized support workflows
+                            and SLA compliance.
+                        </p>
+                    </div>
+                </div>
 
-  <!-- theme toggle sits above the grid -->
-  <button id="theme-toggle" aria-label="Toggle theme">🌓</button>
-  <script src="js/main.js" defer></script>
+                <!-- Docupop -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Senior Student Loan Debt Coordinator</h3>
+                            <span class="timeline-date">Jan 2017 — Aug 2018</span>
+                        </div>
+                        <h4 class="company">
+                            <a href="https://www.linkedin.com/company/docupop/" target="_blank" rel="noopener noreferrer">
+                                Docupop
+                            </a>
+                        </h4>
+                        <p>
+                            Managed high-volume loan portfolios; built custom tools to automate
+                            reconciliation processes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Hibrid Solar -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Sales Operations</h3>
+                            <span class="timeline-date">Aug 2016 — Jan 2017</span>
+                        </div>
+                        <h4 class="company">
+                            <a href="https://www.linkedin.com/company/hibrid-solar/" target="_blank" rel="noopener noreferrer">
+                                Hibrid Solar
+                            </a>
+                        </h4>
+                        <p>
+                            Drove CRM integrations and process automation to streamline sales workflows
+                            and reporting.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <!-- Personal Website -->
+                <div class="project-card">
+                    <h3>Personal Website</h3>
+                    <p>
+                        Responsive HTML/CSS portfolio showcasing experience and design sensibility.
+                    </p>
+                    <a href="https://github.com/edgarsdzgz/edgarsdzgz.github.io" target="_blank" rel="noopener noreferrer" class="project-link">
+                        View on GitHub →
+                    </a>
+                </div>
+
+                <!-- edgarsdzgz_site -->
+                <div class="project-card">
+                    <h3>edgarsdzgz_site</h3>
+                    <p>
+                        Modern React & TypeScript front end with interactive components and clean architecture.
+                    </p>
+                    <a href="https://github.com/edgarsdzgz/edgarsdzgz_site" target="_blank" rel="noopener noreferrer" class="project-link">
+                        View on GitHub →
+                    </a>
+                </div>
+
+                <!-- recommend2me -->
+                <div class="project-card">
+                    <h3>recommend2me</h3>
+                    <p>
+                        Full-stack Node.js/TypeScript app for capturing & organizing personal recommendations.
+                    </p>
+                    <a href="https://github.com/edgarsdzgz/recommend2me" target="_blank" rel="noopener noreferrer" class="project-link">
+                        View on GitHub →
+                    </a>
+                </div>
+
+                <!-- RTK Query Demo -->
+                <div class="project-card">
+                    <h3>RTK Query Demo</h3>
+                    <p>
+                        Illustration of efficient data fetching and cache management in React.
+                    </p>
+                    <a href="https://github.com/edgarsdzgz/rtk-query-basic" target="_blank" rel="noopener noreferrer" class="project-link">
+                        View on GitHub →
+                    </a>
+                </div>
+
+                <!-- Banking API -->
+                <div class="project-card">
+                    <h3>Banking API</h3>
+                    <p>
+                        Secure RESTful service built with Express, TypeORM & TypeScript.
+                    </p>
+                    <a href="https://github.com/edgarsdzgz/typeorm-backend-basic" target="_blank" rel="noopener noreferrer" class="project-link">
+                        View on GitHub →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Counters Section -->
+    <section id="counters" class="counters section">
+        <div class="container">
+            <h2 class="section-title">Interactive Counters</h2>
+            <p class="section-description">
+                These counters are unique to your browser and persist across visits using localStorage.
+                Try them out!
+            </p>
+            <div class="counters-grid">
+                <!-- Click Counter -->
+                <div class="counter-card">
+                    <div class="counter-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </div>
+                    <h3>Click Counter</h3>
+                    <div class="counter-value" id="clickCounter">0</div>
+                    <p class="counter-description">Total clicks on this page</p>
+                    <button id="resetClicks" class="btn-reset">Reset Counter</button>
+                </div>
+
+                <!-- Tick Counter -->
+                <div class="counter-card">
+                    <div class="counter-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Tick Counter</h3>
+                    <div class="counter-value" id="tickCounter">0</div>
+                    <p class="counter-description">Seconds elapsed (auto-increments)</p>
+                    <button id="resetTicks" class="btn-reset">Reset Counter</button>
+                </div>
+            </div>
+            <div class="counter-info">
+                <p>
+                    <strong>Note:</strong> These counters use your browser's localStorage to save data.
+                    Each browser/device has its own independent counters. Data persists across page reloads
+                    and browser restarts (except in private browsing mode).
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education section">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3>San Diego State University</h3>
+                    <p class="degree">B.A. Film & Media Arts</p>
+                </div>
+                <div class="education-card">
+                    <h3>Coding Dojo</h3>
+                    <p class="degree">Full-Stack Web Dev Certificate (Java & Python)</p>
+                    <p class="achievement">Top of Class</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="contact-intro">
+                I'm always looking for new challenges where I can leverage my blend of creative leadership
+                and full-stack expertise. Feel free to reach out—let's build something great together.
+            </p>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <div>
+                        <h3>Email</h3>
+                        <a href="mailto:edgar.s.dzgz@gmail.com">edgar.s.dzgz@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <div>
+                        <h3>Phone</h3>
+                        <a href="tel:+16197504888">(619) 750-4888</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                    <div>
+                        <h3>LinkedIn</h3>
+                        <a href="https://www.linkedin.com/in/edgar-dzgz/" target="_blank" rel="noopener noreferrer">linkedin.com/in/edgar-dzgz</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <div>
+                        <h3>GitHub</h3>
+                        <a href="https://github.com/edgarsdzgz" target="_blank" rel="noopener noreferrer">github.com/edgarsdzgz</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Edgar Diaz-Gutierrez. All rights reserved.</p>
+            <p class="footer-note">Built with HTML, CSS, and vanilla JavaScript. Hosted on GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
-
 </html>
