@@ -7,6 +7,7 @@ const CONFIG = {
     clickKey: 'clickCount',
     tickKey: 'tickCount',
     themeKey: 'theme',
+    agenticClickerLevelKey: 'agenticClickerLevel',
 };
 
 // ===============================================
@@ -114,8 +115,10 @@ class ThemeManager {
 class CounterManager {
     constructor() {
         this.clickCount = 0;
+        this.agenticClickerLevel = 0;
         // this.tickCount = 0; // DISABLED - Tick counter removed
         this.clickCounterEl = document.getElementById('clickCounter');
+        this.shopButtonSubtitle = document.getElementById('shop-button-subtitle');
         // this.tickCounterEl = document.getElementById('tickCounter'); // DISABLED
         // this.resetClicksBtn = document.getElementById('resetClicks'); // DISABLED
         // this.resetTicksBtn = document.getElementById('resetTicks'); // DISABLED
@@ -128,6 +131,7 @@ class CounterManager {
 
         // Initialize displays
         this.updateClickDisplay();
+        this.updateShopButtonSubtitle();
         // this.updateTickDisplay(); // DISABLED
 
         // Setup click counter
@@ -148,20 +152,36 @@ class CounterManager {
 
     loadCounters() {
         const savedClicks = getStorageItem(CONFIG.clickKey);
+        const savedLevel = getStorageItem(CONFIG.agenticClickerLevelKey);
         // const savedTicks = getStorageItem(CONFIG.tickKey); // DISABLED
 
         this.clickCount = savedClicks ? parseInt(savedClicks, 10) : 0;
+        this.agenticClickerLevel = savedLevel ? parseInt(savedLevel, 10) : 0;
         // this.tickCount = savedTicks ? parseInt(savedTicks, 10) : 0; // DISABLED
 
         // Handle NaN cases
         if (isNaN(this.clickCount)) this.clickCount = 0;
+        if (isNaN(this.agenticClickerLevel)) this.agenticClickerLevel = 0;
         // if (isNaN(this.tickCount)) this.tickCount = 0; // DISABLED
     }
 
     updateClickDisplay() {
         if (this.clickCounterEl) {
-            this.clickCounterEl.textContent = formatNumber(this.clickCount);
+            this.clickCounterEl.innerHTML = `<span class="counter-currency">ED</span> ${formatNumber(this.clickCount)}`;
         }
+    }
+
+    updateShopButtonSubtitle() {
+        if (this.shopButtonSubtitle) {
+            const nextLevel = this.agenticClickerLevel + 1;
+            const cost = this.calculateUpgradeCost();
+            this.shopButtonSubtitle.textContent = `Level ${nextLevel} ED ${formatNumber(cost)}`;
+        }
+    }
+
+    calculateUpgradeCost() {
+        // Base cost is 20, increases by 40% per level
+        return Math.floor(20 * Math.pow(1.4, this.agenticClickerLevel));
     }
 
     // DISABLED - Tick counter removed
@@ -350,7 +370,7 @@ class CounterManager {
     }
 
     handlePurchase() {
-        const cost = 20;
+        const cost = this.calculateUpgradeCost();
 
         // Check if user has enough clicks
         if (this.clickCount < cost) {
@@ -399,6 +419,11 @@ class CounterManager {
                     this.clickCount = endCount;
                     setStorageItem(CONFIG.clickKey, this.clickCount);
                     this.updateClickDisplay();
+
+                    // Level up!
+                    this.agenticClickerLevel++;
+                    setStorageItem(CONFIG.agenticClickerLevelKey, this.agenticClickerLevel);
+                    this.updateShopButtonSubtitle();
                 }
             };
 
