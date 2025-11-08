@@ -72,5 +72,43 @@ export class ThemeManager {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         this.setTheme(newTheme);
+
+        // Play swish sound
+        this.playSwishSound();
+    }
+
+    playSwishSound() {
+        try {
+            // Create audio context
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const currentTime = audioContext.currentTime;
+
+            // Create oscillator and gain node
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            // Configure swoosh sound: frequency sweep with envelope
+            oscillator.type = 'sine';
+
+            // Frequency sweep: 800Hz -> 400Hz (downward swish)
+            oscillator.frequency.setValueAtTime(800, currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(400, currentTime + 0.15);
+
+            // Volume envelope: quick attack, medium decay
+            gainNode.gain.setValueAtTime(0, currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.3, currentTime + 0.02); // Quick attack
+            gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + 0.15); // Smooth decay
+
+            // Start and stop
+            oscillator.start(currentTime);
+            oscillator.stop(currentTime + 0.15);
+
+            console.log('[THEME] Swish sound played');
+        } catch (error) {
+            console.error('[THEME] Error playing swish sound:', error);
+        }
     }
 }

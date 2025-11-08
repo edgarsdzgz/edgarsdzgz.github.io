@@ -70,6 +70,20 @@ export const ACHIEVEMENTS = [
         condition: (agenticLevel, darkModeUnlocked, maxLevel) => {
             return agenticLevel >= maxLevel && darkModeUnlocked;
         }
+    },
+    {
+        id: 'glitch_star',
+        title: 'Glitch in the Matrix',
+        description: 'Hovered over the name and triggered the glitch effect',
+        checkType: 'name_hover',
+        condition: (hovered) => hovered === true
+    },
+    {
+        id: 'pop_glow',
+        title: 'Star Power!',
+        description: 'Clicked on the name to make it pop and glow',
+        checkType: 'name_click',
+        condition: (clicked) => clicked === true
     }
 ];
 

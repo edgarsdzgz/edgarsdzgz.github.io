@@ -9,6 +9,7 @@ import { ShopManager } from './managers/shopManager.js';
 import { LoreManager } from './managers/loreManager.js';
 import { NavigationManager } from './managers/navigationManager.js';
 import { ScrollAnimationManager } from './managers/scrollAnimationManager.js';
+import { HeroNameManager } from './managers/heroNameManager.js';
 
 // Wait for DOM to be ready
 if (document.readyState === 'loading') {
@@ -48,6 +49,10 @@ function init() {
     // 7. ScrollAnimationManager - no dependencies
     console.log('[DEBUG] Creating ScrollAnimationManager...');
     new ScrollAnimationManager();
+
+    // 8. HeroNameManager - depends on AchievementManager
+    console.log('[DEBUG] Creating HeroNameManager...');
+    new HeroNameManager(achievementManager);
 
     // Add smooth transition to counter values
     const counterValues = document.querySelectorAll('.counter-value');

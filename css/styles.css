@@ -333,6 +333,58 @@ img {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Glitch effect on hover */
+#hero-name.glitch {
+    animation: glitch 0.3s ease;
+}
+
+@keyframes glitch {
+    0%, 100% {
+        transform: translate(0);
+        text-shadow: 0 0 0 transparent;
+    }
+    20% {
+        transform: translate(-2px, 2px);
+        text-shadow: 2px 0 0 rgba(255, 0, 0, 0.7), -2px 0 0 rgba(0, 255, 255, 0.7);
+    }
+    40% {
+        transform: translate(2px, -2px);
+        text-shadow: -2px 0 0 rgba(255, 0, 0, 0.7), 2px 0 0 rgba(0, 255, 255, 0.7);
+    }
+    60% {
+        transform: translate(-1px, 1px);
+        text-shadow: 1px 0 0 rgba(255, 0, 0, 0.7), -1px 0 0 rgba(0, 255, 255, 0.7);
+    }
+    80% {
+        transform: translate(1px, -1px);
+        text-shadow: -1px 0 0 rgba(255, 0, 0, 0.7), 1px 0 0 rgba(0, 255, 255, 0.7);
+    }
+}
+
+/* Pop & Glow effect on click */
+#hero-name.pop-glow {
+    animation: popGlow 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes popGlow {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 transparent);
+    }
+    50% {
+        transform: scale(1.15);
+        filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.8));
+    }
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 transparent);
+    }
 }
 
 .hero-subtitle {
