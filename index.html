@@ -436,15 +436,46 @@
                 <div class="upgrade-container">
                     <div class="upgrade-stat">
                         <span class="upgrade-stat-label">Agentic Clicker</span>
-                        <span id="agentic-clicker-level" class="upgrade-stat-level">Lv 0</span>
+                        <svg id="cog-icon" class="cog-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M12 1v6m0 6v6m5.196-14.196l-4.242 4.242m0 5.908l4.242 4.242M23 12h-6m-6 0H1m14.196 5.196l-4.242-4.242m0-5.908l4.242-4.242"></path>
+                        </svg>
+                        <span id="agentic-clicker-level" class="upgrade-stat-level">0 Agents Clicking</span>
                     </div>
                     <button id="buy-agentic-clicker" class="shop-button">
-                        <span id="shop-button-text" class="shop-button-text">Level Up <span class="counter-currency">ED</span>20</span>
+                        <span id="shop-button-text" class="shop-button-text">Hire Agent <span class="counter-currency">ED</span>20</span>
+                    </button>
+                </div>
+
+                <div class="upgrade-container">
+                    <div class="upgrade-stat">
+                        <span class="upgrade-stat-label">Dark Mode</span>
+                        <span id="dark-mode-level" class="upgrade-stat-level">Locked</span>
+                    </div>
+                    <button id="buy-dark-mode" class="shop-button">
+                        <span id="dark-mode-button-text" class="shop-button-text">Unlock <span class="counter-currency">ED</span>50</span>
                     </button>
                 </div>
             </div>
             <div class="dialog-footer">
+                <button id="clear-data-btn" class="btn-clear-data">Clear Data</button>
                 <button id="close-dialog" class="btn-close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Dialog for Clear Data -->
+    <div id="confirm-dialog-backdrop" class="dialog-backdrop">
+        <div id="confirm-dialog" class="dialog confirm-dialog">
+            <div class="dialog-header">
+                <h2>Clear All Data?</h2>
+            </div>
+            <div class="dialog-body">
+                <p class="confirm-message">Clearing the data will clear all progress and reset you back to the start. Do you wish to continue?</p>
+            </div>
+            <div class="dialog-footer">
+                <button id="confirm-clear-no" class="btn-close">No</button>
+                <button id="confirm-clear-yes" class="btn-danger">Yes</button>
             </div>
         </div>
     </div>

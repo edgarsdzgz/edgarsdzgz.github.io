@@ -963,6 +963,24 @@ img {
     opacity: 1;
 }
 
+/* Dim everything when dialog is open */
+body.dialog-open #nav,
+body.dialog-open .hero,
+body.dialog-open .section,
+body.dialog-open .footer {
+    filter: brightness(0.3);
+    pointer-events: none;
+}
+
+/* Keep counter and theme toggle bright and interactive */
+body.dialog-open .nav-counter,
+body.dialog-open .theme-toggle {
+    filter: brightness(3.33); /* Counteract the 0.3 brightness: 1/0.3 = 3.33 */
+    pointer-events: auto;
+    position: relative;
+    z-index: 2001;
+}
+
 /* Dialog box */
 .dialog {
     background: var(--card-bg);
@@ -1028,7 +1046,7 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .upgrade-container {
@@ -1048,6 +1066,7 @@ img {
     border-radius: 8px 8px 0 0;
     border: 1px solid var(--border-color);
     border-bottom: none;
+    gap: 0.75rem;
 }
 
 .upgrade-stat-label {
@@ -1056,9 +1075,32 @@ img {
     color: var(--text-primary);
 }
 
+.cog-icon {
+    flex-shrink: 0;
+    color: var(--accent-primary);
+    transition: opacity 0.3s ease;
+}
+
+.cog-icon.spinning {
+    animation: cogRotate linear infinite;
+}
+
+.cog-icon.stopped {
+    opacity: 0.3;
+}
+
+@keyframes cogRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .upgrade-stat-level {
-    font-size: 1.125rem;
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 600;
     color: var(--accent-primary);
     font-family: 'Courier New', monospace;
 }
@@ -1067,6 +1109,7 @@ img {
     padding: 1rem 2rem 2rem;
     display: flex;
     justify-content: center;
+    gap: 1rem;
 }
 
 /* Shop button */
@@ -1132,6 +1175,55 @@ img {
     background: var(--accent-primary);
     color: white;
     border-color: var(--accent-primary);
+}
+
+.btn-clear-data {
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-clear-data:hover {
+    background: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+.btn-danger {
+    padding: 0.75rem 2rem;
+    background: #dc3545;
+    color: white;
+    border: 1px solid #dc3545;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+    border-color: #c82333;
+    transform: translateY(-2px);
+}
+
+/* Confirmation dialog styling */
+.confirm-dialog {
+    max-width: 400px;
+}
+
+.confirm-message {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
+    margin: 0;
 }
 
 /* Energy beam animation */
@@ -1224,6 +1316,39 @@ img {
     100% {
         transform: translateY(-50px);
         opacity: 0;
+    }
+}
+
+/* Slot machine animation for level number */
+.upgrade-stat-level {
+    display: inline-block;
+    position: relative;
+}
+
+.upgrade-stat-level.slot-machine {
+    animation: slotMachineRoll 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes slotMachineRoll {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    25% {
+        transform: translateY(-30px) scale(0.8);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-40px) scale(0.7);
+        opacity: 0;
+    }
+    75% {
+        transform: translateY(20px) scale(1.2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
     }
 }
 

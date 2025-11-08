@@ -9,6 +9,7 @@ const CONFIG = {
     tickKey: 'tickCount',
     themeKey: 'theme',
     agenticClickerLevelKey: 'agenticClickerLevel',
+    darkModeUnlockedKey: 'darkModeUnlocked',
     achievementsKey: 'earnedAchievements', // Array of earned achievement IDs
 };
 
@@ -107,31 +108,56 @@ function formatNumber(num) {
 class ThemeManager {
     constructor() {
         this.themeToggle = document.getElementById('theme-toggle');
+        this.darkModeUnlocked = false;
         this.init();
     }
 
     init() {
-        // Load saved theme or detect system preference
+        // Check if dark mode is unlocked
+        const unlockedValue = getStorageItem(CONFIG.darkModeUnlockedKey);
+        this.darkModeUnlocked = unlockedValue === 'true';
+
+        // Default to light mode (dark mode locked by default)
         const savedTheme = getStorageItem(CONFIG.themeKey);
-        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        const theme = savedTheme || systemTheme;
+        const theme = savedTheme || 'light';
 
         this.setTheme(theme, false);
+        this.updateToggleState();
 
         // Add event listener
         if (this.themeToggle) {
             this.themeToggle.addEventListener('click', () => this.toggleTheme());
         }
+    }
 
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!getStorageItem(CONFIG.themeKey)) {
-                this.setTheme(e.matches ? 'dark' : 'light', false);
+    updateToggleState() {
+        if (this.themeToggle) {
+            if (this.darkModeUnlocked) {
+                this.themeToggle.style.opacity = '1';
+                this.themeToggle.style.cursor = 'pointer';
+                this.themeToggle.disabled = false;
+            } else {
+                this.themeToggle.style.opacity = '0.3';
+                this.themeToggle.style.cursor = 'not-allowed';
+                this.themeToggle.disabled = true;
             }
-        });
+        }
+    }
+
+    unlockDarkMode() {
+        this.darkModeUnlocked = true;
+        setStorageItem(CONFIG.darkModeUnlockedKey, 'true');
+        this.updateToggleState();
+        // Automatically switch to dark mode when unlocked
+        this.setTheme('dark');
     }
 
     setTheme(theme, save = true) {
+        // Only allow dark mode if unlocked
+        if (theme === 'dark' && !this.darkModeUnlocked) {
+            return;
+        }
+
         document.documentElement.setAttribute('data-theme', theme);
         if (save) {
             setStorageItem(CONFIG.themeKey, theme);
@@ -139,6 +165,10 @@ class ThemeManager {
     }
 
     toggleTheme() {
+        if (!this.darkModeUnlocked) {
+            return;
+        }
+
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         this.setTheme(newTheme);
@@ -150,16 +180,22 @@ class ThemeManager {
 // ===============================================
 
 class CounterManager {
-    constructor() {
+    constructor(themeManager) {
+        this.themeManager = themeManager;
         this.clickCount = 0;
         this.totalClicks = 0; // Lifetime clicks
         this.agenticClickerLevel = 0;
+        this.darkModeUnlocked = false;
         this.earnedAchievements = new Set(); // Set of earned achievement IDs
         this.autoClickerIntervalId = null; // Auto-clicker interval ID
+        this.dialogOpen = false; // Track dialog state
         // this.tickCount = 0; // DISABLED - Tick counter removed
         this.clickCounterEl = document.getElementById('clickCounter');
         this.agenticClickerLevelEl = document.getElementById('agentic-clicker-level');
+        this.cogIconEl = document.getElementById('cog-icon');
+        this.darkModeLevelEl = document.getElementById('dark-mode-level');
         this.shopButtonText = document.getElementById('shop-button-text');
+        this.darkModeButtonText = document.getElementById('dark-mode-button-text');
         // this.tickCounterEl = document.getElementById('tickCounter'); // DISABLED
         // this.resetClicksBtn = document.getElementById('resetClicks'); // DISABLED
         // this.resetTicksBtn = document.getElementById('resetTicks'); // DISABLED
@@ -200,12 +236,14 @@ class CounterManager {
         const savedClicks = getStorageItem(CONFIG.clickKey);
         const savedTotalClicks = getStorageItem(CONFIG.totalClicksKey);
         const savedLevel = getStorageItem(CONFIG.agenticClickerLevelKey);
+        const savedDarkModeUnlocked = getStorageItem(CONFIG.darkModeUnlockedKey);
         const savedAchievements = getStorageItem(CONFIG.achievementsKey);
         // const savedTicks = getStorageItem(CONFIG.tickKey); // DISABLED
 
         this.clickCount = savedClicks ? parseInt(savedClicks, 10) : 0;
         this.totalClicks = savedTotalClicks ? parseInt(savedTotalClicks, 10) : 0;
         this.agenticClickerLevel = savedLevel ? parseInt(savedLevel, 10) : 0;
+        this.darkModeUnlocked = savedDarkModeUnlocked === 'true';
         // this.tickCount = savedTicks ? parseInt(savedTicks, 10) : 0; // DISABLED
 
         // Load earned achievements
@@ -233,15 +271,41 @@ class CounterManager {
     }
 
     updateShopDisplay() {
-        // Update current level display
+        // Update Agentic Clicker level display
         if (this.agenticClickerLevelEl) {
-            this.agenticClickerLevelEl.textContent = `Lv ${this.agenticClickerLevel}`;
+            const agentText = this.agenticClickerLevel === 1 ? 'Agent' : 'Agents';
+            this.agenticClickerLevelEl.textContent = `${this.agenticClickerLevel} ${agentText} Clicking`;
         }
 
-        // Update button text with next level cost
+        // Update cog icon rotation
+        this.updateCogAnimation();
+
+        // Update Agentic Clicker button text with next level cost
         if (this.shopButtonText) {
             const cost = this.calculateUpgradeCost();
-            this.shopButtonText.innerHTML = `Level Up <span class="counter-currency">ED</span>${formatNumber(cost)}`;
+            this.shopButtonText.innerHTML = `Hire Agent <span class="counter-currency">ED</span>${formatNumber(cost)}`;
+        }
+
+        // Update Dark Mode display
+        if (this.darkModeLevelEl) {
+            this.darkModeLevelEl.textContent = this.darkModeUnlocked ? 'Unlocked' : 'Locked';
+        }
+
+        // Update Dark Mode button
+        if (this.darkModeButtonText) {
+            if (this.darkModeUnlocked) {
+                this.darkModeButtonText.innerHTML = `<span style="opacity: 0.6;">Already Unlocked</span>`;
+            } else {
+                this.darkModeButtonText.innerHTML = `Unlock <span class="counter-currency">ED</span>50`;
+            }
+        }
+
+        // Update button disabled state
+        const darkModeBtn = document.getElementById('buy-dark-mode');
+        if (darkModeBtn) {
+            darkModeBtn.disabled = this.darkModeUnlocked;
+            darkModeBtn.style.opacity = this.darkModeUnlocked ? '0.5' : '1';
+            darkModeBtn.style.cursor = this.darkModeUnlocked ? 'not-allowed' : 'pointer';
         }
     }
 
@@ -264,11 +328,15 @@ class CounterManager {
 
         // Only start if level > 0
         if (this.agenticClickerLevel === 0) {
+            this.updateCogAnimation();
             return;
         }
 
         const interval = this.calculateAutoClickerInterval();
         console.log(`[AUTO-CLICKER] Starting at level ${this.agenticClickerLevel}, interval: ${interval.toFixed(2)}ms`);
+
+        // Update cog animation speed
+        this.updateCogAnimation();
 
         this.autoClickerIntervalId = setInterval(() => {
             this.clickCount++;
@@ -286,10 +354,32 @@ class CounterManager {
         }, interval);
     }
 
+    updateCogAnimation() {
+        if (!this.cogIconEl) return;
+
+        if (this.agenticClickerLevel === 0) {
+            // No agents - cog is stopped
+            this.cogIconEl.classList.remove('spinning');
+            this.cogIconEl.classList.add('stopped');
+            this.cogIconEl.style.animationDuration = '';
+        } else {
+            // Agents working - cog spins
+            this.cogIconEl.classList.add('spinning');
+            this.cogIconEl.classList.remove('stopped');
+
+            // Calculate rotation speed based on auto-clicker interval
+            // Faster clicking = faster rotation
+            const interval = this.calculateAutoClickerInterval();
+            // Make one full rotation per click (interval in ms)
+            this.cogIconEl.style.animationDuration = `${interval}ms`;
+        }
+    }
+
     stopAutoClicker() {
         if (this.autoClickerIntervalId) {
             clearInterval(this.autoClickerIntervalId);
             this.autoClickerIntervalId = null;
+            this.updateCogAnimation();
             console.log('[AUTO-CLICKER] Stopped');
         }
     }
@@ -470,12 +560,17 @@ class CounterManager {
         const dialog = document.getElementById('clicker-dialog');
         const closeBtn = document.getElementById('close-dialog');
         const buyBtn = document.getElementById('buy-agentic-clicker');
+        const clearDataBtn = document.getElementById('clear-data-btn');
 
-        // Open dialog when clicking counter
+        // Toggle dialog when clicking counter
         if (this.clickCounterEl) {
             this.clickCounterEl.addEventListener('click', (e) => {
                 e.stopPropagation(); // Prevent this from counting as a click
-                this.openDialog();
+                if (this.dialogOpen) {
+                    this.closeDialog();
+                } else {
+                    this.openDialog();
+                }
             });
         }
 
@@ -495,18 +590,198 @@ class CounterManager {
             });
         }
 
-        // Handle purchase
+        // Handle Agentic Clicker purchase
         if (buyBtn) {
             buyBtn.addEventListener('click', () => {
                 this.handlePurchase();
             });
         }
+
+        // Handle Dark Mode purchase
+        const darkModeBtn = document.getElementById('buy-dark-mode');
+        if (darkModeBtn) {
+            darkModeBtn.addEventListener('click', () => {
+                this.handleDarkModePurchase();
+            });
+        }
+
+        // Handle clear data button
+        if (clearDataBtn) {
+            clearDataBtn.addEventListener('click', () => {
+                this.openConfirmDialog();
+            });
+        }
+
+        // Setup confirmation dialog
+        this.setupConfirmDialog();
+    }
+
+    setupConfirmDialog() {
+        const confirmBackdrop = document.getElementById('confirm-dialog-backdrop');
+        const confirmYes = document.getElementById('confirm-clear-yes');
+        const confirmNo = document.getElementById('confirm-clear-no');
+
+        // Close confirmation dialog when clicking backdrop
+        if (confirmBackdrop) {
+            confirmBackdrop.addEventListener('click', (e) => {
+                if (e.target === confirmBackdrop) {
+                    this.closeConfirmDialog();
+                }
+            });
+        }
+
+        // Handle "No" button
+        if (confirmNo) {
+            confirmNo.addEventListener('click', () => {
+                this.closeConfirmDialog();
+            });
+        }
+
+        // Handle "Yes" button - clear all data
+        if (confirmYes) {
+            confirmYes.addEventListener('click', () => {
+                this.clearAllData();
+                this.closeConfirmDialog();
+                this.closeDialog();
+            });
+        }
+    }
+
+    openConfirmDialog() {
+        const confirmBackdrop = document.getElementById('confirm-dialog-backdrop');
+        if (confirmBackdrop) {
+            confirmBackdrop.classList.add('show');
+            document.body.classList.add('dialog-open');
+        }
+    }
+
+    closeConfirmDialog() {
+        const confirmBackdrop = document.getElementById('confirm-dialog-backdrop');
+        if (confirmBackdrop) {
+            confirmBackdrop.classList.remove('show');
+            // Don't remove dialog-open if main dialog is still open
+            const mainBackdrop = document.getElementById('clicker-dialog-backdrop');
+            if (!mainBackdrop || !mainBackdrop.classList.contains('show')) {
+                document.body.classList.remove('dialog-open');
+            }
+        }
+    }
+
+    clearAllData() {
+        // Stop auto-clicker
+        this.stopAutoClicker();
+
+        // Clear all localStorage
+        if (storageAvailable) {
+            localStorage.removeItem(CONFIG.storagePrefix + CONFIG.clickKey);
+            localStorage.removeItem(CONFIG.storagePrefix + CONFIG.totalClicksKey);
+            localStorage.removeItem(CONFIG.storagePrefix + CONFIG.agenticClickerLevelKey);
+            localStorage.removeItem(CONFIG.storagePrefix + CONFIG.darkModeUnlockedKey);
+            localStorage.removeItem(CONFIG.storagePrefix + CONFIG.achievementsKey);
+            // Note: We keep theme preference, but reset to light mode
+            setStorageItem(CONFIG.themeKey, 'light');
+        }
+
+        // Reset all counters and state
+        this.clickCount = 0;
+        this.totalClicks = 0;
+        this.agenticClickerLevel = 0;
+        this.darkModeUnlocked = false;
+        this.earnedAchievements = new Set();
+
+        // Reset theme to light and lock dark mode
+        this.themeManager.darkModeUnlocked = false;
+        this.themeManager.setTheme('light');
+        this.themeManager.updateToggleState();
+
+        // Update all displays
+        this.updateClickDisplay();
+        this.updateShopDisplay();
+
+        console.log('[CLEAR DATA] All game progress has been reset');
+    }
+
+    handleDarkModePurchase() {
+        const cost = 50;
+
+        // Check if already unlocked
+        if (this.darkModeUnlocked) {
+            return;
+        }
+
+        // Check if user has enough clicks
+        if (this.clickCount < cost) {
+            const shortage = cost - this.clickCount;
+            this.showInsufficientFundsNotification(shortage);
+            return;
+        }
+
+        // Add purchasing animation to button
+        const darkModeBtn = document.getElementById('buy-dark-mode');
+        if (darkModeBtn) {
+            darkModeBtn.classList.add('purchasing');
+            setTimeout(() => {
+                darkModeBtn.classList.remove('purchasing');
+            }, 500);
+        }
+
+        // Animate energy siphon
+        this.animateEnergySiphon();
+
+        // Play sound
+        this.playPurchaseSound();
+
+        // Deduct clicks after a short delay (for animation effect)
+        setTimeout(() => {
+            const startCount = this.clickCount;
+            const endCount = this.clickCount - cost;
+            const duration = 800; // Animation duration in ms
+            const startTime = Date.now();
+
+            // Animate counter counting down
+            const animate = () => {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Ease out cubic function for smooth deceleration
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+
+                const currentCount = Math.round(startCount - (cost * easeProgress));
+                this.clickCount = currentCount;
+                this.updateClickDisplay();
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    // Final update to ensure exact value
+                    this.clickCount = endCount;
+                    setStorageItem(CONFIG.clickKey, this.clickCount);
+                    this.updateClickDisplay();
+
+                    // Unlock dark mode!
+                    this.darkModeUnlocked = true;
+                    setStorageItem(CONFIG.darkModeUnlockedKey, 'true');
+
+                    // Update shop display immediately
+                    this.updateShopDisplay();
+
+                    // Unlock and activate dark mode in theme manager
+                    this.themeManager.unlockDarkMode();
+
+                    console.log('[DARK MODE] Unlocked!');
+                }
+            };
+
+            animate();
+        }, 200);
     }
 
     openDialog() {
         const backdrop = document.getElementById('clicker-dialog-backdrop');
         if (backdrop) {
             backdrop.classList.add('show');
+            document.body.classList.add('dialog-open');
+            this.dialogOpen = true;
         }
     }
 
@@ -514,6 +789,8 @@ class CounterManager {
         const backdrop = document.getElementById('clicker-dialog-backdrop');
         if (backdrop) {
             backdrop.classList.remove('show');
+            document.body.classList.remove('dialog-open');
+            this.dialogOpen = false;
         }
     }
 
@@ -575,6 +852,10 @@ class CounterManager {
 
                     // Update shop display immediately (before auto-clicker restart)
                     this.updateShopDisplay();
+
+                    // Play slot machine animation and sound
+                    this.playSlotMachineAnimation();
+                    this.playSlotMachineSound();
 
                     // Start or restart auto-clicker with new speed
                     this.startAutoClicker();
@@ -679,6 +960,85 @@ class CounterManager {
         setTimeout(() => {
             floatingText.remove();
         }, 2000);
+    }
+
+    playSlotMachineAnimation() {
+        if (this.agenticClickerLevelEl) {
+            // Remove existing animation class if any
+            this.agenticClickerLevelEl.classList.remove('slot-machine');
+
+            // Force reflow to restart animation
+            void this.agenticClickerLevelEl.offsetWidth;
+
+            // Add animation class
+            this.agenticClickerLevelEl.classList.add('slot-machine');
+
+            // Remove animation class after completion
+            setTimeout(() => {
+                this.agenticClickerLevelEl.classList.remove('slot-machine');
+            }, 600);
+        }
+    }
+
+    playSlotMachineSound() {
+        try {
+            // Create audio context
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const currentTime = audioContext.currentTime;
+
+            // Create oscillators for multiple tones
+            const oscillator1 = audioContext.createOscillator();
+            const oscillator2 = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            // Connect nodes
+            oscillator1.connect(gainNode);
+            oscillator2.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            // Configure slot machine "spinning" sound (rising chirp)
+            oscillator1.type = 'sine';
+            oscillator1.frequency.setValueAtTime(400, currentTime);
+            oscillator1.frequency.exponentialRampToValueAtTime(800, currentTime + 0.3);
+
+            oscillator2.type = 'sine';
+            oscillator2.frequency.setValueAtTime(600, currentTime);
+            oscillator2.frequency.exponentialRampToValueAtTime(1200, currentTime + 0.3);
+
+            // Volume envelope - fade in and out
+            gainNode.gain.setValueAtTime(0, currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.15, currentTime + 0.05);
+            gainNode.gain.linearRampToValueAtTime(0.1, currentTime + 0.3);
+            gainNode.gain.linearRampToValueAtTime(0, currentTime + 0.35);
+
+            // Play spinning sound
+            oscillator1.start(currentTime);
+            oscillator1.stop(currentTime + 0.35);
+            oscillator2.start(currentTime);
+            oscillator2.stop(currentTime + 0.35);
+
+            // Create "ding" sound at the end
+            setTimeout(() => {
+                const dingOscillator = audioContext.createOscillator();
+                const dingGain = audioContext.createGain();
+
+                dingOscillator.connect(dingGain);
+                dingGain.connect(audioContext.destination);
+
+                // High pitched "ding"
+                dingOscillator.type = 'sine';
+                dingOscillator.frequency.setValueAtTime(1200, audioContext.currentTime);
+
+                // Quick attack and decay
+                dingGain.gain.setValueAtTime(0.2, audioContext.currentTime);
+                dingGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+
+                dingOscillator.start(audioContext.currentTime);
+                dingOscillator.stop(audioContext.currentTime + 0.2);
+            }, 350);
+        } catch (e) {
+            console.log('Web Audio API not supported:', e);
+        }
     }
 }
 
@@ -802,10 +1162,10 @@ function init() {
 
     // Initialize all managers
     console.log('[DEBUG] Creating ThemeManager...');
-    new ThemeManager();
+    const themeManager = new ThemeManager();
 
     console.log('[DEBUG] Creating CounterManager...');
-    new CounterManager();
+    new CounterManager(themeManager);
 
     console.log('[DEBUG] Creating NavigationManager...');
     new NavigationManager();
