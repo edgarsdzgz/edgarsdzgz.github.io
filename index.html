@@ -26,13 +26,21 @@
             <path d="M2 12 Q 6 10, 10 12 T 18 12 T 22 12" stroke="currentColor" fill="none" opacity="0.7"/>
             <path d="M2 16 Q 6 14, 10 16 T 18 16 T 22 16" stroke="currentColor" fill="none" opacity="0.5"/>
         </svg>
+        <!-- Maritime Mode Symbol: Sailboat -->
+        <svg class="maritime-rune" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <!-- Sailboat -->
+            <path d="M4 20 L20 20" stroke="currentColor" fill="none"/>
+            <path d="M12 4 L12 20" stroke="currentColor" fill="none"/>
+            <path d="M12 4 L6 12 L12 12 Z" fill="currentColor" opacity="0.3" stroke="currentColor"/>
+            <path d="M12 12 L18 18 L12 18 Z" fill="currentColor" opacity="0.2" stroke="currentColor"/>
+        </svg>
     </button>
 
     <!-- BGM Controls -->
     <div id="bgm-controls" class="bgm-controls" style="display: none;">
         <button id="bgm-play-pause" class="bgm-button" aria-label="Play/Pause BGM">▶</button>
-        <input type="range" id="bgm-volume" class="bgm-slider" min="0" max="100" value="50">
-        <span id="bgm-volume-display" class="bgm-volume-text">50%</span>
+        <input type="range" id="bgm-volume" class="bgm-slider" min="0" max="100" value="15">
+        <span id="bgm-volume-display" class="bgm-volume-text">15%</span>
     </div>
 
     <!-- Navigation -->
@@ -478,16 +486,6 @@
                     </div>
                     <button id="buy-dark-mode" class="shop-button">
                         <span id="dark-mode-button-text" class="shop-button-text">Unlock 50<span class="counter-currency">ED</span></span>
-                    </button>
-                </div>
-
-                <div class="upgrade-container">
-                    <div class="upgrade-stat">
-                        <span class="upgrade-stat-label">Synthwave Mode</span>
-                        <span id="synthwave-level" class="upgrade-stat-level">Locked</span>
-                    </div>
-                    <button id="buy-synthwave" class="shop-button">
-                        <span id="synthwave-button-text" class="shop-button-text">Unlock 100<span class="counter-currency">ED</span></span>
                     </button>
                 </div>
 

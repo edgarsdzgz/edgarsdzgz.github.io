@@ -12,7 +12,6 @@ export const CONFIG = {
     themeKey: 'theme',
     agenticClickerLevelKey: 'agenticClickerLevel',
     darkModeUnlockedKey: 'darkModeUnlocked',
-    synthwaveUnlockedKey: 'synthwaveUnlocked',
     maritimeUnlockedKey: 'maritimeUnlocked',
     bgmUnlockedKey: 'bgmUnlocked',
     bgmVolumeKey: 'bgmVolume',
@@ -74,8 +73,8 @@ export const ACHIEVEMENTS = [
         title: 'Everything Must Go!',
         description: 'Purchased everything available in the shop',
         checkType: 'shop_completion',
-        condition: (agenticLevel, darkModeUnlocked, synthwaveUnlocked, maritimeUnlocked, maxLevel) => {
-            return agenticLevel >= maxLevel && darkModeUnlocked && synthwaveUnlocked && maritimeUnlocked;
+        condition: (agenticLevel, darkModeUnlocked, maritimeUnlocked, maxLevel) => {
+            return agenticLevel >= maxLevel && darkModeUnlocked && maritimeUnlocked;
         }
     },
     {

@@ -19,12 +19,10 @@ export class ShopManager {
         this.agenticClickerLevelEl = document.getElementById('agentic-clicker-level');
         this.cogIconEl = document.getElementById('cog-icon');
         this.darkModeLevelEl = document.getElementById('dark-mode-level');
-        this.synthwaveLevelEl = document.getElementById('synthwave-level');
         this.maritimeLevelEl = document.getElementById('maritime-level');
         this.bgmLevelEl = document.getElementById('bgm-level');
         this.shopButtonText = document.getElementById('shop-button-text');
         this.darkModeButtonText = document.getElementById('dark-mode-button-text');
-        this.synthwaveButtonText = document.getElementById('synthwave-button-text');
         this.maritimeButtonText = document.getElementById('maritime-button-text');
         this.bgmButtonText = document.getElementById('bgm-button-text');
 
@@ -44,7 +42,6 @@ export class ShopManager {
         const closeBtn = document.getElementById('close-dialog');
         const buyBtn = document.getElementById('buy-agentic-clicker');
         const darkModeBtn = document.getElementById('buy-dark-mode');
-        const synthwaveBtn = document.getElementById('buy-synthwave');
         const maritimeBtn = document.getElementById('buy-maritime');
         const bgmBtn = document.getElementById('buy-bgm');
         const clearDataBtn = document.getElementById('clear-data-btn');
@@ -89,13 +86,6 @@ export class ShopManager {
         if (darkModeBtn) {
             darkModeBtn.addEventListener('click', () => {
                 this.handleDarkModePurchase();
-            });
-        }
-
-        // Handle Synthwave Mode purchase
-        if (synthwaveBtn) {
-            synthwaveBtn.addEventListener('click', () => {
-                this.handleSynthwavePurchase();
             });
         }
 
@@ -248,31 +238,6 @@ export class ShopManager {
             darkModeBtn.disabled = unlocked;
             darkModeBtn.style.opacity = unlocked ? '0.5' : '1';
             darkModeBtn.style.cursor = unlocked ? 'not-allowed' : 'pointer';
-        }
-
-        // Update Synthwave Mode display
-        if (this.synthwaveLevelEl) {
-            const unlocked = this.counterManager.isSynthwaveUnlocked();
-            this.synthwaveLevelEl.textContent = unlocked ? 'Unlocked' : 'Locked';
-        }
-
-        // Update Synthwave Mode button
-        if (this.synthwaveButtonText) {
-            const unlocked = this.counterManager.isSynthwaveUnlocked();
-            if (unlocked) {
-                this.synthwaveButtonText.innerHTML = `<span style="opacity: 0.6;">Already Unlocked</span>`;
-            } else {
-                this.synthwaveButtonText.innerHTML = `Unlock 100<span class="counter-currency">ED</span>`;
-            }
-        }
-
-        // Update Synthwave button disabled state
-        const synthwaveBtn = document.getElementById('buy-synthwave');
-        if (synthwaveBtn) {
-            const unlocked = this.counterManager.isSynthwaveUnlocked();
-            synthwaveBtn.disabled = unlocked;
-            synthwaveBtn.style.opacity = unlocked ? '0.5' : '1';
-            synthwaveBtn.style.cursor = unlocked ? 'not-allowed' : 'pointer';
         }
 
         // Update Maritime Mode display
@@ -466,55 +431,6 @@ export class ShopManager {
         });
     }
 
-    handleSynthwavePurchase() {
-        const cost = 100;
-        const currentClicks = this.counterManager.getClickCount();
-
-        // Check if already unlocked
-        if (this.counterManager.isSynthwaveUnlocked()) {
-            return;
-        }
-
-        // Check if user has enough clicks
-        if (currentClicks < cost) {
-            const shortage = cost - currentClicks;
-            this.showInsufficientFundsNotification(shortage);
-            return;
-        }
-
-        // Add purchasing animation to button
-        const synthwaveBtn = document.getElementById('buy-synthwave');
-        if (synthwaveBtn) {
-            synthwaveBtn.classList.add('purchasing');
-            setTimeout(() => {
-                synthwaveBtn.classList.remove('purchasing');
-            }, 500);
-        }
-
-        // Animate energy siphon
-        this.animateEnergySiphon();
-
-        // Play sound
-        this.playPurchaseSound();
-
-        // Deduct clicks with animation
-        this.animateCounterDeduction(cost, () => {
-            // After deduction completes, unlock synthwave mode
-            this.counterManager.unlockSynthwave();
-
-            // Update shop display
-            this.updateDisplay();
-
-            // Unlock and activate synthwave mode in theme manager
-            this.themeManager.unlockSynthwave();
-
-            // Check for shop completion achievement
-            this.checkShopCompletion();
-
-            console.log('[SYNTHWAVE MODE] Unlocked!');
-        });
-    }
-
     handleMaritimePurchase() {
         const cost = 200;
         const currentClicks = this.counterManager.getClickCount();
@@ -615,14 +531,12 @@ export class ShopManager {
     checkShopCompletion() {
         const agenticLevel = this.counterManager.getAgenticClickerLevel();
         const darkModeUnlocked = this.counterManager.isDarkModeUnlocked();
-        const synthwaveUnlocked = this.counterManager.isSynthwaveUnlocked();
         const maritimeUnlocked = this.counterManager.isMaritimeUnlocked();
 
         this.achievementManager.checkAchievements(
             'shop_completion',
             agenticLevel,
             darkModeUnlocked,
-            synthwaveUnlocked,
             maritimeUnlocked,
             CONFIG.maxAgenticClickerLevel
         );

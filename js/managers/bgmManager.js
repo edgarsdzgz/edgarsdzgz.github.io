@@ -9,7 +9,7 @@ export class BGMManager {
     constructor() {
         this.audio = null;
         this.isPlaying = false;
-        this.volume = 50; // 0-100
+        this.volume = 15; // 0-100
         this.bgmUnlocked = false;
         this.fadeInterval = null;
 
@@ -48,7 +48,7 @@ export class BGMManager {
         const savedPlaying = getStorageItem(CONFIG.bgmPlayingKey);
 
         this.bgmUnlocked = savedUnlocked === 'true';
-        this.volume = savedVolume ? parseInt(savedVolume, 10) : 50;
+        this.volume = savedVolume ? parseInt(savedVolume, 10) : 15;
 
         // Only auto-play if it was playing before AND unlocked
         // Note: Autoplay policy may still block this
@@ -58,7 +58,7 @@ export class BGMManager {
         }
 
         // Handle NaN case
-        if (isNaN(this.volume)) this.volume = 50;
+        if (isNaN(this.volume)) this.volume = 15;
         if (this.volume < 0) this.volume = 0;
         if (this.volume > 100) this.volume = 100;
     }

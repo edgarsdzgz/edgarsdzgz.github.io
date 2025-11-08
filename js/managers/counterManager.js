@@ -15,7 +15,6 @@ export class CounterManager {
         this.agentClicks = 0; // Lifetime agent clicks only
         this.agenticClickerLevel = 0;
         this.darkModeUnlocked = false;
-        this.synthwaveUnlocked = false;
         this.maritimeUnlocked = false;
         this.bgmUnlocked = false;
         this.autoClickerIntervalId = null;
@@ -53,7 +52,6 @@ export class CounterManager {
         const savedAgentClicks = getStorageItem(CONFIG.agentClicksKey);
         const savedLevel = getStorageItem(CONFIG.agenticClickerLevelKey);
         const savedDarkModeUnlocked = getStorageItem(CONFIG.darkModeUnlockedKey);
-        const savedSynthwaveUnlocked = getStorageItem(CONFIG.synthwaveUnlockedKey);
         const savedMaritimeUnlocked = getStorageItem(CONFIG.maritimeUnlockedKey);
         const savedBgmUnlocked = getStorageItem(CONFIG.bgmUnlockedKey);
 
@@ -63,7 +61,6 @@ export class CounterManager {
         this.agentClicks = savedAgentClicks ? parseInt(savedAgentClicks, 10) : 0;
         this.agenticClickerLevel = savedLevel ? parseInt(savedLevel, 10) : 0;
         this.darkModeUnlocked = savedDarkModeUnlocked === 'true';
-        this.synthwaveUnlocked = savedSynthwaveUnlocked === 'true';
         this.maritimeUnlocked = savedMaritimeUnlocked === 'true';
         this.bgmUnlocked = savedBgmUnlocked === 'true';
 
@@ -82,7 +79,6 @@ export class CounterManager {
         this.agentClicks = 0;
         this.agenticClickerLevel = 0;
         this.darkModeUnlocked = false;
-        this.synthwaveUnlocked = false;
         this.maritimeUnlocked = false;
         this.bgmUnlocked = false;
         this.updateDisplay();
@@ -220,10 +216,6 @@ export class CounterManager {
         return this.darkModeUnlocked;
     }
 
-    isSynthwaveUnlocked() {
-        return this.synthwaveUnlocked;
-    }
-
     isMaritimeUnlocked() {
         return this.maritimeUnlocked;
     }
@@ -247,11 +239,6 @@ export class CounterManager {
     unlockDarkMode() {
         this.darkModeUnlocked = true;
         setStorageItem(CONFIG.darkModeUnlockedKey, 'true');
-    }
-
-    unlockSynthwave() {
-        this.synthwaveUnlocked = true;
-        setStorageItem(CONFIG.synthwaveUnlockedKey, 'true');
     }
 
     unlockMaritime() {

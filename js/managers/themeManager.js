@@ -9,7 +9,6 @@ export class ThemeManager {
     constructor() {
         this.themeToggle = document.getElementById('theme-toggle');
         this.darkModeUnlocked = false;
-        this.synthwaveUnlocked = false;
         this.maritimeUnlocked = false;
         this.init();
     }
@@ -17,11 +16,9 @@ export class ThemeManager {
     init() {
         // Check which themes are unlocked
         const darkUnlockedValue = getStorageItem(CONFIG.darkModeUnlockedKey);
-        const synthwaveUnlockedValue = getStorageItem(CONFIG.synthwaveUnlockedKey);
         const maritimeUnlockedValue = getStorageItem(CONFIG.maritimeUnlockedKey);
 
         this.darkModeUnlocked = darkUnlockedValue === 'true';
-        this.synthwaveUnlocked = synthwaveUnlockedValue === 'true';
         this.maritimeUnlocked = maritimeUnlockedValue === 'true';
 
         // Default to light mode (all other modes locked by default)
@@ -59,14 +56,6 @@ export class ThemeManager {
         this.setTheme('dark');
     }
 
-    unlockSynthwave() {
-        this.synthwaveUnlocked = true;
-        setStorageItem(CONFIG.synthwaveUnlockedKey, 'true');
-        this.updateToggleState();
-        // Automatically switch to synthwave when unlocked
-        this.setTheme('synthwave');
-    }
-
     unlockMaritime() {
         this.maritimeUnlocked = true;
         setStorageItem(CONFIG.maritimeUnlockedKey, 'true');
@@ -78,7 +67,6 @@ export class ThemeManager {
     setTheme(theme, save = true) {
         // Check if theme is allowed
         if (theme === 'dark' && !this.darkModeUnlocked) return;
-        if (theme === 'synthwave' && !this.synthwaveUnlocked) return;
         if (theme === 'maritime' && !this.maritimeUnlocked) return;
 
         document.documentElement.setAttribute('data-theme', theme);
@@ -94,9 +82,8 @@ export class ThemeManager {
 
         const currentTheme = document.documentElement.getAttribute('data-theme');
 
-        // Build theme cycle based on what's unlocked: light → dark → synthwave? → maritime? → light
+        // Build theme cycle based on what's unlocked: light → dark → maritime? → light
         const themes = ['light', 'dark'];
-        if (this.synthwaveUnlocked) themes.push('synthwave');
         if (this.maritimeUnlocked) themes.push('maritime');
 
         const currentIndex = themes.indexOf(currentTheme);
