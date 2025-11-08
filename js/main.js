@@ -5,10 +5,47 @@
 const CONFIG = {
     storagePrefix: 'edgar_tech_',
     clickKey: 'clickCount',
+    totalClicksKey: 'totalClicks', // Lifetime clicks (never decreases)
     tickKey: 'tickCount',
     themeKey: 'theme',
     agenticClickerLevelKey: 'agenticClickerLevel',
+    achievementsKey: 'earnedAchievements', // Array of earned achievement IDs
 };
+
+// ===============================================
+// ACHIEVEMENTS DEFINITIONS
+// ===============================================
+
+const ACHIEVEMENTS = [
+    {
+        id: 'first_click',
+        title: 'Your First Click!',
+        description: 'Clicked for the first time on the site',
+        checkType: 'click',
+        condition: (totalClicks) => totalClicks >= 1
+    },
+    {
+        id: 'ten_clicks',
+        title: '10x Develo-clicker',
+        description: 'Clicked 10 times',
+        checkType: 'click',
+        condition: (totalClicks) => totalClicks >= 10
+    },
+    {
+        id: 'over_9000',
+        title: 'Over 9000!',
+        description: 'Clicked 9001 times',
+        checkType: 'click',
+        condition: (totalClicks) => totalClicks >= 9001
+    },
+    {
+        id: 'first_purchase',
+        title: 'I think this site is not what I think it is',
+        description: 'Bought 1 item',
+        checkType: 'purchase',
+        condition: (level) => level >= 1
+    }
+];
 
 // ===============================================
 // UTILITY FUNCTIONS
@@ -115,7 +152,10 @@ class ThemeManager {
 class CounterManager {
     constructor() {
         this.clickCount = 0;
+        this.totalClicks = 0; // Lifetime clicks
         this.agenticClickerLevel = 0;
+        this.earnedAchievements = new Set(); // Set of earned achievement IDs
+        this.autoClickerIntervalId = null; // Auto-clicker interval ID
         // this.tickCount = 0; // DISABLED - Tick counter removed
         this.clickCounterEl = document.getElementById('clickCounter');
         this.shopButtonSubtitle = document.getElementById('shop-button-subtitle');
@@ -148,19 +188,39 @@ class CounterManager {
 
         // Setup clicker dialog
         this.setupClickerDialog();
+
+        // Start auto-clicker if level > 0
+        if (this.agenticClickerLevel > 0) {
+            this.startAutoClicker();
+        }
     }
 
     loadCounters() {
         const savedClicks = getStorageItem(CONFIG.clickKey);
+        const savedTotalClicks = getStorageItem(CONFIG.totalClicksKey);
         const savedLevel = getStorageItem(CONFIG.agenticClickerLevelKey);
+        const savedAchievements = getStorageItem(CONFIG.achievementsKey);
         // const savedTicks = getStorageItem(CONFIG.tickKey); // DISABLED
 
         this.clickCount = savedClicks ? parseInt(savedClicks, 10) : 0;
+        this.totalClicks = savedTotalClicks ? parseInt(savedTotalClicks, 10) : 0;
         this.agenticClickerLevel = savedLevel ? parseInt(savedLevel, 10) : 0;
         // this.tickCount = savedTicks ? parseInt(savedTicks, 10) : 0; // DISABLED
 
+        // Load earned achievements
+        if (savedAchievements) {
+            try {
+                const achievementsArray = JSON.parse(savedAchievements);
+                this.earnedAchievements = new Set(achievementsArray);
+            } catch (e) {
+                console.error('Error parsing achievements:', e);
+                this.earnedAchievements = new Set();
+            }
+        }
+
         // Handle NaN cases
         if (isNaN(this.clickCount)) this.clickCount = 0;
+        if (isNaN(this.totalClicks)) this.totalClicks = 0;
         if (isNaN(this.agenticClickerLevel)) this.agenticClickerLevel = 0;
         // if (isNaN(this.tickCount)) this.tickCount = 0; // DISABLED
     }
@@ -184,6 +244,50 @@ class CounterManager {
         return Math.floor(20 * Math.pow(1.4, this.agenticClickerLevel));
     }
 
+    calculateAutoClickerInterval() {
+        // Level 1: 750ms, each level is 5% faster (95% of previous interval)
+        // Formula: 750 * (0.95 ^ (level - 1))
+        return 750 * Math.pow(0.95, this.agenticClickerLevel - 1);
+    }
+
+    startAutoClicker() {
+        // Clear existing interval if any
+        if (this.autoClickerIntervalId) {
+            clearInterval(this.autoClickerIntervalId);
+        }
+
+        // Only start if level > 0
+        if (this.agenticClickerLevel === 0) {
+            return;
+        }
+
+        const interval = this.calculateAutoClickerInterval();
+        console.log(`[AUTO-CLICKER] Starting at level ${this.agenticClickerLevel}, interval: ${interval.toFixed(2)}ms`);
+
+        this.autoClickerIntervalId = setInterval(() => {
+            this.clickCount++;
+            // Note: totalClicks is NOT incremented for auto-clicks, only manual clicks count
+            setStorageItem(CONFIG.clickKey, this.clickCount);
+            this.updateClickDisplay();
+
+            // Add subtle animation
+            if (this.clickCounterEl) {
+                this.clickCounterEl.style.transform = 'scale(1.08)';
+                setTimeout(() => {
+                    this.clickCounterEl.style.transform = 'scale(1)';
+                }, 100);
+            }
+        }, interval);
+    }
+
+    stopAutoClicker() {
+        if (this.autoClickerIntervalId) {
+            clearInterval(this.autoClickerIntervalId);
+            this.autoClickerIntervalId = null;
+            console.log('[AUTO-CLICKER] Stopped');
+        }
+    }
+
     // DISABLED - Tick counter removed
     // updateTickDisplay() {
     //     if (this.tickCounterEl) {
@@ -197,9 +301,11 @@ class CounterManager {
             // No need to filter clicks anymore since reset buttons are removed
 
             this.clickCount++;
-            console.log('[DEBUG] Click detected! New count:', this.clickCount);
+            this.totalClicks++; // Increment lifetime clicks
+            console.log('[DEBUG] Click detected! Current:', this.clickCount, 'Total:', this.totalClicks);
 
             setStorageItem(CONFIG.clickKey, this.clickCount);
+            setStorageItem(CONFIG.totalClicksKey, this.totalClicks);
             this.updateClickDisplay();
 
             // Add a subtle animation to nav counter
@@ -210,12 +316,48 @@ class CounterManager {
                 }, 200);
             }
 
-            // Show toast every 5 clicks
-            if (this.clickCount % 5 === 0) {
-                console.log('[DEBUG] Multiple of 5! Showing toast...');
-                this.showToast('FIVE CLICKS!');
+            // Check for click-based achievements
+            this.checkAchievements('click');
+        });
+    }
+
+    checkAchievements(checkType) {
+        // Filter achievements by type
+        const relevantAchievements = ACHIEVEMENTS.filter(a => a.checkType === checkType);
+
+        relevantAchievements.forEach(achievement => {
+            // Skip if already earned
+            if (this.earnedAchievements.has(achievement.id)) {
+                return;
+            }
+
+            // Check condition based on type
+            let conditionMet = false;
+            if (checkType === 'click') {
+                conditionMet = achievement.condition(this.totalClicks);
+            } else if (checkType === 'purchase') {
+                conditionMet = achievement.condition(this.agenticClickerLevel);
+            }
+
+            // If condition met, award achievement
+            if (conditionMet) {
+                this.earnAchievement(achievement);
             }
         });
+    }
+
+    earnAchievement(achievement) {
+        console.log('[ACHIEVEMENT] Earned:', achievement.title);
+
+        // Add to earned set
+        this.earnedAchievements.add(achievement.id);
+
+        // Save to localStorage
+        const achievementsArray = Array.from(this.earnedAchievements);
+        setStorageItem(CONFIG.achievementsKey, JSON.stringify(achievementsArray));
+
+        // Show toast notification
+        this.showToast(achievement.title);
     }
 
     showToast(message, duration = 3000) {
@@ -424,6 +566,12 @@ class CounterManager {
                     this.agenticClickerLevel++;
                     setStorageItem(CONFIG.agenticClickerLevelKey, this.agenticClickerLevel);
                     this.updateShopButtonSubtitle();
+
+                    // Start or restart auto-clicker with new speed
+                    this.startAutoClicker();
+
+                    // Check for purchase-based achievements
+                    this.checkAchievements('purchase');
                 }
             };
 
