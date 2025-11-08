@@ -35,12 +35,12 @@ export class ThemeManager {
             if (this.darkModeUnlocked) {
                 this.themeToggle.style.opacity = '1';
                 this.themeToggle.style.cursor = 'pointer';
-                this.themeToggle.disabled = false;
             } else {
                 this.themeToggle.style.opacity = '0.3';
                 this.themeToggle.style.cursor = 'not-allowed';
-                this.themeToggle.disabled = true;
             }
+            // Never disable the button - let clicks through for counter
+            this.themeToggle.disabled = false;
         }
     }
 

@@ -175,7 +175,7 @@ img {
     background: var(--nav-bg);
     backdrop-filter: blur(10px);
     box-shadow: var(--shadow-sm);
-    z-index: 1000;
+    z-index: 2100;
     transition: all var(--transition-base);
 }
 
