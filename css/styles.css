@@ -105,6 +105,47 @@ body {
     transition: background-color var(--transition-base), color var(--transition-base);
 }
 
+/* ===============================================
+   CUSTOM SCROLLBAR
+   =============================================== */
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-primary) var(--bg-secondary);
+}
+
+/* WebKit Browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-primary);
+    border-radius: 10px;
+    border: 2px solid var(--bg-secondary);
+    transition: background var(--transition-base);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-secondary);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: var(--accent-secondary);
+}
+
+/* Scrollbar corner (where vertical and horizontal scrollbars meet) */
+::-webkit-scrollbar-corner {
+    background: var(--bg-secondary);
+}
+
 h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
     font-weight: 600;
@@ -204,8 +245,8 @@ img {
 
 .bgm-controls {
     position: fixed;
-    bottom: 1rem;
-    left: 5rem;
+    bottom: 1.5rem;
+    right: 1.5rem;
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -214,7 +255,24 @@ img {
     border-radius: 2rem;
     box-shadow: var(--shadow-md);
     z-index: 1001;
-    transition: all var(--transition-base);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    max-width: 250px;
+}
+
+/* Collapsed state - only show play button */
+.bgm-controls.collapsed {
+    padding: 0.75rem;
+    max-width: 52px;
+    gap: 0;
+}
+
+.bgm-controls.collapsed .bgm-slider,
+.bgm-controls.collapsed .bgm-volume-text {
+    opacity: 0;
+    width: 0;
+    margin: 0;
+    pointer-events: none;
 }
 
 .bgm-button {
@@ -250,6 +308,11 @@ img {
     border-radius: 2px;
     outline: none;
     cursor: pointer;
+    transition: opacity 0.3s ease, width 0.3s ease;
+}
+
+.bgm-volume-text {
+    transition: opacity 0.3s ease, width 0.3s ease;
 }
 
 .bgm-slider::-webkit-slider-thumb {
@@ -1126,7 +1189,7 @@ img {
     border: 2px solid #667eea;
     padding: 1rem 1.5rem;
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-    z-index: 1002;
+    z-index: 1010;
     min-width: 200px;
 
     /* Start as invisible circle */
@@ -1391,6 +1454,61 @@ body.dialog-open .toast {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 1;
+}
+
+/* Shop Tabs */
+.shop-tabs {
+    display: flex;
+    gap: 0;
+    background: var(--bg-secondary);
+    border-bottom: 2px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.shop-tab {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    font-family: inherit;
+}
+
+.shop-tab:hover {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.shop-tab.active {
+    color: var(--accent-color);
+    background: var(--bg-primary);
+}
+
+.shop-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent-color);
+}
+
+/* Tab Panels */
+.tab-panel {
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.tab-panel.active {
+    display: flex;
 }
 
 @keyframes headerShine {

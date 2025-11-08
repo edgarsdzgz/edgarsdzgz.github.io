@@ -464,49 +464,62 @@
             <div class="dialog-header">
                 <h2>Upgrade Shop</h2>
             </div>
+
+            <!-- Shop Tabs -->
+            <div class="shop-tabs">
+                <button class="shop-tab active" data-tab="upgrades">Upgrades</button>
+                <button class="shop-tab" data-tab="themes">Themes</button>
+            </div>
+
             <div class="dialog-body">
-                <div class="upgrade-container">
-                    <div class="upgrade-stat">
-                        <span class="upgrade-stat-label">Agentic Clicker</span>
-                        <svg id="cog-icon" class="cog-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="3"></circle>
-                            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-                        </svg>
-                        <span id="agentic-clicker-level" class="upgrade-stat-level">0 Agents Clicking</span>
+                <!-- Upgrades Tab Panel -->
+                <div class="tab-panel active" data-panel="upgrades">
+                    <div class="upgrade-container">
+                        <div class="upgrade-stat">
+                            <span class="upgrade-stat-label">Agentic Clicker</span>
+                            <svg id="cog-icon" class="cog-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                            </svg>
+                            <span id="agentic-clicker-level" class="upgrade-stat-level">0 Agents Clicking</span>
+                        </div>
+                        <button id="buy-agentic-clicker" class="shop-button">
+                            <span id="shop-button-text" class="shop-button-text">Hire Agent 20<span class="counter-currency">ED</span></span>
+                        </button>
                     </div>
-                    <button id="buy-agentic-clicker" class="shop-button">
-                        <span id="shop-button-text" class="shop-button-text">Hire Agent 20<span class="counter-currency">ED</span></span>
-                    </button>
+
+                    <div class="upgrade-container">
+                        <div class="upgrade-stat">
+                            <span class="upgrade-stat-label">Background Music</span>
+                            <span id="bgm-level" class="upgrade-stat-level">Locked</span>
+                        </div>
+                        <button id="buy-bgm" class="shop-button">
+                            <span id="bgm-button-text" class="shop-button-text">Unlock 250<span class="counter-currency">ED</span></span>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="upgrade-container">
-                    <div class="upgrade-stat">
-                        <span class="upgrade-stat-label">Dark Mode</span>
-                        <span id="dark-mode-level" class="upgrade-stat-level">Locked</span>
+                <!-- Themes Tab Panel -->
+                <div class="tab-panel" data-panel="themes">
+                    <div class="upgrade-container">
+                        <div class="upgrade-stat">
+                            <span class="upgrade-stat-label">Dark Mode</span>
+                            <span id="dark-mode-level" class="upgrade-stat-level">Locked</span>
+                        </div>
+                        <button id="buy-dark-mode" class="shop-button">
+                            <span id="dark-mode-button-text" class="shop-button-text">Unlock 50<span class="counter-currency">ED</span></span>
+                        </button>
                     </div>
-                    <button id="buy-dark-mode" class="shop-button">
-                        <span id="dark-mode-button-text" class="shop-button-text">Unlock 50<span class="counter-currency">ED</span></span>
-                    </button>
-                </div>
 
-                <div class="upgrade-container">
-                    <div class="upgrade-stat">
-                        <span class="upgrade-stat-label">Maritime Mode</span>
-                        <span id="maritime-level" class="upgrade-stat-level">Locked</span>
+                    <div class="upgrade-container">
+                        <div class="upgrade-stat">
+                            <span class="upgrade-stat-label">Maritime Mode</span>
+                            <span id="maritime-level" class="upgrade-stat-level">Locked</span>
+                        </div>
+                        <button id="buy-maritime" class="shop-button">
+                            <span id="maritime-button-text" class="shop-button-text">Unlock 200<span class="counter-currency">ED</span></span>
+                        </button>
                     </div>
-                    <button id="buy-maritime" class="shop-button">
-                        <span id="maritime-button-text" class="shop-button-text">Unlock 200<span class="counter-currency">ED</span></span>
-                    </button>
-                </div>
-
-                <div class="upgrade-container">
-                    <div class="upgrade-stat">
-                        <span class="upgrade-stat-label">Background Music</span>
-                        <span id="bgm-level" class="upgrade-stat-level">Locked</span>
-                    </div>
-                    <button id="buy-bgm" class="shop-button">
-                        <span id="bgm-button-text" class="shop-button-text">Unlock 250<span class="counter-currency">ED</span></span>
-                    </button>
                 </div>
             </div>
             <div class="dialog-footer">

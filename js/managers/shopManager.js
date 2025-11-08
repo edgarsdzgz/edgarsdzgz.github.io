@@ -46,6 +46,9 @@ export class ShopManager {
         const bgmBtn = document.getElementById('buy-bgm');
         const clearDataBtn = document.getElementById('clear-data-btn');
 
+        // Setup shop tabs
+        this.setupShopTabs();
+
         // Toggle dialog when clicking counter
         const clickCounter = document.getElementById('clickCounter');
         if (clickCounter) {
@@ -143,6 +146,28 @@ export class ShopManager {
                 this.closeDialog();
             });
         }
+    }
+
+    setupShopTabs() {
+        const tabs = document.querySelectorAll('.shop-tab');
+        const panels = document.querySelectorAll('.tab-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.dataset.tab;
+
+                // Remove active class from all tabs and panels
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+
+                // Add active class to clicked tab and corresponding panel
+                tab.classList.add('active');
+                const targetPanel = document.querySelector(`[data-panel="${targetTab}"]`);
+                if (targetPanel) {
+                    targetPanel.classList.add('active');
+                }
+            });
+        });
     }
 
     openDialog() {

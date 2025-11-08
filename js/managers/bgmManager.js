@@ -17,6 +17,11 @@ export class BGMManager {
         this.playPauseBtn = null;
         this.volumeSlider = null;
         this.volumeDisplay = null;
+        this.bgmControls = null;
+
+        // Auto-collapse
+        this.collapseTimer = null;
+        this.collapseDelay = 3000; // 3 seconds
 
         this.init();
     }
@@ -67,10 +72,14 @@ export class BGMManager {
         this.playPauseBtn = playPauseBtn;
         this.volumeSlider = volumeSlider;
         this.volumeDisplay = volumeDisplay;
+        this.bgmControls = document.getElementById('bgm-controls');
 
         // Setup play/pause button
         if (this.playPauseBtn) {
-            this.playPauseBtn.addEventListener('click', () => this.togglePlayPause());
+            this.playPauseBtn.addEventListener('click', () => {
+                this.togglePlayPause();
+                this.resetCollapseTimer();
+            });
         }
 
         // Setup volume slider
@@ -78,7 +87,24 @@ export class BGMManager {
             this.volumeSlider.value = this.volume;
             this.volumeSlider.addEventListener('input', (e) => {
                 this.setVolume(parseInt(e.target.value, 10));
+                this.resetCollapseTimer();
             });
+        }
+
+        // Setup auto-collapse behavior
+        if (this.bgmControls) {
+            // Expand on hover
+            this.bgmControls.addEventListener('mouseenter', () => {
+                this.expandControls();
+            });
+
+            // Start collapse timer on mouse leave
+            this.bgmControls.addEventListener('mouseleave', () => {
+                this.startCollapseTimer();
+            });
+
+            // Start initially collapsed after delay
+            this.startCollapseTimer();
         }
 
         // Update display
@@ -248,5 +274,37 @@ export class BGMManager {
 
     getIsPlaying() {
         return this.isPlaying;
+    }
+
+    expandControls() {
+        if (this.bgmControls) {
+            this.bgmControls.classList.remove('collapsed');
+            this.clearCollapseTimer();
+        }
+    }
+
+    collapseControls() {
+        if (this.bgmControls) {
+            this.bgmControls.classList.add('collapsed');
+        }
+    }
+
+    startCollapseTimer() {
+        this.clearCollapseTimer();
+        this.collapseTimer = setTimeout(() => {
+            this.collapseControls();
+        }, this.collapseDelay);
+    }
+
+    resetCollapseTimer() {
+        this.expandControls();
+        this.startCollapseTimer();
+    }
+
+    clearCollapseTimer() {
+        if (this.collapseTimer) {
+            clearTimeout(this.collapseTimer);
+            this.collapseTimer = null;
+        }
     }
 }
