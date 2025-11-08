@@ -174,6 +174,8 @@ class CounterManager {
             // No need to filter clicks anymore since reset buttons are removed
 
             this.clickCount++;
+            console.log('[DEBUG] Click detected! New count:', this.clickCount);
+
             setStorageItem(CONFIG.clickKey, this.clickCount);
             this.updateClickDisplay();
 
@@ -187,37 +189,58 @@ class CounterManager {
 
             // Show toast every 5 clicks
             if (this.clickCount % 5 === 0) {
+                console.log('[DEBUG] Multiple of 5! Showing toast...');
                 this.showToast('FIVE CLICKS!');
             }
         });
     }
 
     showToast(message, duration = 3000) {
+        console.log('[DEBUG] showToast called with message:', message);
+
         const toast = document.getElementById('toast');
         const toastMessage = document.getElementById('toast-message');
-        const progressBar = toast.querySelector('.toast-progress-bar::after');
 
-        if (!toast) return;
+        console.log('[DEBUG] Toast element:', toast);
+        console.log('[DEBUG] Toast message element:', toastMessage);
+
+        if (!toast) {
+            console.error('[DEBUG] Toast element not found!');
+            return;
+        }
 
         // Update message
         if (toastMessage) {
             toastMessage.textContent = message;
+            console.log('[DEBUG] Message updated to:', message);
+        } else {
+            console.error('[DEBUG] Toast message element not found!');
         }
 
-        // Remove any existing show class and animation
-        toast.classList.remove('show');
+        // Remove any existing classes
+        toast.classList.remove('show', 'hiding');
+        console.log('[DEBUG] Removed existing classes');
 
         // Force reflow to restart animation
         void toast.offsetWidth;
 
-        // Show toast with bounce animation
+        // Show toast with morph-in animation
         setTimeout(() => {
             toast.classList.add('show');
+            console.log('[DEBUG] Toast morphing in!');
         }, 10);
 
-        // Hide toast after duration
+        // Hide toast with morph-out animation
         setTimeout(() => {
             toast.classList.remove('show');
+            toast.classList.add('hiding');
+            console.log('[DEBUG] Toast morphing out...');
+
+            // Clean up hiding class after animation completes
+            setTimeout(() => {
+                toast.classList.remove('hiding');
+                console.log('[DEBUG] Cleanup complete - toast fully hidden');
+            }, 500); // Match morphOut animation duration
         }, duration);
     }
 
@@ -388,10 +411,19 @@ if (document.readyState === 'loading') {
 }
 
 function init() {
+    console.log('[DEBUG] Initializing portfolio...');
+
     // Initialize all managers
+    console.log('[DEBUG] Creating ThemeManager...');
     new ThemeManager();
+
+    console.log('[DEBUG] Creating CounterManager...');
     new CounterManager();
+
+    console.log('[DEBUG] Creating NavigationManager...');
     new NavigationManager();
+
+    console.log('[DEBUG] Creating ScrollAnimationManager...');
     new ScrollAnimationManager();
 
     // Add smooth transition to counter values
@@ -399,6 +431,16 @@ function init() {
     counterValues.forEach(el => {
         el.style.transition = 'transform 0.2s ease';
     });
+
+    // Check if toast element exists
+    const toastCheck = document.getElementById('toast');
+    console.log('[DEBUG] Toast element check on init:', toastCheck);
+
+    // Check theme toggle icons
+    const lightRune = document.querySelector('.light-rune');
+    const darkRune = document.querySelector('.dark-rune');
+    console.log('[DEBUG] Light rune icon:', lightRune);
+    console.log('[DEBUG] Dark rune icon:', darkRune);
 
     console.log('🚀 Edgar\'s Portfolio 2.0 initialized successfully!');
 }
