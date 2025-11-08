@@ -427,6 +427,36 @@
         <div class="toast-progress-bar"></div>
     </div>
 
+    <!-- Clicker Dialog -->
+    <div id="clicker-dialog-backdrop" class="dialog-backdrop">
+        <div id="clicker-dialog" class="dialog">
+            <div class="dialog-header">
+                <h2>Clicker Shop</h2>
+            </div>
+            <div class="dialog-body">
+                <button id="buy-agentic-clicker" class="shop-button">
+                    <span class="shop-button-title">Agentic Clicker</span>
+                    <span class="shop-button-subtitle">Level 1 ED 20</span>
+                </button>
+            </div>
+            <div class="dialog-footer">
+                <button id="close-dialog" class="btn-close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Energy beam SVG for animation -->
+    <svg id="energy-beam" class="energy-beam" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="beamGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#667eea;stop-opacity:0" />
+                <stop offset="50%" style="stop-color:#667eea;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#667eea;stop-opacity:0" />
+            </linearGradient>
+        </defs>
+        <line id="beam-line" x1="0" y1="0" x2="0" y2="0" stroke="url(#beamGradient)" stroke-width="3" />
+    </svg>
+
     <script src="js/main.js"></script>
 </body>
 </html>

@@ -141,6 +141,9 @@ class CounterManager {
 
         // Setup cross-tab synchronization
         this.setupStorageListener();
+
+        // Setup clicker dialog
+        this.setupClickerDialog();
     }
 
     loadCounters() {
@@ -291,6 +294,180 @@ class CounterManager {
                 //     this.updateTickDisplay();
                 // }
             });
+        }
+    }
+
+    setupClickerDialog() {
+        const backdrop = document.getElementById('clicker-dialog-backdrop');
+        const dialog = document.getElementById('clicker-dialog');
+        const closeBtn = document.getElementById('close-dialog');
+        const buyBtn = document.getElementById('buy-agentic-clicker');
+
+        // Open dialog when clicking counter
+        if (this.clickCounterEl) {
+            this.clickCounterEl.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent this from counting as a click
+                this.openDialog();
+            });
+        }
+
+        // Close dialog when clicking backdrop
+        if (backdrop) {
+            backdrop.addEventListener('click', (e) => {
+                if (e.target === backdrop) {
+                    this.closeDialog();
+                }
+            });
+        }
+
+        // Close dialog when clicking close button
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                this.closeDialog();
+            });
+        }
+
+        // Handle purchase
+        if (buyBtn) {
+            buyBtn.addEventListener('click', () => {
+                this.handlePurchase();
+            });
+        }
+    }
+
+    openDialog() {
+        const backdrop = document.getElementById('clicker-dialog-backdrop');
+        if (backdrop) {
+            backdrop.classList.add('show');
+        }
+    }
+
+    closeDialog() {
+        const backdrop = document.getElementById('clicker-dialog-backdrop');
+        if (backdrop) {
+            backdrop.classList.remove('show');
+        }
+    }
+
+    handlePurchase() {
+        const cost = 20;
+
+        // Check if user has enough clicks
+        if (this.clickCount < cost) {
+            alert(`Not enough clicks! You need ${cost} clicks but only have ${this.clickCount}.`);
+            return;
+        }
+
+        // Add purchasing animation to button
+        const buyBtn = document.getElementById('buy-agentic-clicker');
+        if (buyBtn) {
+            buyBtn.classList.add('purchasing');
+            setTimeout(() => {
+                buyBtn.classList.remove('purchasing');
+            }, 500);
+        }
+
+        // Animate energy siphon
+        this.animateEnergySiphon();
+
+        // Play sound
+        this.playPurchaseSound();
+
+        // Deduct clicks after a short delay (for animation effect)
+        setTimeout(() => {
+            const startCount = this.clickCount;
+            const endCount = this.clickCount - cost;
+            const duration = 800; // Animation duration in ms
+            const startTime = Date.now();
+
+            // Animate counter counting down
+            const animate = () => {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Ease out cubic function for smooth deceleration
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+
+                const currentCount = Math.round(startCount - (cost * easeProgress));
+                this.clickCount = currentCount;
+                this.updateClickDisplay();
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    // Final update to ensure exact value
+                    this.clickCount = endCount;
+                    setStorageItem(CONFIG.clickKey, this.clickCount);
+                    this.updateClickDisplay();
+                }
+            };
+
+            animate();
+        }, 200);
+    }
+
+    animateEnergySiphon() {
+        const beam = document.getElementById('energy-beam');
+        const beamLine = document.getElementById('beam-line');
+        const counter = this.clickCounterEl;
+        const buyBtn = document.getElementById('buy-agentic-clicker');
+
+        if (!beam || !beamLine || !counter || !buyBtn) return;
+
+        // Get positions
+        const counterRect = counter.getBoundingClientRect();
+        const btnRect = buyBtn.getBoundingClientRect();
+
+        const x1 = counterRect.left + counterRect.width / 2;
+        const y1 = counterRect.top + counterRect.height / 2;
+        const x2 = btnRect.left + btnRect.width / 2;
+        const y2 = btnRect.top + btnRect.height / 2;
+
+        // Set beam line coordinates
+        beamLine.setAttribute('x1', x1);
+        beamLine.setAttribute('y1', y1);
+        beamLine.setAttribute('x2', x2);
+        beamLine.setAttribute('y2', y2);
+
+        // Activate beam
+        beam.classList.add('active');
+
+        // Add pulse animation to counter
+        counter.classList.add('energy-active');
+
+        // Remove animations after completion
+        setTimeout(() => {
+            beam.classList.remove('active');
+            counter.classList.remove('energy-active');
+        }, 1000);
+    }
+
+    playPurchaseSound() {
+        try {
+            // Create audio context (Web Audio API)
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+            // Create oscillator for the main tone
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            // Configure sound: swoosh/zap effect
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.3);
+
+            // Volume envelope
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+            // Play sound
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        } catch (e) {
+            console.log('Web Audio API not supported:', e);
         }
     }
 }

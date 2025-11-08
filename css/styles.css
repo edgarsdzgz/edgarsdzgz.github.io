@@ -915,6 +915,211 @@ img {
 }
 
 /* ===============================================
+   CLICKER DIALOG
+   =============================================== */
+
+/* Counter hover effect */
+.nav-counter {
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-counter:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+}
+
+.nav-counter.energy-active {
+    animation: counterPulse 0.5s ease-out;
+}
+
+/* Dialog backdrop */
+.dialog-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.dialog-backdrop.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* Dialog box */
+.dialog {
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    width: 90%;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dialog-backdrop.show .dialog {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.dialog-header {
+    padding: 2rem 2rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dialog-header h2 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.dialog-body {
+    padding: 2rem;
+}
+
+.dialog-footer {
+    padding: 1rem 2rem 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Shop button */
+.shop-button {
+    width: 100%;
+    padding: 2rem;
+    background: var(--accent-gradient);
+    border: 2px solid var(--accent-primary);
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.shop-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+}
+
+.shop-button:active {
+    transform: translateY(-2px);
+}
+
+.shop-button.purchasing {
+    animation: buttonPulse 0.5s ease-out;
+    pointer-events: none;
+}
+
+.shop-button-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.shop-button-subtitle {
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-close {
+    padding: 0.75rem 2rem;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-close:hover {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+/* Energy beam animation */
+.energy-beam {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1999;
+    opacity: 0;
+}
+
+.energy-beam.active {
+    opacity: 1;
+    animation: beamFade 1s ease-out forwards;
+}
+
+#beam-line {
+    filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.8));
+    stroke-dasharray: 10 5;
+    animation: beamFlow 0.5s linear infinite;
+}
+
+/* Animations */
+@keyframes counterPulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+    }
+    25% {
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.8), 0 0 40px rgba(102, 126, 234, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(102, 126, 234, 0.7), 0 0 30px rgba(102, 126, 234, 0.3);
+    }
+    75% {
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.8), 0 0 40px rgba(102, 126, 234, 0.4);
+    }
+}
+
+@keyframes buttonPulse {
+    0%, 100% {
+        transform: translateY(-2px) scale(1);
+    }
+    50% {
+        transform: translateY(-2px) scale(0.95);
+    }
+}
+
+@keyframes beamFade {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes beamFlow {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dashoffset: 15;
+    }
+}
+
+/* ===============================================
    ANIMATIONS
    =============================================== */
 
