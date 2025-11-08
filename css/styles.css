@@ -13,11 +13,11 @@
     --accent-primary: #667eea;
     --accent-secondary: #764ba2;
     --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --border-color: #dee2e6;
+    --border-color: #adb5bd;
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
-    --card-bg: #ffffff;
+    --card-bg: #f8f9fa;
     --nav-bg: rgba(255, 255, 255, 0.95);
 
     /* Spacing */
@@ -561,6 +561,137 @@ img {
     line-height: 1.7;
 }
 
+/* Unlock Lore Button */
+.unlock-lore-btn {
+    margin-top: var(--spacing-sm);
+    padding: 0.5rem 1rem;
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.unlock-lore-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.unlock-lore-btn .unlock-icon {
+    font-size: 1rem;
+}
+
+.unlock-lore-btn.purchasing {
+    animation: buttonPulse 0.5s ease;
+}
+
+/* Lore Item Styles */
+.lore-item {
+    margin-left: 1.5rem;
+    padding-bottom: var(--spacing-md);
+}
+
+.lore-marker {
+    position: absolute;
+    left: -2.5rem;
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-secondary);
+    border: 2px solid var(--bg-primary);
+    box-shadow: 0 0 0 2px var(--border-color);
+}
+
+.lore-content {
+    background: var(--bg-secondary);
+    padding: var(--spacing-sm);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.lore-content:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.lore-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.lore-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.lore-expand-icon {
+    font-size: 0.75rem;
+    color: var(--accent-primary);
+    transition: transform var(--transition-fast);
+}
+
+.lore-title {
+    font-size: var(--font-size-base);
+    margin: 0;
+    color: var(--accent-secondary);
+    font-weight: 600;
+}
+
+.lore-badge {
+    font-size: 0.75rem;
+    background: var(--accent-gradient);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.lore-body {
+    padding-top: var(--spacing-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.875rem;
+}
+
+.lore-body p {
+    margin: 0;
+}
+
+/* Spawn Animation */
+@keyframes spawnIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+    }
+    50% {
+        transform: scale(1.05) translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.lore-item.spawning {
+    animation: spawnIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 /* ===============================================
    PROJECTS SECTION
    =============================================== */
@@ -963,8 +1094,8 @@ img {
     opacity: 1;
 }
 
-/* Dim everything when dialog is open */
-body.dialog-open #nav,
+/* Dim everything when dialog is open, except counter and toast */
+body.dialog-open .nav-links,
 body.dialog-open .hero,
 body.dialog-open .section,
 body.dialog-open .footer {
@@ -972,13 +1103,25 @@ body.dialog-open .footer {
     pointer-events: none;
 }
 
-/* Keep counter and theme toggle bright and interactive */
-body.dialog-open .nav-counter,
-body.dialog-open .theme-toggle {
-    filter: brightness(3.33); /* Counteract the 0.3 brightness: 1/0.3 = 3.33 */
+/* Keep counter bright and interactive */
+body.dialog-open .nav-counter {
+    filter: none;
     pointer-events: auto;
     position: relative;
     z-index: 2001;
+}
+
+/* Keep theme toggle fixed at bottom left, bright and interactive */
+body.dialog-open .theme-toggle {
+    filter: none;
+    pointer-events: auto;
+    z-index: 2001;
+}
+
+/* Keep toast bright and in foreground */
+body.dialog-open .toast {
+    filter: none;
+    z-index: 2100;
 }
 
 /* Dialog box */
@@ -988,6 +1131,9 @@ body.dialog-open .theme-toggle {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     max-width: 500px;
     width: 90%;
+    max-height: calc(100vh - 80px - 8rem); /* Account for navbar (80px) + top/bottom margins + toast space */
+    display: flex;
+    flex-direction: column;
     transform: scale(0.9);
     opacity: 0;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -1004,6 +1150,7 @@ body.dialog-open .theme-toggle {
     border-radius: 16px 16px 0 0;
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .dialog-header::before {
@@ -1047,6 +1194,8 @@ body.dialog-open .theme-toggle {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .upgrade-container {
@@ -1110,6 +1259,7 @@ body.dialog-open .theme-toggle {
     display: flex;
     justify-content: center;
     gap: 1rem;
+    flex-shrink: 0;
 }
 
 /* Shop button */
