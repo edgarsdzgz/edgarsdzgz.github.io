@@ -7,9 +7,10 @@ import { getStorageItem, setStorageItem } from '../utils/storage.js';
 import { formatNumber } from '../utils/helpers.js';
 
 export class LoreManager {
-    constructor(counterManager, shopManager) {
+    constructor(counterManager, shopManager, achievementManager) {
         this.counterManager = counterManager;
         this.shopManager = shopManager;
+        this.achievementManager = achievementManager;
         this.unlockedLore = new Set();
         this.init();
     }
@@ -46,7 +47,6 @@ export class LoreManager {
             }
 
             button.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent event bubbling
                 this.handleUnlock(loreId, button);
             });
         });
@@ -105,6 +105,9 @@ export class LoreManager {
 
         // Create and spawn lore card with animation
         this.createLoreCard(lore, true); // true = with animation
+
+        // Check for lore achievements
+        this.achievementManager.checkAchievements('lore', this.unlockedLore.size, LORE.length);
 
         console.log('[LORE] Unlocked:', lore.title);
     }

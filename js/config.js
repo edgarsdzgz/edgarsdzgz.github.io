@@ -12,6 +12,7 @@ export const CONFIG = {
     darkModeUnlockedKey: 'darkModeUnlocked',
     achievementsKey: 'earnedAchievements', // Array of earned achievement IDs
     unlockedLoreKey: 'unlockedLore', // Array of unlocked lore IDs
+    maxAgenticClickerLevel: 10, // Maximum level for agentic clicker
 };
 
 // ===============================================
@@ -46,6 +47,29 @@ export const ACHIEVEMENTS = [
         description: 'Bought 1 item',
         checkType: 'purchase',
         condition: (level) => level >= 1
+    },
+    {
+        id: 'first_lore_unlock',
+        title: 'The Story Begins',
+        description: 'Unlocked your first piece of lore',
+        checkType: 'lore',
+        condition: (loreCount) => loreCount >= 1
+    },
+    {
+        id: 'lore_master',
+        title: 'Lore Master',
+        description: 'Unlocked all available lore',
+        checkType: 'lore',
+        condition: (loreCount, totalLore) => loreCount >= totalLore
+    },
+    {
+        id: 'shop_complete',
+        title: 'Everything Must Go!',
+        description: 'Purchased everything available in the shop',
+        checkType: 'shop_completion',
+        condition: (agenticLevel, darkModeUnlocked, maxLevel) => {
+            return agenticLevel >= maxLevel && darkModeUnlocked;
+        }
     }
 ];
 
@@ -59,7 +83,14 @@ export const LORE = [
         experienceId: 'valcom',
         title: 'The MVC Revelation',
         cost: 5,
-        text: 'Upon being hired, I was asked about how I teach backend organization. I explained MVC to the team and I was asked if I could reorganize the backend in that way since it was not something they had thought of. By the end of my first week at Valcom, I was reorganizing and refactoring our backend using MVC which is still used today!'
+        text: 'Upon being hired, I was asked about how I taught backend organization at Coding Dojo as an Instructor. I explained MVC to the team and I was asked if I could reorganize the backend in that way since it was not something they had thought of. By the end of my first week at Valcom, I was reorganizing and refactoring our backend using MVC which is still used today!'
+    },
+    {
+        id: 'coding_dojo_teaching',
+        experienceId: 'coding_dojo',
+        title: 'Learning Through Teaching',
+        cost: 5,
+        text: 'I took the bootcamp for Coding Dojo in 2020 and found that I learned a lot more when I helped others. The more I tried to explain things the more I found the gaps in my knowledge. This helped me learn faster, more effectively, and collaborate more with my classmates. Ultimately, this is the trait that got me a job offer before I graduated the program.'
     }
     // More lore entries can be added here
 ];

@@ -25,7 +25,7 @@ export class AchievementManager {
         }
     }
 
-    checkAchievements(checkType, value) {
+    checkAchievements(checkType, ...args) {
         // Filter achievements by type
         const relevantAchievements = ACHIEVEMENTS.filter(a => a.checkType === checkType);
 
@@ -35,8 +35,8 @@ export class AchievementManager {
                 return;
             }
 
-            // Check condition
-            const conditionMet = achievement.condition(value);
+            // Check condition with all provided arguments
+            const conditionMet = achievement.condition(...args);
 
             // If condition met, award achievement
             if (conditionMet) {

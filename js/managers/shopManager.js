@@ -170,9 +170,24 @@ export class ShopManager {
         this.updateCogAnimation();
 
         // Update Agentic Clicker button text with next level cost
+        const currentLevel = this.counterManager.getAgenticClickerLevel();
+        const maxReached = currentLevel >= CONFIG.maxAgenticClickerLevel;
+
         if (this.shopButtonText) {
-            const cost = this.calculateUpgradeCost();
-            this.shopButtonText.innerHTML = `Hire Agent <span class="counter-currency">ED</span>${formatNumber(cost)}`;
+            if (maxReached) {
+                this.shopButtonText.innerHTML = `<span style="opacity: 0.6;">Max Level Reached</span>`;
+            } else {
+                const cost = this.calculateUpgradeCost();
+                this.shopButtonText.innerHTML = `Hire Agent <span class="counter-currency">ED</span>${formatNumber(cost)}`;
+            }
+        }
+
+        // Update Agentic Clicker button disabled state
+        const agenticBtn = document.getElementById('buy-agentic-clicker');
+        if (agenticBtn) {
+            agenticBtn.disabled = maxReached;
+            agenticBtn.style.opacity = maxReached ? '0.5' : '1';
+            agenticBtn.style.cursor = maxReached ? 'not-allowed' : 'pointer';
         }
 
         // Update Dark Mode display
@@ -230,6 +245,14 @@ export class ShopManager {
     }
 
     handleAgenticClickerPurchase() {
+        const currentLevel = this.counterManager.getAgenticClickerLevel();
+
+        // Check if max level reached
+        if (currentLevel >= CONFIG.maxAgenticClickerLevel) {
+            console.log('[SHOP] Max level reached for Agentic Clicker');
+            return;
+        }
+
         const cost = this.calculateUpgradeCost();
         const currentClicks = this.counterManager.getClickCount();
 
@@ -274,6 +297,9 @@ export class ShopManager {
 
                 // Check for purchase-based achievements
                 this.achievementManager.checkAchievements('purchase', this.counterManager.getAgenticClickerLevel());
+
+                // Check for shop completion achievement
+                this.checkShopCompletion();
             }, 500);
         });
     }
@@ -320,8 +346,23 @@ export class ShopManager {
             // Unlock and activate dark mode in theme manager
             this.themeManager.unlockDarkMode();
 
+            // Check for shop completion achievement
+            this.checkShopCompletion();
+
             console.log('[DARK MODE] Unlocked!');
         });
+    }
+
+    checkShopCompletion() {
+        const agenticLevel = this.counterManager.getAgenticClickerLevel();
+        const darkModeUnlocked = this.counterManager.isDarkModeUnlocked();
+
+        this.achievementManager.checkAchievements(
+            'shop_completion',
+            agenticLevel,
+            darkModeUnlocked,
+            CONFIG.maxAgenticClickerLevel
+        );
     }
 
     animateCounterDeduction(cost, onComplete) {

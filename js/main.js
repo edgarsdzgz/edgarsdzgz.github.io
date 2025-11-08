@@ -37,9 +37,9 @@ function init() {
     console.log('[DEBUG] Creating ShopManager...');
     const shopManager = new ShopManager(counterManager, themeManager, achievementManager);
 
-    // 5. LoreManager - depends on CounterManager, ShopManager
+    // 5. LoreManager - depends on CounterManager, ShopManager, AchievementManager
     console.log('[DEBUG] Creating LoreManager...');
-    new LoreManager(counterManager, shopManager);
+    new LoreManager(counterManager, shopManager, achievementManager);
 
     // 6. NavigationManager - no dependencies
     console.log('[DEBUG] Creating NavigationManager...');
