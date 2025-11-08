@@ -235,7 +235,7 @@ class CounterManager {
         if (this.shopButtonSubtitle) {
             const nextLevel = this.agenticClickerLevel + 1;
             const cost = this.calculateUpgradeCost();
-            this.shopButtonSubtitle.textContent = `Level ${nextLevel} ED ${formatNumber(cost)}`;
+            this.shopButtonSubtitle.innerHTML = `Level ${nextLevel} <span class="counter-currency">ED</span>${formatNumber(cost)}`;
         }
     }
 
@@ -799,14 +799,4 @@ function init() {
 // UTILITY: SCROLL TO TOP
 // ===============================================
 
-// Add scroll to top functionality when clicking logo
-const navLogo = document.querySelector('.nav-logo');
-if (navLogo) {
-    navLogo.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-}
+// Scroll to top functionality removed (nav logo removed)
