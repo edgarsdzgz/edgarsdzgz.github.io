@@ -522,7 +522,8 @@ class CounterManager {
 
         // Check if user has enough clicks
         if (this.clickCount < cost) {
-            alert(`Not enough clicks! You need ${cost} clicks but only have ${this.clickCount}.`);
+            const shortage = cost - this.clickCount;
+            this.showInsufficientFundsNotification(shortage);
             return;
         }
 
@@ -650,6 +651,34 @@ class CounterManager {
         } catch (e) {
             console.log('Web Audio API not supported:', e);
         }
+    }
+
+    showInsufficientFundsNotification(shortage) {
+        const buyBtn = document.getElementById('buy-agentic-clicker');
+        if (!buyBtn) return;
+
+        // Get button position
+        const btnRect = buyBtn.getBoundingClientRect();
+        const centerX = btnRect.left + btnRect.width / 2;
+        const centerY = btnRect.top + btnRect.height / 2;
+
+        // Create floating text element
+        const floatingText = document.createElement('div');
+        floatingText.className = 'floating-text';
+        floatingText.innerHTML = `Need ${formatNumber(shortage)} more <span class="counter-currency" style="color: #ff6b6b; background: none; -webkit-text-fill-color: #ff6b6b;">ED</span>`;
+
+        // Position at button center
+        floatingText.style.left = `${centerX}px`;
+        floatingText.style.top = `${centerY}px`;
+        floatingText.style.transform = 'translate(-50%, -50%)';
+
+        // Add to document
+        document.body.appendChild(floatingText);
+
+        // Remove element after animation completes
+        setTimeout(() => {
+            floatingText.remove();
+        }, 2000);
     }
 }
 

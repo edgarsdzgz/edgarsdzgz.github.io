@@ -1200,6 +1200,33 @@ img {
     }
 }
 
+/* Floating text notification */
+.floating-text {
+    position: fixed;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ff6b6b;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    z-index: 2100;
+    opacity: 1;
+    animation: floatUp 2s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+}
+
 /* ===============================================
    ANIMATIONS
    =============================================== */
