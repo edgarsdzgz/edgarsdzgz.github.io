@@ -564,32 +564,39 @@ img {
 /* Unlock Lore Button */
 .unlock-lore-btn {
     margin-top: var(--spacing-sm);
-    padding: 0.5rem 1rem;
-    background: var(--accent-gradient);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: var(--font-size-sm);
-    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all var(--transition-fast);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    box-shadow: var(--shadow-sm);
 }
 
 .unlock-lore-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-.unlock-lore-btn .unlock-icon {
-    font-size: 1rem;
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    background: var(--bg-secondary);
 }
 
 .unlock-lore-btn.purchasing {
     animation: buttonPulse 0.5s ease;
+}
+
+/* White version of ED currency for dark backgrounds */
+.unlock-lore-btn .counter-currency,
+.lore-badge .counter-currency {
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: currentColor;
+    background-clip: unset;
+    color: currentColor;
+    font-weight: 700;
 }
 
 /* Lore Item Styles */
