@@ -83,32 +83,42 @@ export class ThemeManager {
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             const currentTime = audioContext.currentTime;
 
-            // Create oscillator and gain node
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
+            // Create two oscillators for a "toggle click" sound (two-note pattern)
+            const osc1 = audioContext.createOscillator();
+            const osc2 = audioContext.createOscillator();
+            const gain1 = audioContext.createGain();
+            const gain2 = audioContext.createGain();
 
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
+            osc1.connect(gain1);
+            osc2.connect(gain2);
+            gain1.connect(audioContext.destination);
+            gain2.connect(audioContext.destination);
 
-            // Configure swoosh sound: frequency sweep with envelope
-            oscillator.type = 'sine';
+            // Use triangle wave for a more "digital" toggle sound
+            osc1.type = 'triangle';
+            osc2.type = 'triangle';
 
-            // Frequency sweep: 800Hz -> 400Hz (downward swish)
-            oscillator.frequency.setValueAtTime(800, currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(400, currentTime + 0.15);
+            // First note: 600Hz (quick click)
+            osc1.frequency.setValueAtTime(600, currentTime);
+            gain1.gain.setValueAtTime(0, currentTime);
+            gain1.gain.linearRampToValueAtTime(0.25, currentTime + 0.01);
+            gain1.gain.exponentialRampToValueAtTime(0.01, currentTime + 0.08);
 
-            // Volume envelope: quick attack, medium decay
-            gainNode.gain.setValueAtTime(0, currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.3, currentTime + 0.02); // Quick attack
-            gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + 0.15); // Smooth decay
+            // Second note: 450Hz (complementary click) - starts slightly after first
+            osc2.frequency.setValueAtTime(450, currentTime + 0.05);
+            gain2.gain.setValueAtTime(0, currentTime + 0.05);
+            gain2.gain.linearRampToValueAtTime(0.25, currentTime + 0.06);
+            gain2.gain.exponentialRampToValueAtTime(0.01, currentTime + 0.13);
 
-            // Start and stop
-            oscillator.start(currentTime);
-            oscillator.stop(currentTime + 0.15);
+            // Play both notes
+            osc1.start(currentTime);
+            osc1.stop(currentTime + 0.08);
+            osc2.start(currentTime + 0.05);
+            osc2.stop(currentTime + 0.13);
 
-            console.log('[THEME] Swish sound played');
+            console.log('[THEME] Toggle sound played');
         } catch (error) {
-            console.error('[THEME] Error playing swish sound:', error);
+            console.error('[THEME] Error playing toggle sound:', error);
         }
     }
 }
