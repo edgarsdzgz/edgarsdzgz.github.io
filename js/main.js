@@ -114,11 +114,11 @@ class ThemeManager {
 class CounterManager {
     constructor() {
         this.clickCount = 0;
-        this.tickCount = 0;
+        // this.tickCount = 0; // DISABLED - Tick counter removed
         this.clickCounterEl = document.getElementById('clickCounter');
-        this.tickCounterEl = document.getElementById('tickCounter');
-        this.resetClicksBtn = document.getElementById('resetClicks');
-        this.resetTicksBtn = document.getElementById('resetTicks');
+        // this.tickCounterEl = document.getElementById('tickCounter'); // DISABLED
+        // this.resetClicksBtn = document.getElementById('resetClicks'); // DISABLED
+        // this.resetTicksBtn = document.getElementById('resetTicks'); // DISABLED
         this.init();
     }
 
@@ -128,16 +128,16 @@ class CounterManager {
 
         // Initialize displays
         this.updateClickDisplay();
-        this.updateTickDisplay();
+        // this.updateTickDisplay(); // DISABLED
 
         // Setup click counter
         this.setupClickCounter();
 
-        // Setup tick counter
-        this.setupTickCounter();
+        // Setup tick counter - DISABLED (will add button to start later)
+        // this.setupTickCounter();
 
-        // Setup reset buttons
-        this.setupResetButtons();
+        // Setup reset buttons - DISABLED
+        // this.setupResetButtons();
 
         // Setup cross-tab synchronization
         this.setupStorageListener();
@@ -145,14 +145,14 @@ class CounterManager {
 
     loadCounters() {
         const savedClicks = getStorageItem(CONFIG.clickKey);
-        const savedTicks = getStorageItem(CONFIG.tickKey);
+        // const savedTicks = getStorageItem(CONFIG.tickKey); // DISABLED
 
         this.clickCount = savedClicks ? parseInt(savedClicks, 10) : 0;
-        this.tickCount = savedTicks ? parseInt(savedTicks, 10) : 0;
+        // this.tickCount = savedTicks ? parseInt(savedTicks, 10) : 0; // DISABLED
 
         // Handle NaN cases
         if (isNaN(this.clickCount)) this.clickCount = 0;
-        if (isNaN(this.tickCount)) this.tickCount = 0;
+        // if (isNaN(this.tickCount)) this.tickCount = 0; // DISABLED
     }
 
     updateClickDisplay() {
@@ -161,27 +161,25 @@ class CounterManager {
         }
     }
 
-    updateTickDisplay() {
-        if (this.tickCounterEl) {
-            this.tickCounterEl.textContent = formatNumber(this.tickCount);
-        }
-    }
+    // DISABLED - Tick counter removed
+    // updateTickDisplay() {
+    //     if (this.tickCounterEl) {
+    //         this.tickCounterEl.textContent = formatNumber(this.tickCount);
+    //     }
+    // }
 
     setupClickCounter() {
         // Listen for ANY click on the page
         document.addEventListener('click', (event) => {
-            // Don't count clicks on reset buttons
-            if (event.target.id === 'resetClicks' || event.target.id === 'resetTicks') {
-                return;
-            }
+            // No need to filter clicks anymore since reset buttons are removed
 
             this.clickCount++;
             setStorageItem(CONFIG.clickKey, this.clickCount);
             this.updateClickDisplay();
 
-            // Add a subtle animation
+            // Add a subtle animation to nav counter
             if (this.clickCounterEl) {
-                this.clickCounterEl.style.transform = 'scale(1.1)';
+                this.clickCounterEl.style.transform = 'scale(1.15)';
                 setTimeout(() => {
                     this.clickCounterEl.style.transform = 'scale(1)';
                 }, 200);
@@ -189,48 +187,52 @@ class CounterManager {
         });
     }
 
-    setupTickCounter() {
-        // Increment every second
-        setInterval(() => {
-            this.tickCount++;
-            setStorageItem(CONFIG.tickKey, this.tickCount);
-            this.updateTickDisplay();
-        }, 1000);
-    }
+    // DISABLED - Tick counter will be added with button later
+    // setupTickCounter() {
+    //     // Increment every second
+    //     setInterval(() => {
+    //         this.tickCount++;
+    //         setStorageItem(CONFIG.tickKey, this.tickCount);
+    //         this.updateTickDisplay();
+    //     }, 1000);
+    // }
 
-    setupResetButtons() {
-        if (this.resetClicksBtn) {
-            this.resetClicksBtn.addEventListener('click', () => {
-                if (confirm('Are you sure you want to reset the click counter?')) {
-                    this.clickCount = 0;
-                    setStorageItem(CONFIG.clickKey, this.clickCount);
-                    this.updateClickDisplay();
-                }
-            });
-        }
+    // DISABLED - Reset buttons removed
+    // setupResetButtons() {
+    //     if (this.resetClicksBtn) {
+    //         this.resetClicksBtn.addEventListener('click', () => {
+    //             if (confirm('Are you sure you want to reset the click counter?')) {
+    //                 this.clickCount = 0;
+    //                 setStorageItem(CONFIG.clickKey, this.clickCount);
+    //                 this.updateClickDisplay();
+    //             }
+    //         });
+    //     }
 
-        if (this.resetTicksBtn) {
-            this.resetTicksBtn.addEventListener('click', () => {
-                if (confirm('Are you sure you want to reset the tick counter?')) {
-                    this.tickCount = 0;
-                    setStorageItem(CONFIG.tickKey, this.tickCount);
-                    this.updateTickDisplay();
-                }
-            });
-        }
-    }
+    //     if (this.resetTicksBtn) {
+    //         this.resetTicksBtn.addEventListener('click', () => {
+    //             if (confirm('Are you sure you want to reset the tick counter?')) {
+    //                 this.tickCount = 0;
+    //                 setStorageItem(CONFIG.tickKey, this.tickCount);
+    //                 this.updateTickDisplay();
+    //             }
+    //         });
+    //     }
+    // }
 
     setupStorageListener() {
-        // Sync counters across tabs
+        // Sync click counter across tabs
         if (storageAvailable) {
             window.addEventListener('storage', (e) => {
                 if (e.key === CONFIG.storagePrefix + CONFIG.clickKey && e.newValue !== null) {
                     this.clickCount = parseInt(e.newValue, 10) || 0;
                     this.updateClickDisplay();
-                } else if (e.key === CONFIG.storagePrefix + CONFIG.tickKey && e.newValue !== null) {
-                    this.tickCount = parseInt(e.newValue, 10) || 0;
-                    this.updateTickDisplay();
                 }
+                // Tick counter sync disabled
+                // else if (e.key === CONFIG.storagePrefix + CONFIG.tickKey && e.newValue !== null) {
+                //     this.tickCount = parseInt(e.newValue, 10) || 0;
+                //     this.updateTickDisplay();
+                // }
             });
         }
     }
