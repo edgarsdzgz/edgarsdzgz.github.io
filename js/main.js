@@ -245,9 +245,9 @@ class CounterManager {
     }
 
     calculateAutoClickerInterval() {
-        // Level 1: 750ms, each level is 5% faster (95% of previous interval)
-        // Formula: 750 * (0.95 ^ (level - 1))
-        return 750 * Math.pow(0.95, this.agenticClickerLevel - 1);
+        // Level 1: 2000ms (2 seconds), each level is 5% faster (95% of previous interval)
+        // Formula: 2000 * (0.95 ^ (level - 1))
+        return 2000 * Math.pow(0.95, this.agenticClickerLevel - 1);
     }
 
     startAutoClicker() {
