@@ -1568,19 +1568,8 @@ body.dialog-open .toast {
 
 .dialog-body {
     padding: 1.25rem;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
     overflow-y: auto;
     flex: 1;
-}
-
-/* Two columns on larger screens */
-@media (min-width: 600px) {
-    .dialog-body {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
 }
 
 .upgrade-container {
