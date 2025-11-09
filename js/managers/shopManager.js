@@ -180,7 +180,18 @@ export class ShopManager {
 
                 // Update dialog title
                 if (dialogTitle) {
-                    dialogTitle.textContent = targetTab === 'upgrades' ? 'Upgrade Shop' : 'Theme Shop';
+                    if (targetTab === 'upgrades') {
+                        dialogTitle.textContent = 'Upgrade Shop';
+                    } else if (targetTab === 'themes') {
+                        dialogTitle.textContent = 'Theme Shop';
+                    } else if (targetTab === 'achievements') {
+                        dialogTitle.textContent = 'Achievements';
+                    }
+                }
+
+                // Populate achievements list if achievements tab
+                if (targetTab === 'achievements') {
+                    this.populateAchievements();
                 }
 
                 // Open dialog if not already open
@@ -872,6 +883,42 @@ export class ShopManager {
         } catch (e) {
             console.log('Web Audio API not supported:', e);
         }
+    }
+
+    populateAchievements() {
+        const achievementsList = document.getElementById('achievements-list');
+        if (!achievementsList) return;
+
+        // Import achievements from config
+        import('../config.js').then(({ ACHIEVEMENTS }) => {
+            const earnedAchievements = this.achievementManager.getEarnedAchievements();
+
+            // Clear existing content
+            achievementsList.innerHTML = '';
+
+            // Create achievement items
+            ACHIEVEMENTS.forEach(achievement => {
+                const isEarned = earnedAchievements.has(achievement.id);
+
+                const achievementItem = document.createElement('div');
+                achievementItem.className = `achievement-item ${isEarned ? 'earned' : 'locked'}`;
+
+                achievementItem.innerHTML = `
+                    <div class="achievement-icon">
+                        ${isEarned ? '🏆' : '🔒'}
+                    </div>
+                    <div class="achievement-info">
+                        <div class="achievement-title">${achievement.title}</div>
+                        <div class="achievement-description">${achievement.description}</div>
+                    </div>
+                    <div class="achievement-status ${isEarned ? 'earned' : 'locked'}">
+                        ${isEarned ? 'Earned' : 'Locked'}
+                    </div>
+                `;
+
+                achievementsList.appendChild(achievementItem);
+            });
+        });
     }
 
     clearAllData() {
