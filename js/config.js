@@ -13,12 +13,14 @@ export const CONFIG = {
     agenticClickerLevelKey: 'agenticClickerLevel',
     darkModeUnlockedKey: 'darkModeUnlocked',
     maritimeUnlockedKey: 'maritimeUnlocked',
+    vcInvestmentUnlockedKey: 'vcInvestmentUnlocked',
     bgmUnlockedKey: 'bgmUnlocked',
     bgmVolumeKey: 'bgmVolume',
     bgmPlayingKey: 'bgmPlaying',
     achievementsKey: 'earnedAchievements', // Array of earned achievement IDs
     unlockedLoreKey: 'unlockedLore', // Array of unlocked lore IDs
-    maxAgenticClickerLevel: 10, // Maximum level for agentic clicker
+    maxAgenticClickerLevel: 10, // Maximum level for agentic clicker (base)
+    maxAgenticClickerLevelExtended: 20, // Maximum level after VC Investment
 };
 
 // ===============================================

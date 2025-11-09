@@ -16,6 +16,7 @@ export class CounterManager {
         this.agenticClickerLevel = 0;
         this.darkModeUnlocked = false;
         this.maritimeUnlocked = false;
+        this.vcInvestmentUnlocked = false;
         this.bgmUnlocked = false;
         this.autoClickerIntervalId = null;
         this.tickCallbacks = []; // Callbacks to trigger on each auto-click tick
@@ -53,6 +54,7 @@ export class CounterManager {
         const savedLevel = getStorageItem(CONFIG.agenticClickerLevelKey);
         const savedDarkModeUnlocked = getStorageItem(CONFIG.darkModeUnlockedKey);
         const savedMaritimeUnlocked = getStorageItem(CONFIG.maritimeUnlockedKey);
+        const savedVCInvestmentUnlocked = getStorageItem(CONFIG.vcInvestmentUnlockedKey);
         const savedBgmUnlocked = getStorageItem(CONFIG.bgmUnlockedKey);
 
         this.clickCount = savedClicks ? parseInt(savedClicks, 10) : 0;
@@ -62,6 +64,7 @@ export class CounterManager {
         this.agenticClickerLevel = savedLevel ? parseInt(savedLevel, 10) : 0;
         this.darkModeUnlocked = savedDarkModeUnlocked === 'true';
         this.maritimeUnlocked = savedMaritimeUnlocked === 'true';
+        this.vcInvestmentUnlocked = savedVCInvestmentUnlocked === 'true';
         this.bgmUnlocked = savedBgmUnlocked === 'true';
 
         // Handle NaN cases
@@ -80,6 +83,7 @@ export class CounterManager {
         this.agenticClickerLevel = 0;
         this.darkModeUnlocked = false;
         this.maritimeUnlocked = false;
+        this.vcInvestmentUnlocked = false;
         this.bgmUnlocked = false;
         this.updateDisplay();
     }
@@ -253,5 +257,18 @@ export class CounterManager {
     unlockBGM() {
         this.bgmUnlocked = true;
         setStorageItem(CONFIG.bgmUnlockedKey, 'true');
+    }
+
+    isVCInvestmentUnlocked() {
+        return this.vcInvestmentUnlocked;
+    }
+
+    unlockVCInvestment() {
+        this.vcInvestmentUnlocked = true;
+        setStorageItem(CONFIG.vcInvestmentUnlockedKey, 'true');
+    }
+
+    getMaxAgenticClickerLevel() {
+        return this.vcInvestmentUnlocked ? CONFIG.maxAgenticClickerLevelExtended : CONFIG.maxAgenticClickerLevel;
     }
 }

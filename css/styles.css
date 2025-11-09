@@ -1464,7 +1464,6 @@ body.dialog-open .toast {
     display: flex;
     gap: 0;
     background: var(--bg-secondary);
-    border-bottom: 2px solid var(--border-color);
     flex-shrink: 0;
 }
 

@@ -18,10 +18,12 @@ export class ShopManager {
         // DOM elements
         this.agenticClickerLevelEl = document.getElementById('agentic-clicker-level');
         this.cogIconEl = document.getElementById('cog-icon');
+        this.vcInvestmentLevelEl = document.getElementById('vc-investment-level');
         this.darkModeLevelEl = document.getElementById('dark-mode-level');
         this.maritimeLevelEl = document.getElementById('maritime-level');
         this.bgmLevelEl = document.getElementById('bgm-level');
         this.shopButtonText = document.getElementById('shop-button-text');
+        this.vcInvestmentButtonText = document.getElementById('vc-investment-button-text');
         this.darkModeButtonText = document.getElementById('dark-mode-button-text');
         this.maritimeButtonText = document.getElementById('maritime-button-text');
         this.bgmButtonText = document.getElementById('bgm-button-text');
@@ -41,6 +43,7 @@ export class ShopManager {
         const backdrop = document.getElementById('clicker-dialog-backdrop');
         const closeBtn = document.getElementById('close-dialog');
         const buyBtn = document.getElementById('buy-agentic-clicker');
+        const vcInvestmentBtn = document.getElementById('buy-vc-investment');
         const darkModeBtn = document.getElementById('buy-dark-mode');
         const maritimeBtn = document.getElementById('buy-maritime');
         const bgmBtn = document.getElementById('buy-bgm');
@@ -78,10 +81,17 @@ export class ShopManager {
             });
         }
 
-        // Handle Agentic Clicker purchase
+        // Handle Hire Clicker purchase
         if (buyBtn) {
             buyBtn.addEventListener('click', () => {
                 this.handleAgenticClickerPurchase();
+            });
+        }
+
+        // Handle VC Investment purchase
+        if (vcInvestmentBtn) {
+            vcInvestmentBtn.addEventListener('click', () => {
+                this.handleVCInvestmentPurchase();
             });
         }
 
@@ -220,7 +230,7 @@ export class ShopManager {
     }
 
     updateDisplay() {
-        // Update Agentic Clicker level display
+        // Update Hire Clicker level display
         if (this.agenticClickerLevelEl) {
             const level = this.counterManager.getAgenticClickerLevel();
             const agentText = level === 1 ? 'Agent' : 'Agents';
@@ -230,9 +240,10 @@ export class ShopManager {
         // Update cog icon rotation
         this.updateCogAnimation();
 
-        // Update Agentic Clicker button text with next level cost
+        // Update Hire Clicker button text with next level cost
         const currentLevel = this.counterManager.getAgenticClickerLevel();
-        const maxReached = currentLevel >= CONFIG.maxAgenticClickerLevel;
+        const maxLevel = this.counterManager.getMaxAgenticClickerLevel();
+        const maxReached = currentLevel >= maxLevel;
 
         if (this.shopButtonText) {
             if (maxReached) {
@@ -243,7 +254,7 @@ export class ShopManager {
             }
         }
 
-        // Update Agentic Clicker button disabled state
+        // Update Hire Clicker button disabled state
         const agenticBtn = document.getElementById('buy-agentic-clicker');
         if (agenticBtn) {
             agenticBtn.disabled = maxReached;
@@ -301,6 +312,31 @@ export class ShopManager {
             maritimeBtn.style.cursor = unlocked ? 'not-allowed' : 'pointer';
         }
 
+        // Update VC Investment display
+        if (this.vcInvestmentLevelEl) {
+            const unlocked = this.counterManager.isVCInvestmentUnlocked();
+            this.vcInvestmentLevelEl.textContent = unlocked ? 'Unlocked' : 'Locked';
+        }
+
+        // Update VC Investment button
+        if (this.vcInvestmentButtonText) {
+            const unlocked = this.counterManager.isVCInvestmentUnlocked();
+            if (unlocked) {
+                this.vcInvestmentButtonText.innerHTML = `<span style="opacity: 0.6;">Already Unlocked</span>`;
+            } else {
+                this.vcInvestmentButtonText.innerHTML = `Unlock 1000<span class="counter-currency">ED</span>`;
+            }
+        }
+
+        // Update VC Investment button disabled state
+        const vcBtn = document.getElementById('buy-vc-investment');
+        if (vcBtn) {
+            const unlocked = this.counterManager.isVCInvestmentUnlocked();
+            vcBtn.disabled = unlocked;
+            vcBtn.style.opacity = unlocked ? '0.5' : '1';
+            vcBtn.style.cursor = unlocked ? 'not-allowed' : 'pointer';
+        }
+
         // Update BGM display
         if (this.bgmLevelEl) {
             const unlocked = this.counterManager.isBGMUnlocked();
@@ -329,8 +365,15 @@ export class ShopManager {
 
     calculateUpgradeCost() {
         const level = this.counterManager.getAgenticClickerLevel();
-        // Base cost is 20, increases by 40% per level
-        return Math.floor(20 * Math.pow(1.4, level));
+
+        if (level < 10) {
+            // Levels 1-10: Base cost is 20, increases by 40% per level
+            return Math.floor(20 * Math.pow(1.4, level));
+        } else {
+            // Levels 11-20: Base cost is 750, increases by 60% per level
+            // Subtract 10 from level to start at base cost for level 11
+            return Math.floor(750 * Math.pow(1.6, level - 10));
+        }
     }
 
     updateCogAnimation() {
@@ -360,10 +403,11 @@ export class ShopManager {
 
     handleAgenticClickerPurchase() {
         const currentLevel = this.counterManager.getAgenticClickerLevel();
+        const maxLevel = this.counterManager.getMaxAgenticClickerLevel();
 
         // Check if max level reached
-        if (currentLevel >= CONFIG.maxAgenticClickerLevel) {
-            console.log('[SHOP] Max level reached for Agentic Clicker');
+        if (currentLevel >= maxLevel) {
+            console.log('[SHOP] Max level reached for Hire Clicker');
             return;
         }
 
@@ -564,17 +608,61 @@ export class ShopManager {
         });
     }
 
+    handleVCInvestmentPurchase() {
+        const cost = 1000;
+        const currentClicks = this.counterManager.getClickCount();
+
+        // Check if already unlocked
+        if (this.counterManager.isVCInvestmentUnlocked()) {
+            return;
+        }
+
+        // Check if user has enough clicks
+        if (currentClicks < cost) {
+            const shortage = cost - currentClicks;
+            this.showInsufficientFundsNotification(shortage);
+            return;
+        }
+
+        // Add purchasing animation to button
+        const vcBtn = document.getElementById('buy-vc-investment');
+        if (vcBtn) {
+            vcBtn.classList.add('purchasing');
+            setTimeout(() => {
+                vcBtn.classList.remove('purchasing');
+            }, 500);
+        }
+
+        // Animate energy siphon
+        this.animateEnergySiphon();
+
+        // Play sound
+        this.playPurchaseSound();
+
+        // Deduct clicks with animation
+        this.animateCounterDeduction(cost, () => {
+            // After deduction completes, unlock VC Investment
+            this.counterManager.unlockVCInvestment();
+
+            // Update shop display
+            this.updateDisplay();
+
+            console.log('[VC Investment] Unlocked! 10 more Hire Clicker levels available.');
+        });
+    }
+
     checkShopCompletion() {
         const agenticLevel = this.counterManager.getAgenticClickerLevel();
         const darkModeUnlocked = this.counterManager.isDarkModeUnlocked();
         const maritimeUnlocked = this.counterManager.isMaritimeUnlocked();
 
+        const maxLevel = this.counterManager.getMaxAgenticClickerLevel();
         this.achievementManager.checkAchievements(
             'shop_completion',
             agenticLevel,
             darkModeUnlocked,
             maritimeUnlocked,
-            CONFIG.maxAgenticClickerLevel
+            maxLevel
         );
     }
 
