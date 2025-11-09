@@ -263,7 +263,7 @@ img {
 /* Collapsed state - only show play button */
 .bgm-controls.collapsed {
     padding: 0.75rem;
-    max-width: 52px;
+    max-width: 4rem; /* 2.5rem button + 1.5rem padding (0.75rem each side) */
     gap: 0;
 }
 
@@ -288,6 +288,7 @@ img {
     align-items: center;
     justify-content: center;
     transition: all var(--transition-base);
+    flex-shrink: 0; /* Prevent button from shrinking */
 }
 
 .bgm-button:hover {

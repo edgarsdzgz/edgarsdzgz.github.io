@@ -62,6 +62,19 @@ export class BGMManager {
             this.isPlaying = true;
         }
 
+        // Show BGM controls and credit if already unlocked
+        if (this.bgmUnlocked) {
+            const bgmControls = document.getElementById('bgm-controls');
+            if (bgmControls) {
+                bgmControls.style.display = 'flex';
+            }
+
+            const bgmCredit = document.getElementById('bgm-credit');
+            if (bgmCredit) {
+                bgmCredit.style.display = 'block';
+            }
+        }
+
         // Handle NaN case
         if (isNaN(this.volume)) this.volume = 15;
         if (this.volume < 0) this.volume = 0;
@@ -258,6 +271,12 @@ export class BGMManager {
         const bgmControls = document.getElementById('bgm-controls');
         if (bgmControls) {
             bgmControls.style.display = 'flex';
+        }
+
+        // Show BGM credit in footer
+        const bgmCredit = document.getElementById('bgm-credit');
+        if (bgmCredit) {
+            bgmCredit.style.display = 'block';
         }
 
         // Auto-play when unlocked

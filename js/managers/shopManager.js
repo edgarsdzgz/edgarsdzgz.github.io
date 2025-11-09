@@ -151,6 +151,7 @@ export class ShopManager {
     setupShopTabs() {
         const tabs = document.querySelectorAll('.shop-tab');
         const panels = document.querySelectorAll('.tab-panel');
+        const dialogTitle = document.getElementById('shop-dialog-title');
 
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
@@ -165,6 +166,16 @@ export class ShopManager {
                 const targetPanel = document.querySelector(`[data-panel="${targetTab}"]`);
                 if (targetPanel) {
                     targetPanel.classList.add('active');
+                }
+
+                // Update dialog title
+                if (dialogTitle) {
+                    dialogTitle.textContent = targetTab === 'upgrades' ? 'Upgrade Shop' : 'Theme Shop';
+                }
+
+                // Open dialog if not already open
+                if (!this.dialogOpen) {
+                    this.openDialog();
                 }
             });
         });
