@@ -288,7 +288,9 @@ img {
     align-items: center;
     justify-content: center;
     transition: all var(--transition-base);
-    flex-shrink: 0; /* Prevent button from shrinking */
+    flex-shrink: 0;
+    padding-left: 2px;
+    padding-bottom: 2px;
 }
 
 .bgm-button:hover {
