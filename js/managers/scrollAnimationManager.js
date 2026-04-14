@@ -14,7 +14,7 @@ export class ScrollAnimationManager {
 
     init() {
         // Add fade-in class to elements that should animate
-        const animatedElements = document.querySelectorAll('.timeline-item, .project-card, .counter-card, .education-card, .contact-item');
+        const animatedElements = document.querySelectorAll('.timeline-item, .project-card, .project-flagship, .education-card, .contact-item, .skill-group');
 
         animatedElements.forEach(el => {
             el.style.opacity = '0';

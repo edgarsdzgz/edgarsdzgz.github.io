@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Edgar Diaz-Gutierrez - Full-Stack Software Engineer with 3+ years building mission-critical emergency command-and-control web applications.">
+    <meta name="description" content="Edgar Diaz-Gutierrez | Software Engineer II at Valcom. Full-stack engineer building production web systems with TypeScript, React, Node.js, and Python. Remote, NYC.">
     <meta name="author" content="Edgar Diaz-Gutierrez">
-    <title>Edgar Diaz-Gutierrez | Full-Stack Software Engineer</title>
+    <title>Edgar Diaz-Gutierrez | Software Engineer II</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,96 +13,52 @@
 </head>
 <body>
     <!-- Theme Toggle -->
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-        <!-- Light Mode Symbol: Lightning Bolt -->
-        <svg class="light-rune" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <!-- Geometric lightning bolt -->
-            <path d="M13 2 L4 14 L11 14 L8 22 L20 9 L13 9 Z" fill="currentColor" opacity="0.3" stroke="currentColor"/>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark theme">
+        <svg class="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
         </svg>
-        <!-- Dark Mode Symbol: Flowing Waves -->
-        <svg class="dark-rune" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <!-- Flowing wave lines -->
-            <path d="M2 8 Q 6 6, 10 8 T 18 8 T 22 8" stroke="currentColor" fill="none"/>
-            <path d="M2 12 Q 6 10, 10 12 T 18 12 T 22 12" stroke="currentColor" fill="none" opacity="0.7"/>
-            <path d="M2 16 Q 6 14, 10 16 T 18 16 T 22 16" stroke="currentColor" fill="none" opacity="0.5"/>
-        </svg>
-        <!-- Maritime Mode Symbol: Sailboat -->
-        <svg class="maritime-rune" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <!-- Sailboat -->
-            <path d="M4 20 L20 20" stroke="currentColor" fill="none"/>
-            <path d="M12 4 L12 20" stroke="currentColor" fill="none"/>
-            <path d="M12 4 L6 12 L12 12 Z" fill="currentColor" opacity="0.3" stroke="currentColor"/>
-            <path d="M12 12 L18 18 L12 18 Z" fill="currentColor" opacity="0.2" stroke="currentColor"/>
+        <svg class="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
     </button>
-
-    <!-- BGM Controls -->
-    <div id="bgm-controls" class="bgm-controls" style="display: none;">
-        <button id="bgm-play-pause" class="bgm-button" aria-label="Play/Pause BGM">▶</button>
-        <input type="range" id="bgm-volume" class="bgm-slider" min="0" max="100" value="15">
-        <span id="bgm-volume-display" class="bgm-volume-text">15%</span>
-    </div>
 
     <!-- Navigation -->
     <nav id="nav">
         <div class="nav-container">
-            <div class="nav-logo-wrapper">
-                <span id="clickCounter" class="nav-counter"><span class="counter-currency">ED</span> 0</span>
-            </div>
+            <a href="#home" class="nav-brand">Edgar Diaz-Gutierrez</a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="shop-tabs" style="display: none;">
-                <button class="shop-tab active" data-tab="upgrades">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2v20M2 12h20"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
-                    Upgrades
-                </button>
-                <button class="shop-tab" data-tab="themes">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                    Themes
-                </button>
-                <button class="shop-tab" data-tab="achievements">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="8" r="7"></circle>
-                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
-                    </svg>
-                    Achievements
-                </button>
-            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    Hi, I'm <span id="hero-name" class="highlight">Edgar Diaz-Gutierrez</span>
+                    <span class="highlight">Edgar Diaz-Gutierrez</span>
                 </h1>
-                <p class="hero-subtitle">Full-Stack Software Engineer</p>
+                <p class="hero-subtitle">Software Engineer II at Valcom &middot; Remote, NYC</p>
                 <p class="hero-description">
-                    Building mission-critical emergency command-and-control applications with TypeScript, React, and Node.js.
-                    Former Coding Dojo instructor with a passion for creative problem-solving.
+                    I build production web systems that schools and hospitals use for emergency command-and-control. TypeScript, React, Node.js, Python, Postgres. I use AI heavily and hold the line on architecture and quality.
                 </p>
                 <div class="hero-cta">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="#projects" class="btn btn-secondary">View Projects</a>
+                    <a href="#contact" class="btn btn-primary">Get in touch</a>
+                    <a href="#projects" class="btn btn-secondary">View projects</a>
+                    <a href="resume.pdf" class="btn btn-secondary" download>Download resume (PDF)</a>
                 </div>
                 <div class="social-links">
                     <a href="https://github.com/edgarsdzgz" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -126,298 +82,324 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About -->
     <section id="about" class="about section">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title">About</h2>
             <div class="about-content">
                 <div class="about-text">
                     <p>
-                        I'm a Full-Stack Software Engineer with 3+ years building mission-critical emergency
-                        command-and-control web applications at Valcom, and a former Coding Dojo instructor
-                        who's guided cohorts of 50+ students.
-                    </p>
-                    <p>
-                        Powered by a Film & Theater background, I blend creative leadership with deep technical
-                        expertise in TypeScript, React, Node.js, and more. I'm passionate about building scalable,
-                        maintainable applications that make a real difference.
+                        I'm a full-stack software engineer at Valcom, where I work on emergency command-and-control web applications &mdash; where a dispatcher needs the dashboard to stay responsive during an active incident. Before Valcom, I taught full-stack web development and cybersecurity at Coding Dojo for three years while building the foundation I use today. Before that, I studied theater at San Diego State, which is where I learned how to walk into a room of strangers, hold attention, and explain something clearly. Turns out that's most of senior engineering.
                     </p>
                 </div>
-                <div class="tech-stack">
-                    <h3>Tech Stack</h3>
-                    <div class="tech-tags">
-                        <span class="tech-tag">TypeScript</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Redux Toolkit</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">Express</span>
-                        <span class="tech-tag">TypeORM</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">MySQL</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Django</span>
-                        <span class="tech-tag">Flask</span>
-                        <span class="tech-tag">Spring Boot</span>
-                        <span class="tech-tag">REST APIs</span>
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">Git</span>
-                        <span class="tech-tag">Docker</span>
-                    </div>
+
+                <div class="ai-philosophy">
+                    <h3>How I work with AI</h3>
+                    <p class="ai-philosophy-statement">
+                        Vibe coding is not a thing. I delegate syntax and typing to Claude and Cursor &mdash; the architecture, the plan, and the quality of the result are my job. I won't commit code I can't explain to another engineer.
+                    </p>
+                    <p>
+                        In practice: I write specs before I open an AI tool. I review every suggestion against the actual requirements. I catch the cases where the model is confident and wrong, because I know what the system is supposed to do. AI is a speed multiplier on mechanical work. It doesn't replace the person who has to own the system and answer for it six months later.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- Experience -->
     <section id="experience" class="experience section">
         <div class="container">
             <h2 class="section-title">Experience</h2>
             <div class="timeline">
-                <!-- Valcom -->
-                <div class="timeline-item" data-experience-id="valcom">
+
+                <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">
-                            <h3>Full-Stack Developer</h3>
-                            <span class="timeline-date">Jan 2022 — Present</span>
+                            <h3>Software Engineer II</h3>
+                            <span class="timeline-date">Jan 2022 &mdash; Present</span>
                         </div>
                         <h4 class="company">
-                            <a href="https://www.linkedin.com/company/valcom-inc/" target="_blank" rel="noopener noreferrer">
-                                Valcom
-                            </a>
+                            <a href="https://www.linkedin.com/company/valcom-inc/" target="_blank" rel="noopener noreferrer">Valcom</a>
+                            <span class="company-location">&middot; Remote</span>
                         </h4>
                         <p>
-                            Architected and maintained an Express/React emergency management platform;
-                            led code reviews and mentorship for the development team.
+                            Valcom builds communication and command systems used by thousands of schools, hospitals, and public safety agencies. I work on the web side of their emergency command-and-control platform.
                         </p>
-                        <button class="unlock-lore-btn" data-lore-id="valcom_mvc">
-                            Unlock Lore <span class="counter-currency">ED</span>5
-                        </button>
+                        <ul class="experience-list">
+                            <li>Ship features on a TypeScript and React frontend with a Node.js / Express backend, backed by Python and Django services for the workflows where Django's maturity wins.</li>
+                            <li>Work inside a distributed system built on RabbitMQ and worker services, dispatching requests between frontend clients, backend APIs, and background jobs without blocking the user.</li>
+                            <li>Handle auth and token security end-to-end: JWT issuance, encrypted token storage on mobile clients, and the surface area between a React app and a Django API.</li>
+                            <li>Run daily development inside Docker and Kubernetes so the team's environments stay consistent.</li>
+                            <li>Pair with Claude and Cursor on refactors and feature work &mdash; for the parts where it actually helps, which is mechanical transformation and exploration, not design.</li>
+                            <li>Review code and mentor teammates on both the React side and the AI-assisted workflow side. The goal is the same either way: code we can defend.</li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- Coding Dojo -->
-                <div class="timeline-item" data-experience-id="coding_dojo">
+                <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">
-                            <h3>Instructor (Full-Stack & Cybersecurity)</h3>
-                            <span class="timeline-date">Dec 2020 — Jan 2024</span>
+                            <h3>Instructor &mdash; Full-Stack &amp; Cybersecurity</h3>
+                            <span class="timeline-date">Dec 2020 &mdash; Jan 2024</span>
                         </div>
                         <h4 class="company">
-                            <a href="https://www.linkedin.com/school/codingdojo/" target="_blank" rel="noopener noreferrer">
-                                Coding Dojo
-                            </a>
+                            <a href="https://www.linkedin.com/school/codingdojo/" target="_blank" rel="noopener noreferrer">Coding Dojo</a>
+                            <span class="company-location">&middot; Remote</span>
                         </h4>
                         <p>
-                            Fostered hands-on problem-solving in cohorts of 50+; guided students through
-                            Java, Python, and security bootcamps.
+                            Taught full-stack web development (TypeScript, Python) and cybersecurity bootcamp courses to cohorts of 50+ students. Authored course materials, ran live code review sessions, built hands-on labs and capstone projects, and contributed to curriculum improvements based on industry feedback.
                         </p>
-                        <button class="unlock-lore-btn" data-lore-id="coding_dojo_teaching">
-                            Unlock Lore <span class="counter-currency">ED</span>5
-                        </button>
+                        <p class="experience-quote">
+                            Teaching is the fastest way I know to find out whether you actually understand a concept.
+                        </p>
                     </div>
                 </div>
 
-                <!-- ScoreShuttle -->
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">
                             <h3>Team Lead, Customer Service</h3>
-                            <span class="timeline-date">Aug 2018 — Oct 2019</span>
+                            <span class="timeline-date">Aug 2018 &mdash; Oct 2019</span>
                         </div>
                         <h4 class="company">
-                            <a href="https://www.linkedin.com/company/scoreshuttle/" target="_blank" rel="noopener noreferrer">
-                                ScoreShuttle
-                            </a>
+                            <a href="https://www.linkedin.com/company/scoreshuttle/" target="_blank" rel="noopener noreferrer">ScoreShuttle</a>
                         </h4>
                         <p>
-                            Led a team supporting logistics software; optimized support workflows
-                            and SLA compliance.
+                            Led a team supporting logistics software. Optimized support workflows, handled escalations, and held the line on SLA compliance.
                         </p>
                     </div>
                 </div>
 
-                <!-- Docupop -->
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">
                             <h3>Senior Student Loan Debt Coordinator</h3>
-                            <span class="timeline-date">Jan 2017 — Aug 2018</span>
+                            <span class="timeline-date">Jan 2017 &mdash; Aug 2018</span>
                         </div>
                         <h4 class="company">
-                            <a href="https://www.linkedin.com/company/docupop/" target="_blank" rel="noopener noreferrer">
-                                Docupop
-                            </a>
+                            <a href="https://www.linkedin.com/company/docupop/" target="_blank" rel="noopener noreferrer">Docupop</a>
                         </h4>
                         <p>
-                            Managed high-volume loan portfolios; built custom tools to automate
-                            reconciliation processes.
+                            Managed high-volume loan portfolios and built custom tools to automate reconciliation processes.
                         </p>
                     </div>
                 </div>
 
-                <!-- Hibrid Solar -->
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">
                             <h3>Sales Operations</h3>
-                            <span class="timeline-date">Aug 2016 — Jan 2017</span>
+                            <span class="timeline-date">Aug 2016 &mdash; Jan 2017</span>
                         </div>
                         <h4 class="company">
-                            <a href="https://www.linkedin.com/company/hibrid-solar/" target="_blank" rel="noopener noreferrer">
-                                Hibrid Solar
-                            </a>
+                            <a href="https://www.linkedin.com/company/hibrid-solar/" target="_blank" rel="noopener noreferrer">Hibrid Solar</a>
                         </h4>
                         <p>
-                            Drove CRM integrations and process automation to streamline sales workflows
-                            and reporting.
+                            Drove CRM integrations and process automation to streamline sales workflows and reporting.
                         </p>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects -->
     <section id="projects" class="projects section">
         <div class="container">
             <h2 class="section-title">Projects</h2>
+
+            <!-- Flagship -->
+            <article class="project-card project-flagship">
+                <div class="project-header">
+                    <h3>Dystopian Outcasts Wiki</h3>
+                    <span class="project-badge">Flagship</span>
+                </div>
+                <p class="project-tagline">
+                    A production community wiki for Project Zomboid modding. Built end-to-end.
+                </p>
+                <p>
+                    React and TypeScript frontend, Supabase (Postgres) backend, multi-provider OAuth 2.0 (Discord, Google) plus custom email/password signup, row-level security policies for content-level authorization, PostgreSQL <code>tsvector</code> full-text search across the article corpus, and TanStack Query on the client with optimistic updates for the bookmarking and progress-tracking features.
+                </p>
+                <p>
+                    The interesting part isn't the stack &mdash; it's the decisions. Why RLS instead of service-layer checks. Why <code>tsvector</code> instead of pulling in Algolia. How I unified three auth paths (Discord, Google, email/password) into one user record with a database trigger for automated profile creation and case-insensitive username uniqueness via a generated column. I'm writing a full architecture post on one of those decisions. It'll live here when it's ready.
+                </p>
+                <div class="project-meta">
+                    <span class="project-stack">React 18 &middot; TypeScript &middot; Supabase &middot; PostgreSQL &middot; TanStack Query &middot; OAuth 2.0 &middot; Vite &middot; React Router</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://dystopianoutcasts.wiki" target="_blank" rel="noopener noreferrer" class="project-link">Live site &rarr;</a>
+                    <a href="https://github.com/dystopianoutcasts/dystopianwiki" target="_blank" rel="noopener noreferrer" class="project-link">GitHub &rarr;</a>
+                </div>
+            </article>
+
+            <!-- Supporting projects -->
             <div class="projects-grid">
-                <!-- Personal Website -->
-                <div class="project-card">
-                    <h3>Personal Website</h3>
-                    <p>
-                        Responsive HTML/CSS portfolio showcasing experience and design sensibility.
-                    </p>
-                    <a href="https://github.com/edgarsdzgz/edgarsdzgz.github.io" target="_blank" rel="noopener noreferrer" class="project-link">
-                        View on GitHub →
-                    </a>
-                </div>
-
-                <!-- edgarsdzgz_site -->
-                <div class="project-card">
-                    <h3>edgarsdzgz_site</h3>
-                    <p>
-                        Modern React & TypeScript front end with interactive components and clean architecture.
-                    </p>
-                    <a href="https://github.com/edgarsdzgz/edgarsdzgz_site" target="_blank" rel="noopener noreferrer" class="project-link">
-                        View on GitHub →
-                    </a>
-                </div>
-
-                <!-- recommend2me -->
-                <div class="project-card">
-                    <h3>recommend2me</h3>
-                    <p>
-                        Full-stack Node.js/TypeScript app for capturing & organizing personal recommendations.
-                    </p>
-                    <a href="https://github.com/edgarsdzgz/recommend2me" target="_blank" rel="noopener noreferrer" class="project-link">
-                        View on GitHub →
-                    </a>
-                </div>
-
-                <!-- RTK Query Demo -->
-                <div class="project-card">
+                <article class="project-card">
                     <h3>RTK Query Demo</h3>
                     <p>
-                        Illustration of efficient data fetching and cache management in React.
+                        A React + TypeScript reference application showing how to wire Redux Toolkit Query for data fetching, caching, and mutation. I built it to illustrate patterns around normalized cache state and invalidation for scenarios where the app shouldn't re-fetch the same resource twice.
                     </p>
-                    <a href="https://github.com/edgarsdzgz/rtk-query-basic" target="_blank" rel="noopener noreferrer" class="project-link">
-                        View on GitHub →
-                    </a>
-                </div>
+                    <div class="project-meta">
+                        <span class="project-stack">React &middot; TypeScript &middot; RTK Query &middot; Redux Toolkit</span>
+                    </div>
+                    <a href="https://github.com/edgarsdzgz/rtk-query-basic" target="_blank" rel="noopener noreferrer" class="project-link">GitHub &rarr;</a>
+                </article>
 
-                <!-- Banking API -->
-                <div class="project-card">
-                    <h3>Banking API</h3>
+                <article class="project-card">
+                    <h3>TypeORM Banking API</h3>
                     <p>
-                        Secure RESTful service built with Express, TypeORM & TypeScript.
+                        A secure banking backend built with TypeScript, Express, TypeORM, and Node.js. Type-safe database operations, automated migrations, and thorough input validation for the kind of endpoints where a mistake costs real money.
                     </p>
-                    <a href="https://github.com/edgarsdzgz/typeorm-backend-basic" target="_blank" rel="noopener noreferrer" class="project-link">
-                        View on GitHub →
-                    </a>
-                </div>
+                    <div class="project-meta">
+                        <span class="project-stack">TypeScript &middot; Express &middot; TypeORM &middot; Node.js &middot; PostgreSQL</span>
+                    </div>
+                    <a href="https://github.com/edgarsdzgz/typeorm-backend-basic" target="_blank" rel="noopener noreferrer" class="project-link">GitHub &rarr;</a>
+                </article>
+
+                <article class="project-card">
+                    <h3>This site</h3>
+                    <p>
+                        Vanilla HTML, CSS, and JavaScript. No framework, no build step. Hosted on GitHub Pages with a custom domain. The meta-reference: if you want to see how I approach a small project end-to-end, you're looking at it.
+                    </p>
+                    <div class="project-meta">
+                        <span class="project-stack">HTML &middot; CSS &middot; JavaScript &middot; GitHub Pages</span>
+                    </div>
+                    <a href="https://github.com/edgarsdzgz/edgarsdzgz.github.io" target="_blank" rel="noopener noreferrer" class="project-link">GitHub &rarr;</a>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Counters Section - HIDDEN (tick counter disabled, click counter moved to nav) -->
-    <!--
-    <section id="counters" class="counters section" style="display:none;">
+    <!-- Skills -->
+    <section id="skills" class="skills section">
         <div class="container">
-            <h2 class="section-title">Interactive Counters</h2>
-            <p class="section-description">
-                These counters are unique to your browser and persist across visits using localStorage.
-                Try them out!
-            </p>
-            <div class="counters-grid">
-                <div class="counter-card">
-                    <div class="counter-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 18l6-6-6-6"/>
-                        </svg>
-                    </div>
-                    <h3>Click Counter</h3>
-                    <div class="counter-value">0</div>
-                    <p class="counter-description">Total clicks on this page</p>
-                    <button id="resetClicks" class="btn-reset">Reset Counter</button>
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-group">
+                    <h3>Languages</h3>
+                    <ul class="skill-list">
+                        <li>TypeScript</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>Python</li>
+                        <li>Java</li>
+                        <li>SQL</li>
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                    </ul>
                 </div>
 
-                <div class="counter-card">
-                    <div class="counter-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                    </div>
-                    <h3>Tick Counter</h3>
-                    <div class="counter-value" id="tickCounter">0</div>
-                    <p class="counter-description">Seconds elapsed (auto-increments)</p>
-                    <button id="resetTicks" class="btn-reset">Reset Counter</button>
+                <div class="skill-group">
+                    <h3>Frontend</h3>
+                    <ul class="skill-list">
+                        <li>React 18</li>
+                        <li>React Router</li>
+                        <li>React Native</li>
+                        <li>TanStack Query</li>
+                        <li>RTK Query</li>
+                        <li>Redux Toolkit</li>
+                        <li>Vite</li>
+                    </ul>
                 </div>
-            </div>
-            <div class="counter-info">
-                <p>
-                    <strong>Note:</strong> These counters use your browser's localStorage to save data.
-                    Each browser/device has its own independent counters. Data persists across page reloads
-                    and browser restarts (except in private browsing mode).
-                </p>
+
+                <div class="skill-group">
+                    <h3>Backend</h3>
+                    <ul class="skill-list">
+                        <li>Node.js</li>
+                        <li>Express</li>
+                        <li>Django</li>
+                        <li>Flask</li>
+                        <li>REST API design</li>
+                        <li>RabbitMQ &amp; worker services</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Data</h3>
+                    <ul class="skill-list">
+                        <li>PostgreSQL</li>
+                        <li>MySQL</li>
+                        <li>Supabase</li>
+                        <li>TypeORM</li>
+                        <li>Full-text search (tsvector)</li>
+                        <li>Database design &amp; optimization</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Infra &amp; ops</h3>
+                    <ul class="skill-list">
+                        <li>Docker</li>
+                        <li>Kubernetes</li>
+                        <li>Git &amp; GitHub</li>
+                        <li>CI/CD</li>
+                        <li>AWS</li>
+                        <li>npm</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Auth &amp; security</h3>
+                    <ul class="skill-list">
+                        <li>OAuth 2.0</li>
+                        <li>JWT</li>
+                        <li>bcrypt</li>
+                        <li>PostgreSQL Row-Level Security</li>
+                        <li>Encrypted mobile token storage</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group">
+                    <h3>AI-assisted workflow</h3>
+                    <ul class="skill-list">
+                        <li>Claude (Sonnet &amp; Opus)</li>
+                        <li>Cursor</li>
+                        <li>ChatGPT</li>
+                        <li>Written specs before prompts</li>
+                        <li>Review-first, commit-second</li>
+                    </ul>
+                    <p class="skill-group-note">
+                        See <a href="#about">How I work with AI</a> for the philosophy.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
-    -->
 
-    <!-- Education Section -->
+    <!-- Education + Certifications -->
     <section id="education" class="education section">
         <div class="container">
-            <h2 class="section-title">Education</h2>
+            <h2 class="section-title">Education &amp; Certifications</h2>
             <div class="education-grid">
                 <div class="education-card">
                     <h3>San Diego State University</h3>
-                    <p class="degree">B.A. Film & Media Arts</p>
+                    <p class="degree">B.A. Theater</p>
                 </div>
                 <div class="education-card">
                     <h3>Coding Dojo</h3>
-                    <p class="degree">Full-Stack Web Dev Certificate (Java & Python)</p>
-                    <p class="achievement">Top of Class</p>
+                    <p class="degree">Full-Stack Web Development Certificate (Java &amp; Python)</p>
+                    <p class="achievement">Top of Class &middot; 2023</p>
+                </div>
+                <div class="education-card">
+                    <h3>ServiceNow</h3>
+                    <p class="degree">Certified Systems Administrator</p>
+                    <p class="achievement">Cert No. 26942562</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section id="contact" class="contact section">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
+            <h2 class="section-title">Get in touch</h2>
             <p class="contact-intro">
-                I'm always looking for new challenges where I can leverage my blend of creative leadership
-                and full-stack expertise. Feel free to reach out—let's build something great together.
+                I'm open to mid/senior full-stack and AI-forward engineering roles, remote-first, US-based. If that's what you're hiring for, the best way to reach me is by email.
             </p>
             <div class="contact-grid">
                 <div class="contact-item">
@@ -457,6 +439,16 @@
                         <a href="https://github.com/edgarsdzgz" target="_blank" rel="noopener noreferrer">github.com/edgarsdzgz</a>
                     </div>
                 </div>
+                <div class="contact-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <div>
+                        <h3>Resume</h3>
+                        <a href="resume.pdf" download>Download PDF</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -464,129 +456,10 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Edgar Diaz-Gutierrez. All rights reserved.</p>
-            <p class="footer-note">Built with HTML, CSS, and vanilla JavaScript. Hosted on GitHub Pages.</p>
-            <p id="bgm-credit" class="footer-note" style="display: none;">Background music: <a href="https://www.FesliyanStudios.com" target="_blank" rel="noopener">8 Bit Adventure by Fesliyan Studios</a></p>
+            <p>&copy; 2026 Edgar Diaz-Gutierrez</p>
+            <p class="footer-note">Built with vanilla HTML, CSS, and JavaScript. Hosted on GitHub Pages.</p>
         </div>
     </footer>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="toast">
-        <div class="toast-content">
-            <span id="toast-message" class="toast-message">FIVE CLICKS!</span>
-        </div>
-        <div class="toast-progress-bar"></div>
-    </div>
-
-    <!-- Clicker Dialog -->
-    <div id="clicker-dialog-backdrop" class="dialog-backdrop">
-        <div id="clicker-dialog" class="dialog">
-            <div class="dialog-header">
-                <h2 id="shop-dialog-title">Upgrade Shop</h2>
-            </div>
-
-            <div class="dialog-body">
-                <!-- Upgrades Panel -->
-                <div class="tab-panel active" data-panel="upgrades">
-                    <div class="upgrade-container">
-                        <div class="upgrade-stat">
-                            <span class="upgrade-stat-label">Hire Clicker</span>
-                            <svg id="cog-icon" class="cog-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="3"></circle>
-                                <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-                            </svg>
-                            <span id="agentic-clicker-level" class="upgrade-stat-level">0 Agents Clicking</span>
-                        </div>
-                        <button id="buy-agentic-clicker" class="shop-button">
-                            <span id="shop-button-text" class="shop-button-text">Hire Agent 20<span class="counter-currency">ED</span></span>
-                        </button>
-                    </div>
-
-                    <div class="upgrade-container">
-                        <div class="upgrade-stat">
-                            <span class="upgrade-stat-label">VC Investment</span>
-                            <span id="vc-investment-level" class="upgrade-stat-level">Locked</span>
-                        </div>
-                        <button id="buy-vc-investment" class="shop-button">
-                            <span id="vc-investment-button-text" class="shop-button-text">Unlock 1000<span class="counter-currency">ED</span></span>
-                        </button>
-                    </div>
-
-                    <div class="upgrade-container">
-                        <div class="upgrade-stat">
-                            <span class="upgrade-stat-label">Background Music</span>
-                            <span id="bgm-level" class="upgrade-stat-level">Locked</span>
-                        </div>
-                        <button id="buy-bgm" class="shop-button">
-                            <span id="bgm-button-text" class="shop-button-text">Unlock 250<span class="counter-currency">ED</span></span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Themes Tab Panel -->
-                <div class="tab-panel" data-panel="themes">
-                    <div class="upgrade-container">
-                        <div class="upgrade-stat">
-                            <span class="upgrade-stat-label">Dark Mode</span>
-                            <span id="dark-mode-level" class="upgrade-stat-level">Locked</span>
-                        </div>
-                        <button id="buy-dark-mode" class="shop-button">
-                            <span id="dark-mode-button-text" class="shop-button-text">Unlock 50<span class="counter-currency">ED</span></span>
-                        </button>
-                    </div>
-
-                    <div class="upgrade-container">
-                        <div class="upgrade-stat">
-                            <span class="upgrade-stat-label">Maritime Mode</span>
-                            <span id="maritime-level" class="upgrade-stat-level">Locked</span>
-                        </div>
-                        <button id="buy-maritime" class="shop-button">
-                            <span id="maritime-button-text" class="shop-button-text">Unlock 200<span class="counter-currency">ED</span></span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Achievements Tab Panel -->
-                <div class="tab-panel" data-panel="achievements">
-                    <div id="achievements-list" class="achievements-list">
-                        <!-- Achievements will be populated by JavaScript -->
-                    </div>
-                </div>
-            </div>
-            <div class="dialog-footer">
-                <button id="clear-data-btn" class="btn-clear-data">Clear Data</button>
-                <button id="close-dialog" class="btn-close">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Confirmation Dialog for Clear Data -->
-    <div id="confirm-dialog-backdrop" class="dialog-backdrop">
-        <div id="confirm-dialog" class="dialog confirm-dialog">
-            <div class="dialog-header">
-                <h2>Clear All Data?</h2>
-            </div>
-            <div class="dialog-body">
-                <p class="confirm-message">Clearing the data will clear all progress and reset you back to the start. Do you wish to continue?</p>
-            </div>
-            <div class="dialog-footer">
-                <button id="confirm-clear-no" class="btn-close">No</button>
-                <button id="confirm-clear-yes" class="btn-danger">Yes</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Energy beam SVG for animation -->
-    <svg id="energy-beam" class="energy-beam" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <linearGradient id="beamGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#667eea;stop-opacity:0" />
-                <stop offset="50%" style="stop-color:#667eea;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#667eea;stop-opacity:0" />
-            </linearGradient>
-        </defs>
-        <line id="beam-line" x1="0" y1="0" x2="0" y2="0" stroke="url(#beamGradient)" stroke-width="3" />
-    </svg>
 
     <script type="module" src="js/main.js"></script>
 </body>
