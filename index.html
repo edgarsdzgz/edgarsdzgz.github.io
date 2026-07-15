@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Edgar Diaz-Gutierrez | Software Engineer II at Valcom. Full-stack engineer building production web systems with TypeScript, React, Node.js, and Python. Remote, NYC.">
+    <meta name="description" content="Edgar Diaz-Gutierrez | Full-Stack Software Engineer at Valcom. Building production web systems with TypeScript, React, Node.js, Python, and Postgres. Remote, New York, NY.">
     <meta name="author" content="Edgar Diaz-Gutierrez">
-    <title>Edgar Diaz-Gutierrez | Software Engineer II</title>
+    <title>Edgar Diaz-Gutierrez | Full-Stack Software Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -51,7 +51,7 @@
                 <h1 class="hero-title">
                     <span class="highlight">Edgar Diaz-Gutierrez</span>
                 </h1>
-                <p class="hero-subtitle">Software Engineer II at Valcom &middot; Remote, NYC</p>
+                <p class="hero-subtitle">Full-Stack Software Engineer at Valcom &middot; Remote, NYC</p>
                 <p class="hero-description">
                     I build production web systems that schools and hospitals use for emergency command-and-control. TypeScript, React, Node.js, Python, Postgres. I use AI heavily and hold the line on architecture and quality.
                 </p>
@@ -116,7 +116,7 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">
-                            <h3>Software Engineer II</h3>
+                            <h3>Software Engineer</h3>
                             <span class="timeline-date">Jan 2022 &mdash; Present</span>
                         </div>
                         <h4 class="company">
@@ -127,12 +127,13 @@
                             Valcom builds communication and command systems used by thousands of schools, hospitals, and public safety agencies. I work on the web side of their emergency command-and-control platform.
                         </p>
                         <ul class="experience-list">
-                            <li>Ship features on a TypeScript and React frontend with a Node.js / Express backend, backed by Python and Django services for the workflows where Django's maturity wins.</li>
-                            <li>Work inside a distributed system built on RabbitMQ and worker services, dispatching requests between frontend clients, backend APIs, and background jobs without blocking the user.</li>
+                            <li>Led the frontend overhaul that repositioned Valcom's enterprise product from its K-12 origins into healthcare, commercial, and industrial markets &mdash; shaping the company-wide style guide through modernization wireframes, customer research, and sales feedback.</li>
+                            <li>Drove the org-wide decision to standardize on Tailwind CSS across two teams on competing stacks, after a structured evaluation against CSS Modules, Sass, and Bootstrap, then negotiated buy-in before migration began.</li>
+                            <li>Rebuilt ~150 components through a React 17 &rarr; 19 upgrade, bringing the frontend to WCAG 2.2 AA.</li>
+                            <li>Architected the multi-service Docker stack that replaced hand-scripted, site-by-site installation with a single Compose-defined deployment &mdash; enabling atomic image-based upgrades and database-backed rollbacks.</li>
+                            <li>Raised engineering throughput company-wide by authoring 24 Claude Skills and 3 Python hooks that constrain AI-assisted development, including a per-file checkpoint that blocks progress until generated code meets CI requirements.</li>
+                            <li>Ship features across a TypeScript / React frontend and Node.js / Express backend, with Python and Django services for the workflows where Django's maturity wins, inside a distributed system built on RabbitMQ and worker services.</li>
                             <li>Handle auth and token security end-to-end: JWT issuance, encrypted token storage on mobile clients, and the surface area between a React app and a Django API.</li>
-                            <li>Run daily development inside Docker and Kubernetes so the team's environments stay consistent.</li>
-                            <li>Pair with Claude and Cursor on refactors and feature work &mdash; for the parts where it actually helps, which is mechanical transformation and exploration, not design.</li>
-                            <li>Review code and mentor teammates on both the React side and the AI-assisted workflow side. The goal is the same either way: code we can defend.</li>
                         </ul>
                     </div>
                 </div>
@@ -141,7 +142,7 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">
-                            <h3>Instructor &mdash; Full-Stack &amp; Cybersecurity</h3>
+                            <h3>Instructor &mdash; Programming &amp; Cybersecurity</h3>
                             <span class="timeline-date">Dec 2020 &mdash; Jan 2024</span>
                         </div>
                         <h4 class="company">
@@ -286,9 +287,9 @@
                     <ul class="skill-list">
                         <li>TypeScript</li>
                         <li>JavaScript (ES6+)</li>
-                        <li>Python</li>
-                        <li>Java</li>
+                        <li>Python 3.12</li>
                         <li>SQL</li>
+                        <li>Java</li>
                         <li>HTML5</li>
                         <li>CSS3</li>
                     </ul>
@@ -297,23 +298,26 @@
                 <div class="skill-group">
                     <h3>Frontend</h3>
                     <ul class="skill-list">
-                        <li>React 18</li>
-                        <li>React Router</li>
-                        <li>React Native</li>
+                        <li>React 19</li>
+                        <li>React Router 7</li>
+                        <li>Redux Toolkit &amp; RTK Query</li>
+                        <li>SvelteKit</li>
+                        <li>React Native + Expo</li>
+                        <li>Tailwind CSS</li>
                         <li>TanStack Query</li>
-                        <li>RTK Query</li>
-                        <li>Redux Toolkit</li>
                         <li>Vite</li>
+                        <li>PixiJS / WebGL</li>
                     </ul>
                 </div>
 
                 <div class="skill-group">
                     <h3>Backend</h3>
                     <ul class="skill-list">
-                        <li>Node.js</li>
+                        <li>Node.js 22 LTS</li>
                         <li>Express</li>
-                        <li>Django</li>
+                        <li>FastAPI</li>
                         <li>Flask</li>
+                        <li>Django</li>
                         <li>REST API design</li>
                         <li>RabbitMQ &amp; worker services</li>
                     </ul>
@@ -322,12 +326,25 @@
                 <div class="skill-group">
                     <h3>Data</h3>
                     <ul class="skill-list">
-                        <li>PostgreSQL</li>
+                        <li>PostgreSQL + PostGIS</li>
+                        <li>MongoDB</li>
                         <li>MySQL</li>
+                        <li>SQLite</li>
                         <li>Supabase</li>
+                        <li>Dexie / IndexedDB</li>
                         <li>TypeORM</li>
                         <li>Full-text search (tsvector)</li>
-                        <li>Database design &amp; optimization</li>
+                    </ul>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Testing &amp; quality</h3>
+                    <ul class="skill-list">
+                        <li>Vitest</li>
+                        <li>Playwright</li>
+                        <li>Jest</li>
+                        <li>WCAG 2.2 AA accessibility</li>
+                        <li>OWASP standards</li>
                     </ul>
                 </div>
 
@@ -360,6 +377,7 @@
                         <li>Claude (Sonnet &amp; Opus)</li>
                         <li>Cursor</li>
                         <li>ChatGPT</li>
+                        <li>Authored 24 Claude Skills &amp; 3 Python hooks</li>
                         <li>Written specs before prompts</li>
                         <li>Review-first, commit-second</li>
                     </ul>
@@ -383,7 +401,7 @@
                 <div class="education-card">
                     <h3>Coding Dojo</h3>
                     <p class="degree">Full-Stack Web Development Certificate (Java &amp; Python)</p>
-                    <p class="achievement">Top of Class &middot; 2023</p>
+                    <p class="achievement">Top of Class &middot; 2020</p>
                 </div>
                 <div class="education-card">
                     <h3>ServiceNow</h3>
